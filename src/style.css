@@ -1,24 +1,51 @@
 @import "tailwindcss";
 
-@theme {
-  --color-forest-950: #03140e;
-  --color-forest-900: #072419;
-  --color-forest-850: #0a3123;
-  --color-forest-800: #0f3f2e;
-  --color-forest-700: #14553e;
-  --color-forest-600: #1a6f51;
-  --color-forest-500: #238a66;
+@layer base {
+  :root {
+    --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
 
-  --color-gold-600: #b8811f;
-  --color-gold-500: #d4972c;
-  --color-gold-400: #e5ad45;
-  --color-gold-300: #f2c66d;
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-  font-family: var(--font-sans);
-}
+/* Custom Palette Tokens */
+.bg-forest-950 { background-color: #03140e; }
+.bg-forest-900 { background-color: #072419; }
+.bg-forest-850 { background-color: #0a3123; }
+.bg-forest-800 { background-color: #0f3f2e; }
+.bg-forest-700 { background-color: #14553e; }
+.bg-forest-50  { background-color: #f0f7f4; }
+
+.text-forest-950 { color: #03140e; }
+.text-forest-900 { color: #072419; }
+.text-forest-850 { color: #0a3123; }
+.text-forest-800 { color: #0f3f2e; }
+
+.border-forest-900 { border-color: #072419; }
+.border-forest-850 { border-color: #0a3123; }
+.border-forest-800 { border-color: #0f3f2e; }
+
+.bg-gold-600 { background-color: #b8811f; }
+.bg-gold-500 { background-color: #d4972c; }
+.bg-gold-400 { background-color: #e5ad45; }
+.bg-gold-300 { background-color: #f2c66d; }
+.bg-gold-50  { background-color: #fdfaf3; }
+
+.text-gold-600 { color: #b8811f; }
+.text-gold-500 { color: #d4972c; }
+.text-gold-400 { color: #e5ad45; }
+.text-gold-300 { color: #f2c66d; }
+
+.border-gold-500 { border-color: #d4972c; }
+.border-gold-400 { border-color: #e5ad45; }

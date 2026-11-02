@@ -2,24 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   MapPin, Phone, Mail, Clock, ShieldCheck, 
-  ArrowRight, Heart, ExternalLink 
+  ArrowRight, ExternalLink 
 } from 'lucide-react';
 import { SITE_INFO } from '../data/siteData';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-forest-950 text-slate-300 pt-16 pb-8 border-t-4 border-gold-500">
+    <footer className="bg-forest-950 text-slate-300 pt-16 pb-8 border-t-2 border-forest-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-forest-900">
           
-          {/* Kolom 1: Profil Pondok & Legalitas (2 cols di lg) */}
+          {/* Kolom 1: Profil Pondok & Legalitas */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-lg bg-forest-900 border-2 border-gold-500 flex items-center justify-center text-gold-400 font-serif font-black text-2xl shadow">
+              <div className="w-10 h-10 rounded-lg bg-forest-900 border border-forest-800 flex items-center justify-center text-gold-400 font-bold text-xl shadow">
                 M
               </div>
               <div>
-                <h3 className="font-serif font-bold text-lg text-white tracking-tight">
+                <h3 className="font-bold text-base text-white tracking-tight">
                   {SITE_INFO.name}
                 </h3>
                 <p className="text-xs text-gold-400 uppercase tracking-wider font-semibold">
@@ -32,8 +32,7 @@ export const Footer: React.FC = () => {
               Lembaga pendidikan Islam terpadu yang memadukan kedalaman ilmu agama (Tahfidzul Qur'an & Kitab Kuning) dengan kurikulum nasional, melahirkan generasi hafidz yang berakhlakul karimah, mandiri, dan berwawasan masa depan.
             </p>
 
-            {/* Kotak Legalitas Singkat */}
-            <div className="bg-forest-900/60 rounded-lg p-3 border border-forest-850 space-y-1.5 text-[11px]">
+            <div className="bg-forest-900/60 rounded-xl p-3.5 border border-forest-850 space-y-1.5 text-[11px]">
               <div className="flex items-center gap-2 text-gold-400 font-semibold">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>Legalitas Resmi Terdaftar</span>
@@ -49,7 +48,7 @@ export const Footer: React.FC = () => {
 
           {/* Kolom 2: Navigasi Cepat */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-forest-800 pb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-forest-900 pb-2">
               Menu Utama
             </h4>
             <ul className="space-y-2 text-xs">
@@ -88,7 +87,7 @@ export const Footer: React.FC = () => {
 
           {/* Kolom 3: Program Unggulan */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-forest-800 pb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-forest-900 pb-2">
               Program Unggulan
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
@@ -103,30 +102,30 @@ export const Footer: React.FC = () => {
 
           {/* Kolom 4: Hubungi Kami */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-forest-800 pb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-forest-900 pb-2">
               Alamat & Kontak
             </h4>
             <div className="space-y-2.5 text-xs">
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-gold-400 shrink-0 mt-0.5" />
                 <span className="text-slate-300 leading-snug">
                   {SITE_INFO.address.full}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-gold-500 shrink-0" />
+                <Phone className="w-4 h-4 text-gold-400 shrink-0" />
                 <a href={`tel:${SITE_INFO.contacts.phone}`} className="hover:text-gold-400">
                   {SITE_INFO.contacts.phone}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-gold-500 shrink-0" />
+                <Mail className="w-4 h-4 text-gold-400 shrink-0" />
                 <a href={`mailto:${SITE_INFO.contacts.email}`} className="hover:text-gold-400 break-all">
                   {SITE_INFO.contacts.email}
                 </a>
               </div>
               <div className="flex items-center gap-2 text-slate-400 text-[11px] pt-1">
-                <Clock className="w-3.5 h-3.5 text-gold-500 shrink-0" />
+                <Clock className="w-3.5 h-3.5 text-gold-400 shrink-0" />
                 <span>{SITE_INFO.contacts.operationalHours}</span>
               </div>
 
@@ -135,7 +134,7 @@ export const Footer: React.FC = () => {
                   href={SITE_INFO.contacts.ppdbWa}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-emerald-700 hover:bg-emerald-600 text-white font-medium px-3 py-1.5 rounded text-xs transition-colors"
+                  className="inline-flex items-center gap-1.5 bg-emerald-700 hover:bg-emerald-600 text-white font-medium px-3 py-1.5 rounded-lg text-xs transition-colors"
                 >
                   <span>Chat WhatsApp Resmi</span>
                   <ExternalLink className="w-3 h-3" />

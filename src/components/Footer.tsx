@@ -6,6 +6,22 @@ import {
 } from 'lucide-react';
 import { SITE_INFO } from '../data/siteData';
 
+const InstagramIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
+  <svg 
+    className={className} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
+
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-forest-950 text-slate-300 pt-16 pb-8 border-t-2 border-forest-900">
@@ -15,8 +31,15 @@ export const Footer: React.FC = () => {
           {/* Kolom 1: Profil Pondok & Legalitas */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-forest-900 border border-forest-800 flex items-center justify-center text-gold-400 font-bold text-xl shadow">
-                M
+              <div className="w-11 h-11 rounded-xl bg-white border border-forest-800 flex items-center justify-center p-1 shadow">
+                <img 
+                  src="/logo.webp" 
+                  alt="Logo Al-Mursyid" 
+                  className="w-full h-full object-contain"
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                />
               </div>
               <div>
                 <h3 className="font-bold text-base text-white tracking-tight">
@@ -124,12 +147,23 @@ export const Footer: React.FC = () => {
                   {SITE_INFO.contacts.email}
                 </a>
               </div>
+              <div className="flex items-center gap-2">
+                <InstagramIcon className="w-4 h-4 text-gold-400 shrink-0" />
+                <a 
+                  href={SITE_INFO.contacts.instagram} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-gold-400 font-medium"
+                >
+                  {SITE_INFO.contacts.instagramHandle}
+                </a>
+              </div>
               <div className="flex items-center gap-2 text-slate-400 text-[11px] pt-1">
                 <Clock className="w-3.5 h-3.5 text-gold-400 shrink-0" />
                 <span>{SITE_INFO.contacts.operationalHours}</span>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-col gap-2">
                 <a
                   href={SITE_INFO.contacts.ppdbWa}
                   target="_blank"
@@ -137,6 +171,16 @@ export const Footer: React.FC = () => {
                   className="inline-flex items-center gap-1.5 bg-emerald-700 hover:bg-emerald-600 text-white font-medium px-3 py-1.5 rounded-lg text-xs transition-colors"
                 >
                   <span>Chat WhatsApp Resmi</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                <a
+                  href={SITE_INFO.contacts.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-slate-300 hover:text-gold-400 text-xs transition-colors"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-gold-400" />
+                  <span>Buka di Google Maps</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </div>

@@ -37,10 +37,13 @@ export const SITE_INFO = {
     ]
   },
   contacts: {
-    phone: "+62 821-7890-1234",
-    whatsapp: "+62 821-7890-1234",
+    phone: "+62 838-4847-8150",
+    whatsapp: "+62 838-4847-8150",
     email: "info@almursyidtanggamus.sch.id",
-    ppdbWa: "https://wa.me/6282178901234?text=Halo%20Panitia%20PPDB%20Al-Mursyid,%20saya%20ingin%20konsultasi%20pendaftaran",
+    ppdbWa: "https://wa.me/6283848478150?text=Halo%20Admin%20Pondok%20Pesantren%20Al-Mursyid,%20saya%20ingin%20konsultasi%20dan%20informasi%20pendaftaran%20santri%20baru.",
+    mapsUrl: "https://maps.app.goo.gl/3FVjebPp1YaSYvom7",
+    instagram: "https://www.instagram.com/ponpes_almursyid",
+    instagramHandle: "@ponpes_almursyid",
     operationalHours: "Senin - Sabtu: 07.30 - 16.30 WIB"
   },
   stats: [
@@ -77,7 +80,6 @@ export const NAV_LINKS: NavItem[] = [
   { label: "Fasilitas", href: "/fasilitas" },
   { label: "PPDB Online", href: "/ppdb" },
   { label: "Berita & Kegiatan", href: "/berita" },
-  { label: "Kontak", href: "/kontak" },
 ];
 
 export const PROGRAMS = [

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  MapPin, Phone, Mail, Clock, ShieldCheck, 
+  MapPin, Phone, Mail, Clock, 
   ArrowRight, ExternalLink 
 } from 'lucide-react';
 import { SITE_INFO } from '../data/siteData';
@@ -26,26 +26,24 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-forest-950 text-slate-300 pt-16 pb-8 border-t-2 border-forest-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-forest-900">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-forest-900">
           
-          {/* Kolom 1: Profil Pondok & Legalitas */}
+          {/* Kolom 1: Profil Pondok */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-white border border-forest-800 flex items-center justify-center p-1 shadow">
-                <img 
-                  src="/logo.webp" 
-                  alt="Logo Al-Mursyid" 
-                  className="w-full h-full object-contain"
-                  width="44"
-                  height="44"
-                  loading="lazy"
-                />
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="Logo Al-Mursyid" 
+                className="w-12 h-12 object-contain"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
               <div>
-                <h3 className="font-bold text-base text-white tracking-tight">
+                <h3 className=" font-bold text-lg text-white tracking-tight">
                   {SITE_INFO.name}
                 </h3>
-                <p className="text-xs text-gold-400 uppercase tracking-wider font-semibold">
+                <p className="text-xs text-gold-400 uppercase tracking-widest font-bold">
                   {SITE_INFO.foundation}
                 </p>
               </div>
@@ -54,19 +52,6 @@ export const Footer: React.FC = () => {
             <p className="text-xs text-slate-400 leading-relaxed pr-4">
               Lembaga pendidikan Islam terpadu yang memadukan kedalaman ilmu agama (Tahfidzul Qur'an & Kitab Kuning) dengan kurikulum nasional, melahirkan generasi hafidz yang berakhlakul karimah, mandiri, dan berwawasan masa depan.
             </p>
-
-            <div className="bg-forest-900/60 rounded-xl p-3.5 border border-forest-850 space-y-1.5 text-[11px]">
-              <div className="flex items-center gap-2 text-gold-400 font-semibold">
-                <ShieldCheck className="w-4 h-4 shrink-0" />
-                <span>Legalitas Resmi Terdaftar</span>
-              </div>
-              <p className="text-slate-300">
-                <span className="text-slate-400">SK Kemenkumham:</span> {SITE_INFO.legal.kemenkumham}
-              </p>
-              <p className="text-slate-300">
-                <span className="text-slate-400">NSP Kemenag RI:</span> <span className="font-mono text-gold-300 font-bold">{SITE_INFO.legal.nsp}</span> (Izin Operasional Resmi)
-              </p>
-            </div>
           </div>
 
           {/* Kolom 2: Navigasi Cepat */}
@@ -108,22 +93,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Kolom 3: Program Unggulan */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-forest-900 pb-2">
-              Program Unggulan
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li className="hover:text-slate-200 transition-colors">• Tahfidzul Qur'an 30 Juz Mutqin</li>
-              <li className="hover:text-slate-200 transition-colors">• Madrasah Diniyah & Kajian Kitab</li>
-              <li className="hover:text-slate-200 transition-colors">• SMP & SMA Islam Terpadu</li>
-              <li className="hover:text-slate-200 transition-colors">• Bilingual Arab & English Daily</li>
-              <li className="hover:text-slate-200 transition-colors">• Pembinaan Karakter & Adab</li>
-              <li className="hover:text-slate-200 transition-colors">• Ekstrakurikuler Kaligrafi & Bela Diri</li>
-            </ul>
-          </div>
-
-          {/* Kolom 4: Hubungi Kami */}
+          {/* Kolom 3: Hubungi Kami */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-forest-900 pb-2">
               Alamat & Kontak
@@ -153,7 +123,7 @@ export const Footer: React.FC = () => {
                   href={SITE_INFO.contacts.instagram} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="hover:text-gold-400 font-medium"
+                  className="hover:text-gold-400 font-normal"
                 >
                   {SITE_INFO.contacts.instagramHandle}
                 </a>
@@ -164,15 +134,6 @@ export const Footer: React.FC = () => {
               </div>
 
               <div className="pt-2 flex flex-col gap-2">
-                <a
-                  href={SITE_INFO.contacts.ppdbWa}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-emerald-700 hover:bg-emerald-600 text-white font-medium px-3 py-1.5 rounded-lg text-xs transition-colors"
-                >
-                  <span>Chat WhatsApp Resmi</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
                 <a
                   href={SITE_INFO.contacts.mapsUrl}
                   target="_blank"
@@ -190,21 +151,8 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar Hak Cipta */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+        <div className="pt-6 flex items-center justify-center text-center text-xs text-slate-500">
           <p>© {new Date().getFullYear()} {SITE_INFO.name}. Seluruh Hak Cipta Dilindungi.</p>
-          <div className="flex items-center gap-4 text-[11px]">
-            <Link to="/tentang-kami#legalitas" className="hover:text-slate-300 transition-colors">
-              Izin Operasional & Legalitas
-            </Link>
-            <span>•</span>
-            <Link to="/kontak" className="hover:text-slate-300 transition-colors">
-              Peta Lokasi
-            </Link>
-            <span>•</span>
-            <Link to="/ppdb" className="hover:text-slate-300 transition-colors text-gold-400 font-medium">
-              Portal PPDB
-            </Link>
-          </div>
         </div>
       </div>
     </footer>

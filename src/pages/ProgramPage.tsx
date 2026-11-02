@@ -11,15 +11,15 @@ export const ProgramPage: React.FC = () => {
     <div className="space-y-16 pb-20">
       
       {/* Header Banner */}
-      <section className="bg-forest-950 text-white py-16 border-b-4 border-gold-500">
+      <section className="bg-aurora-mesh border-b border-emerald-100 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="inline-flex items-center gap-2 bg-gold-500/20 text-gold-400 border border-gold-500/40 px-3 py-1 rounded text-xs font-semibold">
+          <div className="inline-flex items-center text-emerald-800 text-xs font-bold tracking-wider uppercase pb-1.5 border-b border-emerald-200">
             <span>Kurikulum & Pengembangan Santri</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+          <h1 className=" text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900">
             Program Pendidikan Terpadu
           </h1>
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
             Memadukan hafalan Al-Qur'an 30 Juz mutqin, penguasaan kitab kuning, kurikulum pendidikan nasional berijazah resmi, serta keterampilan bahasa internasional.
           </p>
         </div>
@@ -34,7 +34,7 @@ export const ProgramPage: React.FC = () => {
             <span className="text-xs font-bold text-gold-600 uppercase tracking-widest flex items-center gap-2">
               <BookOpen className="w-4 h-4" /> Program Unggulan Utama
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+            <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
               Tahfidzul Qur'an 30 Juz Bersanad
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed">
@@ -42,28 +42,28 @@ export const ProgramPage: React.FC = () => {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100 flex items-start gap-2.5">
+              <div className="bg-white p-3.5 rounded-xl border border-stone-200 shadow-sm flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <div className="text-xs">
                   <strong className="block text-slate-800">Metode Ziyadah & Talaqqi</strong>
                   <span className="text-slate-500">Setoran hafalan baru setiap subuh & maghrib</span>
                 </div>
               </div>
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100 flex items-start gap-2.5">
+              <div className="bg-white p-3.5 rounded-xl border border-stone-200 shadow-sm flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <div className="text-xs">
                   <strong className="block text-slate-800">Muraja'ah Terstruktur</strong>
                   <span className="text-slate-500">Pengulangan hafalan harian, mingguan, & bulanan</span>
                 </div>
               </div>
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100 flex items-start gap-2.5">
+              <div className="bg-white p-3.5 rounded-xl border border-stone-200 shadow-sm flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <div className="text-xs">
                   <strong className="block text-slate-800">Tasmi' 5 - 30 Juz Sekali Duduk</strong>
                   <span className="text-slate-500">Uji ketahanan hafalan di hadapan masyayikh</span>
                 </div>
               </div>
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100 flex items-start gap-2.5">
+              <div className="bg-white p-3.5 rounded-xl border border-stone-200 shadow-sm flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <div className="text-xs">
                   <strong className="block text-slate-800">Syahadah & Wisuda Tahfidz</strong>
@@ -96,7 +96,7 @@ export const ProgramPage: React.FC = () => {
             <span className="text-xs font-bold text-gold-600 uppercase tracking-widest flex items-center gap-2">
               <Award className="w-4 h-4" /> Khazanah Keilmuan Ulama
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+            <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
               Madrasah Diniyah & Kajian Kitab Kuning
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed">
@@ -104,7 +104,7 @@ export const ProgramPage: React.FC = () => {
             </p>
 
             <div className="space-y-2 pt-2 text-xs text-slate-700">
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <div className="p-3 bg-white rounded-lg border border-stone-200 shadow-sm">
                 <strong className="text-forest-900 block mb-0.5">Materi Kajian:</strong>
                 <p className="text-slate-600">Nahwu & Shorof (Al-Ajurumiyyah, Imrithi), Fiqih (Safinatun Najah, Fathul Qorib), Aqidah (Aqidatul Awwam, Tijan ad-Darori), Hadits (Arba'in An-Nawawiyyah), dan Akhlak (Ta'lim Muta'allim).</p>
               </div>
@@ -118,7 +118,7 @@ export const ProgramPage: React.FC = () => {
             <span className="text-xs font-bold text-gold-600 uppercase tracking-widest flex items-center gap-2">
               <GraduationCap className="w-4 h-4" /> Kurikulum Nasional & Terakreditasi
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+            <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
               SMP & SMA Islam Boarding School
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed">
@@ -156,7 +156,7 @@ export const ProgramPage: React.FC = () => {
             <span className="text-xs font-bold text-gold-600 uppercase tracking-widest flex items-center gap-2">
               <Languages className="w-4 h-4" /> Pengembangan Minat & Bakat
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+            <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
               Ekstrakurikuler & Pembiasaan Bahasa
             </h2>
             <p className="text-sm text-slate-600">
@@ -165,20 +165,20 @@ export const ProgramPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-slate-50 p-5 rounded-xl border border-slate-100 space-y-2">
-              <h4 className="font-serif font-bold text-sm text-slate-900">Bilingual Daily</h4>
+            <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-2">
+              <h4 className=" font-bold text-sm text-slate-900">Bilingual Daily</h4>
               <p className="text-xs text-slate-600">Pemberian kosakata (mufradat/vocabulary) setiap ba'da subuh dan hari wajib berbahasa Arab & Inggris.</p>
             </div>
-            <div className="bg-slate-50 p-5 rounded-xl border border-slate-100 space-y-2">
-              <h4 className="font-serif font-bold text-sm text-slate-900">Pramuka Pesantren</h4>
+            <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-2">
+              <h4 className=" font-bold text-sm text-slate-900">Pramuka Pesantren</h4>
               <p className="text-xs text-slate-600">Gugus depan kepanduan untuk menanamkan kedisiplinan, survival skill, gotong royong, dan cinta tanah air.</p>
             </div>
-            <div className="bg-slate-50 p-5 rounded-xl border border-slate-100 space-y-2">
-              <h4 className="font-serif font-bold text-sm text-slate-900">Khat & Kaligrafi</h4>
+            <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-2">
+              <h4 className=" font-bold text-sm text-slate-900">Khat & Kaligrafi</h4>
               <p className="text-xs text-slate-600">Seni menulis mushaf Al-Qur'an dan kaidah khat Riq'ah, Naskhi, dan Tsuluts berstandar seni islami.</p>
             </div>
-            <div className="bg-slate-50 p-5 rounded-xl border border-slate-100 space-y-2">
-              <h4 className="font-serif font-bold text-sm text-slate-900">Khitobah & Pidato</h4>
+            <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-2">
+              <h4 className=" font-bold text-sm text-slate-900">Khitobah & Pidato</h4>
               <p className="text-xs text-slate-600">Latihan public speaking 3 bahasa (Indonesia, Arab, Inggris) untuk melatih keberanian berdakwah.</p>
             </div>
           </div>
@@ -188,18 +188,18 @@ export const ProgramPage: React.FC = () => {
 
       {/* CTA Pendaftaran */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="bg-forest-950 text-white rounded-2xl p-8 sm:p-12 border-2 border-gold-500/40 space-y-4">
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold">Siap Menjadi Bagian dari Keluarga Besar Al-Mursyid?</h2>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
+        <div className="bg-aurora-banner text-white rounded-2xl p-8 sm:p-12 border border-emerald-500/20 shadow-lg space-y-4">
+          <h2 className=" text-2xl sm:text-3xl font-bold text-white">Siap Menjadi Bagian dari Keluarga Besar Al-Mursyid?</h2>
+          <p className="text-xs sm:text-sm text-emerald-100/90 max-w-xl mx-auto">
             Pendaftaran dibuka setiap tahun ajaran baru dengan kuota selektif. Konsultasikan jalur pendaftaran bersama tim panitia kami.
           </p>
           <div className="pt-2">
             <Link
               to="/ppdb"
-              className="bg-gold-500 hover:bg-gold-600 text-forest-950 font-bold px-6 py-3 rounded text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 shadow-lg"
+              className="bg-white hover:bg-emerald-50 text-forest-950 font-bold px-6 py-3 rounded-lg text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 shadow-sm transition-all hover:-translate-y-0.5 active:scale-95"
             >
               <span>Daftar Santri Baru Sekarang</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 text-forest-900" />
             </Link>
           </div>
         </div>

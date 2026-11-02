@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+@theme {
+  --color-forest-950: #022c22;
+  --color-forest-900: #064e3b;
+  --color-forest-850: #065f46;
+  --color-forest-800: #047857;
+  --color-forest-700: #059669;
+  --color-forest-600: #10b981;
+  --color-forest-500: #34d399;
+  --color-forest-50:  #f0fdf4;
+
+  --color-gold-600: #15803d;
+  --color-gold-500: #10b981;
+  --color-gold-400: #34d399;
+  --color-gold-300: #a7f3d0;
+  --color-gold-50:  #ecfdf5;
+
+  --color-cream-50:  #f8fafc;
+  --color-cream-100: #f1f5f9;
+  --color-cream-200: #e2e8f0;
+}
+
 @layer base {
   :root {
     --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -9,6 +30,7 @@
   html {
     scroll-behavior: smooth;
     font-family: var(--font-body);
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -19,33 +41,145 @@
   }
 }
 
+/* Taste Motion Engine: 150-200ms Physics Easing */
+.taste-card {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease-out, border-color 180ms ease-out;
+}
+.taste-card:hover {
+  transform: translateY(-2px);
+}
+.taste-card:active {
+  transform: scale(0.99);
+}
+
+.taste-btn {
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), background-color 150ms ease-out;
+}
+.taste-btn:active {
+  transform: scale(0.97);
+}
+
+/* Seamless Right-to-Left Marquee Engine */
+@keyframes marquee-rtl {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-rtl {
+  display: flex;
+  width: max-content;
+  animation: marquee-rtl 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-rtl:hover {
+  animation-play-state: paused;
+}
+
+/* Seamless Left-to-Right Marquee Engine */
+@keyframes marquee-ltr {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 42s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-ltr:hover {
+  animation-play-state: paused;
+}
+
+/* Signature Modern Emerald, Onyx Black & Pure White Gradients (Harmonious & Classy) */
+.bg-aurora-surface {
+  background: radial-gradient(at 10% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 60%),
+              radial-gradient(at 90% 100%, rgba(5, 150, 105, 0.04) 0px, transparent 60%),
+              linear-gradient(180deg, #ffffff 0%, #fbfdfc 100%);
+}
+
+.bg-aurora-mesh {
+  background: radial-gradient(at 15% 20%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+              radial-gradient(at 85% 80%, rgba(5, 150, 105, 0.08) 0px, transparent 55%),
+              linear-gradient(180deg, #ffffff 0%, #f4fbf7 100%);
+}
+
+/* Onyx Black into Deep Royal Emerald with subtle emerald glow highlight */
+.bg-aurora-banner {
+  background: radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.22) 0px, transparent 60%),
+              radial-gradient(at 0% 100%, rgba(5, 150, 105, 0.2) 0px, transparent 60%),
+              linear-gradient(135deg, #090e0c 0%, #061c14 45%, #04291c 80%, #063624 100%);
+}
+
+.bg-dark-hero {
+  background: radial-gradient(at 80% 20%, rgba(16, 185, 129, 0.18) 0px, transparent 55%),
+              radial-gradient(at 20% 90%, rgba(5, 150, 105, 0.14) 0px, transparent 60%),
+              linear-gradient(145deg, #070c09 0%, #091712 50%, #0a2119 100%);
+}
+
+.bg-aurora-btn {
+  background: linear-gradient(135deg, #047857 0%, #059669 45%, #10b981 100%);
+  background-size: 200% 200%;
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bg-aurora-btn:hover {
+  background-position: right center;
+  box-shadow: 0 4px 18px -2px rgba(16, 185, 129, 0.42);
+}
+
+.text-aurora-gradient {
+  background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 60%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Custom Palette Tokens */
-.bg-forest-950 { background-color: #03140e; }
-.bg-forest-900 { background-color: #072419; }
-.bg-forest-850 { background-color: #0a3123; }
-.bg-forest-800 { background-color: #0f3f2e; }
-.bg-forest-700 { background-color: #14553e; }
-.bg-forest-50  { background-color: #f0f7f4; }
+.bg-forest-950 { background-color: #022c22; }
+.bg-forest-900 { background-color: #064e3b; }
+.bg-forest-850 { background-color: #065f46; }
+.bg-forest-800 { background-color: #047857; }
+.bg-forest-700 { background-color: #059669; }
+.bg-forest-600 { background-color: #10b981; }
+.bg-forest-500 { background-color: #34d399; }
+.bg-forest-50  { background-color: #f0fdf4; }
 
-.text-forest-950 { color: #03140e; }
-.text-forest-900 { color: #072419; }
-.text-forest-850 { color: #0a3123; }
-.text-forest-800 { color: #0f3f2e; }
+.text-forest-950 { color: #022c22; }
+.text-forest-900 { color: #064e3b; }
+.text-forest-850 { color: #065f46; }
+.text-forest-800 { color: #047857; }
+.text-forest-700 { color: #059669; }
 
-.border-forest-900 { border-color: #072419; }
-.border-forest-850 { border-color: #0a3123; }
-.border-forest-800 { border-color: #0f3f2e; }
+.border-forest-900 { border-color: #064e3b; }
+.border-forest-850 { border-color: #065f46; }
+.border-forest-800 { border-color: #047857; }
+.border-forest-700 { border-color: #059669; }
 
-.bg-gold-600 { background-color: #b8811f; }
-.bg-gold-500 { background-color: #d4972c; }
-.bg-gold-400 { background-color: #e5ad45; }
-.bg-gold-300 { background-color: #f2c66d; }
-.bg-gold-50  { background-color: #fdfaf3; }
+.bg-gold-600 { background-color: #15803d; }
+.bg-gold-500 { background-color: #10b981; }
+.bg-gold-400 { background-color: #34d399; }
+.bg-gold-300 { background-color: #a7f3d0; }
+.bg-gold-50  { background-color: #ecfdf5; }
 
-.text-gold-600 { color: #b8811f; }
-.text-gold-500 { color: #d4972c; }
-.text-gold-400 { color: #e5ad45; }
-.text-gold-300 { color: #f2c66d; }
+.text-gold-600 { color: #15803d; }
+.text-gold-500 { color: #10b981; }
+.text-gold-400 { color: #34d399; }
+.text-gold-300 { color: #a7f3d0; }
 
-.border-gold-500 { border-color: #d4972c; }
-.border-gold-400 { border-color: #e5ad45; }
+.border-gold-500 { border-color: #10b981; }
+.border-gold-400 { border-color: #34d399; }

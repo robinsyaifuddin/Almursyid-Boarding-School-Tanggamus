@@ -11,15 +11,15 @@ export const AboutPage: React.FC = () => {
     <div className="space-y-16 pb-20">
       
       {/* Header Banner Halaman */}
-      <section className="bg-forest-950 text-white py-16 border-b-4 border-gold-500 relative">
+      <section className="bg-aurora-mesh border-b border-emerald-100 py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="inline-flex items-center gap-2 bg-gold-500/20 text-gold-400 border border-gold-500/40 px-3 py-1 rounded text-xs font-semibold">
+          <div className="inline-flex items-center text-emerald-800 text-xs font-bold tracking-wider uppercase pb-1.5 border-b border-emerald-200">
             <span>Profil Lembaga & Legalitas</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+          <h1 className=" text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900">
             Tentang Pondok Pesantren Al-Mursyid
           </h1>
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
             Menyelenggarakan pendidikan Islam terpadu yang berakar pada tradisi keilmuan Ahlussunnah wal Jama'ah dan berorientasi pada kemajuan peradaban.
           </p>
         </div>
@@ -30,18 +30,18 @@ export const AboutPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           <div className="lg:col-span-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 text-center">
-            <div className="w-36 h-36 mx-auto rounded-full bg-forest-900 border-4 border-gold-500 flex items-center justify-center text-white text-4xl font-serif font-bold shadow-md">
+            <div className="w-36 h-36 mx-auto rounded-full bg-forest-900 border-4 border-gold-500 flex items-center justify-center text-white text-4xl font-bold shadow-md">
               UM
             </div>
             <div>
-              <h3 className="font-serif font-bold text-lg text-slate-900">{SITE_INFO.leadership.pembina}</h3>
-              <p className="text-xs text-gold-600 font-semibold uppercase tracking-wider">Pembina & Pendiri Yayasan</p>
+              <h3 className=" font-bold text-lg text-slate-900">{SITE_INFO.leadership.pembina}</h3>
+              <p className="text-xs text-gold-600 font-bold uppercase tracking-wider">Pembina & Pendiri Yayasan</p>
             </div>
             <p className="text-xs text-slate-500 italic">
               "Pendidikan terbaik adalah yang menanamkan kecintaan kepada Allah dan Rasul-Nya, memuliakan Al-Qur'an, dan memupuk kemandirian hidup."
             </p>
             <div className="pt-2 border-t border-slate-100 text-left text-xs text-slate-600 space-y-1">
-              <p className="font-semibold text-slate-800">Yayasan Almursyid Tanggamus Lampung</p>
+              <p className="font-bold text-slate-800">Yayasan Almursyid Tanggamus Lampung</p>
               <p className="text-[11px] text-slate-500">Way Lalaan Kampung Baru, Kota Agung Timur</p>
             </div>
           </div>
@@ -51,7 +51,7 @@ export const AboutPage: React.FC = () => {
               <span className="text-xs font-bold text-gold-600 uppercase tracking-widest">
                 Sambutan Pembina & Pimpinan
               </span>
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+              <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
                 Membangun Generasi Penjaga Kalamullah
               </h2>
             </div>
@@ -78,147 +78,195 @@ export const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Visi & Misi */}
-      <section id="visi-misi" className="bg-slate-50 py-16 border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-bold text-gold-600 uppercase tracking-widest">
-              Pedoman & Nilai Luhur
-            </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
-              Visi & Misi Lembaga
-            </h2>
+      {/* Visi & Misi — Architectural Editorial Split */}
+      <section id="visi-misi" className="py-24 bg-cream-50/60 border-y border-stone-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-stone-200/80">
+            <div className="space-y-2 max-w-xl">
+              <span className="text-[11px] font-bold text-gold-600 uppercase tracking-widest block">
+                Fondasi Filosofi & Nilai Luhur
+              </span>
+              <h2 className=" text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 tracking-tight leading-tight">
+                Visi & Misi Lembaga
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-stone-600 max-w-md leading-relaxed font-normal">
+              Arah pandang masa depan dan komitmen konkret Pondok Pesantren Al-Mursyid dalam mencetak kader ulama dan pemimpin bangsa.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            {/* Box Visi */}
-            <div className="bg-forest-950 text-white rounded-2xl p-8 border-2 border-forest-900 shadow flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 bg-gold-500/20 text-gold-400 px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">
-                  Visi Pesantren
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+            
+            {/* Visi — Monolithic Deep Forest Anchor */}
+            <div className="lg:col-span-5 bg-aurora-surface text-slate-900 rounded-2xl p-8 sm:p-10 flex flex-col justify-between border border-emerald-200/70 shadow-sm relative overflow-hidden">
+              <div className="space-y-8 relative z-10">
+                <div className="inline-flex items-center gap-2 text-emerald-800 text-xs font-bold uppercase tracking-wider">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  <span>Visi Utama</span>
                 </div>
-                <h3 className="font-serif text-xl sm:text-2xl font-bold text-white leading-snug">
-                  "Menjadi Lembaga Pendidikan Islam yang Melahirkan Ulama, Hafidz, dan Pemimpin Umat yang Berakhlakul Karimah serta Berdaya Saing."
-                </h3>
+                
+                <blockquote className=" text-2xl sm:text-3xl text-slate-900 font-bold leading-relaxed tracking-tight">
+                  “Menjadi Lembaga Pendidikan Islam yang Melahirkan Ulama, Hafidz, dan Pemimpin Umat yang Berakhlakul Karimah serta Berdaya Saing.”
+                </blockquote>
               </div>
-              <div className="pt-6 border-t border-forest-850 text-xs text-slate-300">
-                Pondok Pesantren Al-Mursyid Islamic Boarding School Tanggamus Lampung
+
+              <div className="pt-8 mt-8 border-t border-emerald-100 text-xs text-slate-500 font-normal leading-relaxed relative z-10">
+                Pondok Pesantren Al-Mursyid Islamic Boarding School · Tanggamus, Lampung
               </div>
             </div>
 
-            {/* Box Misi */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm space-y-4">
-              <div className="inline-flex items-center gap-2 bg-emerald-50 text-forest-800 px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">
-                Misi Utama
+            {/* Misi — Clean Editorial List with Hairline Borders */}
+            <div className="lg:col-span-7 bg-white rounded-2xl p-8 sm:p-10 border border-stone-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between pb-6 border-b border-stone-100">
+                  <span className="text-xs font-bold text-stone-900 uppercase tracking-wider">
+                    Empat Pilar Realisasi Misi
+                  </span>
+                  <span className="text-[11px] font-mono text-stone-400">01 — 04</span>
+                </div>
+
+                <div className="divide-y divide-stone-100">
+                  <div className="py-5 flex items-start gap-5 group">
+                    <span className=" text-lg font-bold text-gold-600 shrink-0 w-8">01</span>
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-stone-900">Tahfidzul Qur'an Bersanad</h4>
+                      <p className="text-xs text-stone-600 leading-relaxed">
+                        Menyelenggarakan pendidikan Tahfidzul Qur'an 30 Juz secara berjenjang, intensif, mutqin, dan bersambung sanad keilmuannya.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="py-5 flex items-start gap-5 group">
+                    <span className=" text-lg font-bold text-gold-600 shrink-0 w-8">02</span>
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-stone-900">Integrasi Turats & Sains</h4>
+                      <p className="text-xs text-stone-600 leading-relaxed">
+                        Mengintegrasikan kajian kitab kuning klasik (Madrasah Diniyah) dengan kurikulum sains modern pendidikan nasional terakreditasi.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="py-5 flex items-start gap-5 group">
+                    <span className=" text-lg font-bold text-gold-600 shrink-0 w-8">03</span>
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-stone-900">Kemandirian & Adab Kepemimpinan</h4>
+                      <p className="text-xs text-stone-600 leading-relaxed">
+                        Membina kedisiplinan hidup, jiwa kepemimpinan, dan kemandirian santri melalui kultur tata tertib asrama terpadu 24 jam.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="py-5 flex items-start gap-5 group">
+                    <span className=" text-lg font-bold text-gold-600 shrink-0 w-8">04</span>
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-stone-900">Penguasaan Bahasa Internasional</h4>
+                      <p className="text-xs text-stone-600 leading-relaxed">
+                        Menumbuhkan keterampilan aktif berbahasa Arab dan Inggris sebagai instrumen dakwah global dan pembuka wawasan literatur dunia.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <ul className="space-y-4 text-xs sm:text-sm text-slate-700">
-                <li className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-gold-100 text-gold-700 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
-                  <span>Menyelenggarakan pendidikan Tahfidzul Qur'an 30 Juz secara berjenjang, intensif, mutqin, dan bersanad.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-gold-100 text-gold-700 font-bold flex items-center justify-center shrink-0 text-xs">2</span>
-                  <span>Mengintegrasikan ilmu agama (Madrasah Diniyah & kajian kitab kuning) dengan ilmu pengetahuan umum kurikulum nasional.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-gold-100 text-gold-700 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
-                  <span>Membina kemandirian, kedisiplinan, jiwa kepemimpinan, dan kecakapan hidup santri melalui tata tertib asrama terpadu.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-gold-100 text-gold-700 font-bold flex items-center justify-center shrink-0 text-xs">4</span>
-                  <span>Menumbuhkan penguasaan bahasa Arab dan Inggris sebagai instrumen dakwah global dan pembuka literatur keilmuan.</span>
-                </li>
-              </ul>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* Seksi Legalitas Resmi & Dokumen Negara (Highlight Utama) */}
-      <section id="legalitas" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <div className="border-l-4 border-gold-500 pl-4 space-y-1">
-          <span className="text-xs font-bold text-gold-600 uppercase tracking-widest">
-            Keabsahan Hukum & Izin Operasional
-          </span>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
-            Legalitas Resmi Yayasan & Piagam Pesantren
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600">
-            Seluruh operasional pendidikan berada di bawah payung hukum yang sah dan diakui Kementerian Agama RI serta Kementerian Hukum dan HAM RI.
+      {/* Seksi Legalitas Resmi & Dokumen Negara (Prestige Trust Section) */}
+      <section id="legalitas" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-stone-200">
+          <div className="space-y-2">
+            <span className="text-[11px] font-bold text-gold-600 uppercase tracking-widest block">
+              Keabsahan Hukum & Ketetapan Negara
+            </span>
+            <h2 className=" text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
+              Legalitas Resmi & Piagam Operasional
+            </h2>
+          </div>
+          <p className="text-xs sm:text-sm text-stone-600 max-w-md leading-relaxed">
+            Pondok Pesantren Al-Mursyid menyelenggarakan pendidikan di bawah ketetapan hukum Republik Indonesia melalui izin resmi Kemenag RI dan Kemenkumham RI.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Card Legalitas 1: Kemenag RI */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center">
-                <ShieldCheck className="w-7 h-7" />
+          <div className="bg-aurora-surface text-slate-900 rounded-2xl p-8 border border-emerald-200/70 shadow-sm space-y-6">
+            <div className="flex items-start justify-between">
+              <div className="space-y-1">
+                <span className="text-[11px] uppercase tracking-wider text-emerald-800 font-bold">Pemerintah RI · Dokumen I</span>
+                <h3 className="font-bold text-xl text-slate-900">Piagam Terdaftar Pesantren</h3>
+                <p className="text-xs font-semibold text-emerald-700">Kementerian Agama Republik Indonesia</p>
               </div>
-              <div>
-                <h3 className="font-serif font-bold text-base text-slate-900">Piagam Terdaftar Pesantren</h3>
-                <p className="text-xs text-emerald-700 font-semibold">Kementerian Agama Republik Indonesia</p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2 text-xs">
-              <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
-                <span className="text-slate-500">Nomor Piagam:</span>
-                <span className="font-mono font-bold text-slate-800">{SITE_INFO.legal.piagamKemenag}</span>
-              </div>
-              <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
-                <span className="text-slate-500">Nomor Statistik Pesantren (NSP):</span>
-                <span className="font-mono font-bold text-forest-850 bg-emerald-100/60 px-2 py-0.5 rounded text-sm">{SITE_INFO.legal.nsp}</span>
-              </div>
-              <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
-                <span className="text-slate-500">Tanggal Ditetapkan:</span>
-                <span className="font-semibold text-slate-800">{SITE_INFO.legal.establishedDate}</span>
-              </div>
-              <div className="flex justify-between items-center py-1">
-                <span className="text-slate-500">Instansi Penerbit:</span>
-                <span className="font-semibold text-slate-800">Ditjen Pendidikan Islam Kemenag RI</span>
+              <div className="w-11 h-11 rounded-xl bg-white text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-200 shadow-2xs">
+                <ShieldCheck className="w-5 h-5 stroke-[1.75]" />
               </div>
             </div>
 
-            <p className="text-[11px] text-slate-500 leading-relaxed">
-              *Piagam Statistik Pesantren merupakan bukti legalitas sah bagi santri dalam mengikuti program ujian formal, ijazah negara, maupun beasiswa resmi.
+            <div className="space-y-3 pt-2">
+              <div className="flex items-center justify-between py-2 border-b border-emerald-100 text-xs">
+                <span className="text-slate-600 font-normal">Nomor Statistik Pesantren (NSP)</span>
+                <span className="font-bold text-sm text-slate-900 bg-white px-2.5 py-1 rounded border border-emerald-200">
+                  {SITE_INFO.legal.nsp}
+                </span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-b border-emerald-100 text-xs">
+                <span className="text-slate-600 font-normal">Nomor Piagam</span>
+                <span className="font-bold text-slate-900">{SITE_INFO.legal.piagamKemenag}</span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-b border-emerald-100 text-xs">
+                <span className="text-slate-600 font-normal">Tanggal Ditetapkan</span>
+                <span className="font-bold text-slate-900">{SITE_INFO.legal.establishedDate}</span>
+              </div>
+              <div className="flex items-center justify-between py-2 text-xs">
+                <span className="text-slate-600 font-normal">Instansi Penerbit</span>
+                <span className="font-bold text-slate-900">Ditjen Pendidikan Islam Kemenag RI</span>
+              </div>
+            </div>
+
+            <p className="text-[11px] text-slate-500 italic pt-2 border-t border-emerald-100 leading-relaxed">
+              *Piagam Statistik Pesantren menjadi payung hukum resmi bagi santri dalam mengikuti ujian formal, memperoleh ijazah resmi, dan mengakses program beasiswa nasional.
             </p>
           </div>
 
           {/* Card Legalitas 2: Kemenkumham RI */}
-          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-amber-50 text-gold-700 flex items-center justify-center">
-                <FileText className="w-7 h-7" />
+          <div className="bg-aurora-surface text-slate-900 rounded-2xl p-8 border border-emerald-200/70 shadow-sm space-y-6">
+            <div className="flex items-start justify-between">
+              <div className="space-y-1">
+                <span className="text-[11px] uppercase tracking-wider text-emerald-800 font-bold">Pemerintah RI · Dokumen II</span>
+                <h3 className="font-bold text-xl text-slate-900">Pengesahan Badan Hukum Yayasan</h3>
+                <p className="text-xs font-semibold text-emerald-700">Kementerian Hukum dan HAM Republik Indonesia</p>
               </div>
-              <div>
-                <h3 className="font-serif font-bold text-base text-slate-900">Pengesahan Badan Hukum Yayasan</h3>
-                <p className="text-xs text-gold-700 font-semibold">Kemenkumham Republik Indonesia</p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2 text-xs">
-              <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
-                <span className="text-slate-500">Nama Yayasan:</span>
-                <span className="font-bold text-slate-800">{SITE_INFO.foundation}</span>
-              </div>
-              <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
-                <span className="text-slate-500">Nomor SK Pengesahan:</span>
-                <span className="font-mono font-bold text-slate-800 text-[11px]">{SITE_INFO.legal.kemenkumham}</span>
-              </div>
-              <div className="flex justify-between items-center py-1 border-b border-slate-200/60">
-                <span className="text-slate-500">Tanggal Pengesahan:</span>
-                <span className="font-semibold text-slate-800">{SITE_INFO.legal.kemenkumhamDate}</span>
-              </div>
-              <div className="flex justify-between items-center py-1">
-                <span className="text-slate-500">Status Kelembagaan:</span>
-                <span className="font-semibold text-emerald-700">Badan Hukum Aktif & Resmi</span>
+              <div className="w-11 h-11 rounded-xl bg-white text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-200 shadow-2xs">
+                <FileText className="w-5 h-5 stroke-[1.75]" />
               </div>
             </div>
 
-            <p className="text-[11px] text-slate-500 leading-relaxed">
-              *Demi menjaga privasi dan keamanan identitas para pendiri, Nomor Induk Kependudukan (NIK) pada berkas publik dilindungi.
+            <div className="space-y-3 pt-2">
+              <div className="flex items-center justify-between py-2 border-b border-emerald-100 text-xs">
+                <span className="text-slate-600 font-normal">Nama Badan Hukum</span>
+                <span className="font-bold text-slate-900 text-right">{SITE_INFO.foundation}</span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-b border-emerald-100 text-xs">
+                <span className="text-slate-600 font-normal">Nomor SK Pengesahan</span>
+                <span className="font-bold text-slate-900 text-right text-xs">{SITE_INFO.legal.kemenkumham}</span>
+              </div>
+              <div className="flex items-center justify-between py-2 border-b border-emerald-100 text-xs">
+                <span className="text-slate-600 font-normal">Tanggal Pengesahan</span>
+                <span className="font-bold text-slate-900">{SITE_INFO.legal.kemenkumhamDate}</span>
+              </div>
+              <div className="flex items-center justify-between py-2 text-xs">
+                <span className="text-slate-600 font-normal">Status Badan Hukum</span>
+                <span className="inline-flex items-center gap-1.5 font-bold text-emerald-800 bg-emerald-100/80 px-2.5 py-0.5 rounded text-[11px] border border-emerald-200">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" /> Terdaftar & Aktif
+                </span>
+              </div>
+            </div>
+
+            <p className="text-[11px] text-slate-500 italic pt-2 border-t border-emerald-100 leading-relaxed">
+              *Akta notaris pendirian dan ketetapan menteri menjamin seluruh tata kelola aset wakaf, sarana pendidikan, dan manajemen yayasan terlindungi secara yuridis.
             </p>
           </div>
 
@@ -231,7 +279,7 @@ export const AboutPage: React.FC = () => {
           <span className="text-xs font-bold text-forest-800 uppercase tracking-widest">
             Amanah Kepemimpinan
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+          <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
             Struktur Organisasi Yayasan Almursyid
           </h2>
           <p className="text-xs sm:text-sm text-slate-600">
@@ -241,23 +289,23 @@ export const AboutPage: React.FC = () => {
 
         {/* Pendiri, Pembina, Pengawas Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center space-y-1">
+          <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm text-center space-y-1">
             <span className="text-[10px] uppercase font-bold text-gold-600 tracking-wider">Pendiri Yayasan</span>
-            <h4 className="font-serif font-bold text-slate-900 text-sm">
+            <h4 className=" font-bold text-slate-900 text-sm">
               {SITE_INFO.leadership.founders.join(', ')}
             </h4>
           </div>
 
-          <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center space-y-1">
+          <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm text-center space-y-1">
             <span className="text-[10px] uppercase font-bold text-forest-800 tracking-wider">Pembina</span>
-            <h4 className="font-serif font-bold text-slate-900 text-sm">
+            <h4 className=" font-bold text-slate-900 text-sm">
               {SITE_INFO.leadership.pembina}
             </h4>
           </div>
 
-          <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 text-center space-y-1">
+          <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm text-center space-y-1">
             <span className="text-[10px] uppercase font-bold text-slate-600 tracking-wider">Pengawas</span>
-            <h4 className="font-serif font-bold text-slate-900 text-sm">
+            <h4 className=" font-bold text-slate-900 text-sm">
               {SITE_INFO.leadership.pengawas}
             </h4>
           </div>
@@ -265,16 +313,16 @@ export const AboutPage: React.FC = () => {
 
         {/* Jajaran Pengurus Harian */}
         <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-          <h3 className="font-serif font-bold text-base text-slate-900 border-b border-slate-100 pb-3">
+          <h3 className=" font-bold text-base text-slate-900 border-b border-slate-100 pb-3">
             Jajaran Dewan Pengurus Yayasan & Pengelola Pesantren
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {SITE_INFO.leadership.pengurus.map((item, idx) => (
-              <div key={idx} className="flex items-start gap-3 p-3.5 rounded-lg bg-slate-50 border border-slate-100">
+              <div key={idx} className="flex items-start gap-3 p-3.5 rounded-lg bg-white border border-stone-200 shadow-sm">
                 <UserCheck className="w-5 h-5 text-forest-800 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs font-bold text-slate-900">{item.name}</h4>
-                  <p className="text-[11px] text-gold-600 font-medium">{item.role}</p>
+                  <p className="text-[11px] text-gold-600 font-normal">{item.role}</p>
                 </div>
               </div>
             ))}

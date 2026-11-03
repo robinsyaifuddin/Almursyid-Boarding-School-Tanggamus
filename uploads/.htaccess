@@ -1,0 +1,13 @@
+# Allow direct access to uploaded images and docs
+<IfModule mod_authz_core.c>
+    Require all granted
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order Allow,Deny
+    Allow from all
+</IfModule>
+
+# Turn off script execution for security
+Options -ExecCGI -Indexes
+php_flag engine off
+AddHandler cgi-script .php .phtml .php3 .php4 .php5 .php7 .phps

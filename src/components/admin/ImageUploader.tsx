@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { UploadCloud, Image as ImageIcon, Trash2, AlertCircle } from 'lucide-react';
+import { UploadCloud, Image as ImageIcon, Trash2, AlertCircle, Loader2 } from 'lucide-react';
+import { api } from '../../services/apiClient';
 
 interface ImageUploaderProps {
   label: string;
   value: string;
-  onChange: (base64Url: string) => void;
+  onChange: (url: string) => void;
   aspectRatio?: 'landscape' | 'portrait' | 'square';
   required?: boolean;
   description?: string;
@@ -16,36 +17,53 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   onChange,
   aspectRatio = 'landscape',
   required = false,
-  description = 'Klik atau seret file gambar ke sini (JPG, PNG, WebP maks 2MB)'
+  description = 'Klik atau seret file gambar ke sini (JPG, PNG, WebP maks 5MB)'
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragOver, setDragOver] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const processFile = (file: File) => {
+  const processFile = async (file: File) => {
     setErrorMsg(null);
     if (!file.type.startsWith('image/')) {
       setErrorMsg('File harus berupa gambar (JPG, PNG, WEBP, SVG).');
       return;
     }
 
-    // Cek batas ukuran 3MB
-    if (file.size > 3 * 1024 * 1024) {
-      setErrorMsg('Ukuran file maksimal 3 MB.');
+    // Cek batas ukuran 5MB
+    if (file.size > 5 * 1024 * 1024) {
+      setErrorMsg('Ukuran file maksimal 5 MB.');
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const result = e.target?.result as string;
-      if (result) {
-        onChange(result);
+    setIsUploading(true);
+
+    try {
+      // 1. Coba upload langsung ke Hostinger storage backend
+      const res = await api.uploadFile(file);
+      if (res && res.url) {
+        onChange(res.url);
+        setIsUploading(false);
+        return;
       }
-    };
-    reader.onerror = () => {
-      setErrorMsg('Gagal membaca file gambar.');
-    };
-    reader.readAsDataURL(file);
+    } catch (e: any) {
+      // Fallback: jika backend offline saat testing lokal, gunakan FileReader base64
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const result = ev.target?.result as string;
+        if (result) {
+          onChange(result);
+        }
+        setIsUploading(false);
+      };
+      reader.onerror = () => {
+        setErrorMsg('Gagal memproses file gambar.');
+        setIsUploading(false);
+      };
+      reader.readAsDataURL(file);
+      return;
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +131,12 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
           ${dragOver ? 'border-emerald-500 bg-emerald-50/50' : 'border-slate-200 hover:border-emerald-400 bg-slate-50/70 hover:bg-slate-50'}
         `}
       >
-        {value ? (
+        {isUploading ? (
+          <div className="py-8 px-4 flex flex-col items-center">
+            <Loader2 className="w-8 h-8 text-emerald-600 animate-spin mb-2" />
+            <p className="text-xs font-bold text-slate-700">Mengunggah ke Storage Hostinger...</p>
+          </div>
+        ) : value ? (
           <div className="w-full flex flex-col items-center">
             <div className={`w-full max-w-xs ${aspectClass} rounded-xl overflow-hidden border border-slate-200 bg-white shadow-sm relative group`}>
               <img

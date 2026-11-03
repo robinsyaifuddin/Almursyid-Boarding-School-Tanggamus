@@ -145,6 +145,36 @@ export const api = {
       body: JSON.stringify({ id, status, notes }),
     }),
 
+  // Upload File/Gambar Permanen ke Storage Hostinger
+  uploadFile: async (file: File): Promise<{ url: string; fileName: string }> => {
+    const token = getAuthToken();
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const headers: Record<string, string> = {};
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${API_BASE}/upload.php`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+
+    const resJson = await response.json();
+    if (!response.ok || !resJson.success) {
+      throw new Error(resJson.message || 'Gagal mengunggah file.');
+    }
+    return resJson.data;
+  },
+
+  uploadBase64: (base64: string) =>
+    request<{ url: string; fileName: string }>('/upload.php', {
+      method: 'POST',
+      body: JSON.stringify({ base64 }),
+    }),
+
   // Realtime Sync Polling
   getRealtimeEvents: (lastId: number = 0) =>
     request<{ events: any[]; latestId: number; serverTime: string }>(`/realtime.php?last_id=${lastId}`),

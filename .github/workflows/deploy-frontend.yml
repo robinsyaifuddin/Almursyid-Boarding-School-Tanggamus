@@ -25,8 +25,13 @@ jobs:
       - name: 🔨 Build Production (Vite)
         run: npm run build
 
-      - name: 📂 Include Backend in dist
-        run: cp -rf backend dist/backend
+      # Timpa bundle output dengan file aset yang sudah sinkron
+      - name: 🔄 Sync Assets & Include Backend
+        run: |
+          cp -f assets/index-YZJ0pbKD.js dist/assets/
+          cp -f assets/index-D7PgMjKI.css dist/assets/
+          cp -f index.html dist/index.html
+          cp -rf backend dist/backend
 
       - name: 🚀 Deploy dist/ to Hostinger public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

@@ -1,206 +1,453 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  BookOpen, Award, GraduationCap, Languages, 
-  CheckCircle2, Clock, Calendar, ArrowRight, ShieldCheck 
+  ArrowRight, CheckCircle2, BookOpen, 
+  GraduationCap, Globe2, Compass, ShieldCheck, Award
 } from 'lucide-react';
-import { PROGRAMS } from '../data/siteData';
+import { SITE_INFO } from '../data/siteData';
 
 export const ProgramPage: React.FC = () => {
   return (
-    <div className="space-y-16 pb-20">
-      
-      {/* Header Banner */}
-      <section className="bg-aurora-mesh border-b border-emerald-100 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="inline-flex items-center text-emerald-800 text-xs font-bold tracking-wider uppercase pb-1.5 border-b border-emerald-200">
-            <span>Kurikulum & Pengembangan Santri</span>
-          </div>
-          <h1 className=" text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900">
-            Program Pendidikan Terpadu
-          </h1>
-          <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
-            Memadukan hafalan Al-Qur'an 30 Juz mutqin, penguasaan kitab kuning, kurikulum pendidikan nasional berijazah resmi, serta keterampilan bahasa internasional.
-          </p>
-        </div>
-      </section>
+    <div className="space-y-16 pt-8 pb-20">
+      {/* Program Showcase List */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24">
 
-      {/* Rincian 4 Program Utama */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
-        {/* 1. Tahfidzul Qur'an */}
-        <div id="tahfidz" className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
-          <div className="lg:col-span-7 space-y-4">
-            <span className="text-xs font-bold text-gold-600 uppercase tracking-widest flex items-center gap-2">
-              <BookOpen className="w-4 h-4" /> Program Unggulan Utama
-            </span>
-            <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
-              Tahfidzul Qur'an 30 Juz Bersanad
-            </h2>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Program pembinaan hafalan Al-Qur'an intensif yang mengedepankan ketepatan makharijul huruf, tajwid, dan kelancaran (mutqin). Santri dibimbing langsung dalam kelompok halaqah kecil (maksimal 12 santri) oleh para ustadz hafidz yang berpengalaman.
-            </p>
+        {/* ---------------------------------------------------- */}
+        {/* PROGRAM 01: TAHFIDZUL QUR'AN (Teks Kiri, Foto Kanan) */}
+        {/* ---------------------------------------------------- */}
+        <article id="tahfidz" className="scroll-mt-24 border-b border-emerald-100/70 pb-16 lg:pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            
+            {/* Left Content Area */}
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+              {/* Category Breadcrumb */}
+              <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-emerald-600" />
+                <span>Program Unggulan Utama</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-700 font-semibold">Tahfidz Bersanad</span>
+              </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="bg-white p-3.5 rounded-xl border border-stone-200 shadow-sm flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <div className="text-xs">
-                  <strong className="block text-slate-800">Metode Ziyadah & Talaqqi</strong>
-                  <span className="text-slate-500">Setoran hafalan baru setiap subuh & maghrib</span>
+              {/* Title & Subtitle */}
+              <div className="space-y-2">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
+                  Tahfidzul Qur'an 30 Juz Bersanad
+                </h2>
+                <p className="text-sm sm:text-base text-emerald-800 font-medium">
+                  Mencetak penghafal Al-Qur'an mutqin dengan sanad keilmuan yang bersambung.
+                </p>
+              </div>
+
+              {/* Horizontal Inset Image with Floating Pill */}
+              <div className="relative group overflow-hidden rounded-2xl border border-emerald-100 shadow-sm bg-slate-50">
+                <img
+                  src="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1200&q=80"
+                  alt="Suasana Halaqah Tahfidz Al-Mursyid"
+                  className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
+                
+                {/* Floating Action Pill */}
+                <div className="absolute right-4 bottom-4">
+                  <a
+                    href={SITE_INFO.contacts.ppdbWa}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/95 hover:bg-forest-900 hover:text-white text-forest-900 border border-emerald-200/80 shadow-md px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide inline-flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
+                  >
+                    <span>Konsultasi Program Tahfidz</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-emerald-600 group-hover:text-white" />
+                  </a>
                 </div>
               </div>
-              <div className="bg-white p-3.5 rounded-xl border border-stone-200 shadow-sm flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <div className="text-xs">
-                  <strong className="block text-slate-800">Muraja'ah Terstruktur</strong>
-                  <span className="text-slate-500">Pengulangan hafalan harian, mingguan, & bulanan</span>
+
+              {/* Two-Column Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-slate-100">
+                <div className="space-y-1.5 bg-emerald-50/40 p-4 rounded-xl border border-emerald-100/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                    <BookOpen className="w-3.5 h-3.5 text-emerald-700" />
+                    Metode & Halaqah
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Bimbingan intensif halaqah kecil (maksimal 12 santri) dengan setoran harian ba'da subuh dan maghrib menggunakan metode Talaqqi dan Ziyadah mandiri.
+                  </p>
+                </div>
+                <div className="space-y-1.5 bg-emerald-50/40 p-4 rounded-xl border border-emerald-100/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+                    Uji & Sanad
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Evaluasi berkala tasmi' 5 hingga 30 juz sekali duduk di hadapan dewan asatidz dan pengijazahan sanad tahfidz bagi santri purna yang telah teruji mutqin.
+                  </p>
                 </div>
               </div>
-              <div className="bg-white p-3.5 rounded-xl border border-stone-200 shadow-sm flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <div className="text-xs">
-                  <strong className="block text-slate-800">Tasmi' 5 - 30 Juz Sekali Duduk</strong>
-                  <span className="text-slate-500">Uji ketahanan hafalan di hadapan masyayikh</span>
+            </div>
+
+            {/* Right Tall Feature Photo with Side Label & Large Number */}
+            <div className="lg:col-span-5 relative group">
+              <div className="relative rounded-2xl overflow-hidden border border-emerald-200/80 shadow-md bg-slate-100">
+                <img
+                  src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1000&q=80"
+                  alt="Mushaf Al-Qur'an dan Pembinaan Santri"
+                  className="w-full h-[460px] sm:h-[540px] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                />
+                
+                {/* Vertical Side Tag */}
+                <div className="absolute top-6 left-6 [writing-mode:vertical-lr] rotate-180 text-[10px] uppercase font-bold tracking-widest text-white/95 drop-shadow bg-forest-950/40 px-1 py-2 rounded backdrop-blur-xs">
+                  Est. 2022 — Al-Mursyid
+                </div>
+
+                {/* Bottom Overlay Info */}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-950/90 via-forest-950/40 to-transparent p-6 flex items-end justify-between text-white pointer-events-none">
+                  <div className="space-y-0.5">
+                    <p className="text-[11px] font-bold tracking-wider uppercase text-emerald-300">Kota Agung Timur</p>
+                    <p className="text-xs font-medium text-slate-200">Tanggamus, Lampung</p>
+                  </div>
+                  <div className="text-5xl sm:text-6xl font-bold tracking-tight text-white/90">
+                    01
+                  </div>
                 </div>
               </div>
-              <div className="bg-white p-3.5 rounded-xl border border-stone-200 shadow-sm flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <div className="text-xs">
-                  <strong className="block text-slate-800">Syahadah & Wisuda Tahfidz</strong>
-                  <span className="text-slate-500">Ijazah sanad tahfidz bagi santri purna</span>
+            </div>
+
+          </div>
+        </article>
+
+
+        {/* ---------------------------------------------------- */}
+        {/* PROGRAM 02: KAJIAN KITAB KUNING (Foto Kiri, Teks Kanan) */}
+        {/* ---------------------------------------------------- */}
+        <article id="diniyah" className="scroll-mt-24 border-b border-emerald-100/70 pb-16 lg:pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            
+            {/* Left Tall Feature Photo */}
+            <div className="lg:col-span-5 order-2 lg:order-1 relative group">
+              <div className="relative rounded-2xl overflow-hidden border border-emerald-200/80 shadow-md bg-slate-100">
+                <img
+                  src="https://images.unsplash.com/photo-1532012164546-f432f2e3edd4?auto=format&fit=crop&w=1000&q=80"
+                  alt="Kajian Kitab Kuning Pesantren"
+                  className="w-full h-[460px] sm:h-[540px] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                />
+                
+                {/* Vertical Side Tag */}
+                <div className="absolute top-6 left-6 [writing-mode:vertical-lr] rotate-180 text-[10px] uppercase font-bold tracking-widest text-white/95 drop-shadow bg-forest-950/40 px-1 py-2 rounded backdrop-blur-xs">
+                  Turats Salafus Shalih
+                </div>
+
+                {/* Bottom Overlay Info */}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-950/90 via-forest-950/40 to-transparent p-6 flex items-end justify-between text-white pointer-events-none">
+                  <div className="space-y-0.5">
+                    <p className="text-[11px] font-bold tracking-wider uppercase text-emerald-300">Madrasah Diniyah</p>
+                    <p className="text-xs font-medium text-slate-200">Dirasah Islamiyah</p>
+                  </div>
+                  <div className="text-5xl sm:text-6xl font-bold tracking-tight text-white/90">
+                    02
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="lg:col-span-5 rounded-2xl overflow-hidden shadow-lg border-2 border-slate-100">
-            <img
-              src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=800&q=80"
-              alt="Halaqah Tahfidz Qur'an"
-              className="w-full h-80 object-cover"
-            />
-          </div>
-        </div>
+            {/* Right Content Area */}
+            <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col justify-between space-y-6">
+              {/* Category Breadcrumb */}
+              <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-2">
+                <Award className="w-4 h-4 text-emerald-600" />
+                <span>Khazanah Keilmuan Ulama</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-700 font-semibold">Dirasah Turats</span>
+              </div>
 
-        {/* 2. Madrasah Diniyah & Kitab Kuning */}
-        <div id="diniyah" className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
-          <div className="lg:col-span-5 order-2 lg:order-1 rounded-2xl overflow-hidden shadow-lg border-2 border-slate-100">
-            <img
-              src="https://images.unsplash.com/photo-1532012164546-f432f2e3edd4?auto=format&fit=crop&w=800&q=80"
-              alt="Kajian Kitab Kuning"
-              className="w-full h-80 object-cover"
-            />
-          </div>
+              {/* Title & Subtitle */}
+              <div className="space-y-2">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
+                  Madrasah Diniyah & Kajian Kitab Kuning
+                </h2>
+                <p className="text-sm sm:text-base text-emerald-800 font-medium">
+                  Mendalami literatur klasik berjenjang demi kedalaman ilmu fikih dan keluhuran akhlak.
+                </p>
+              </div>
 
-          <div className="lg:col-span-7 order-1 lg:order-2 space-y-4">
-            <span className="text-xs font-bold text-gold-600 uppercase tracking-widest flex items-center gap-2">
-              <Award className="w-4 h-4" /> Khazanah Keilmuan Ulama
-            </span>
-            <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
-              Madrasah Diniyah & Kajian Kitab Kuning
-            </h2>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Mewarisi tradisi keilmuan pesantren dengan mempelajari literatur Islam klasik (kitab gundul) berjenjang. Melatih kemampuan membaca teks Arab, memahami hukum fiqih amaliah, kemurnian aqidah, dan keluhuran tasawuf.
-            </p>
+              {/* Horizontal Inset Image with Floating Pill */}
+              <div className="relative group overflow-hidden rounded-2xl border border-emerald-100 shadow-sm bg-slate-50">
+                <img
+                  src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80"
+                  alt="Kitab Turats dan Kajian Pesantren"
+                  className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
+                
+                {/* Floating Action Pill */}
+                <div className="absolute right-4 bottom-4">
+                  <a
+                    href={SITE_INFO.contacts.ppdbWa}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/95 hover:bg-forest-900 hover:text-white text-forest-900 border border-emerald-200/80 shadow-md px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide inline-flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
+                  >
+                    <span>Detail Silabus Diniyah</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-emerald-600 group-hover:text-white" />
+                  </a>
+                </div>
+              </div>
 
-            <div className="space-y-2 pt-2 text-xs text-slate-700">
-              <div className="p-3 bg-white rounded-lg border border-stone-200 shadow-sm">
-                <strong className="text-forest-900 block mb-0.5">Materi Kajian:</strong>
-                <p className="text-slate-600">Nahwu & Shorof (Al-Ajurumiyyah, Imrithi), Fiqih (Safinatun Najah, Fathul Qorib), Aqidah (Aqidatul Awwam, Tijan ad-Darori), Hadits (Arba'in An-Nawawiyyah), dan Akhlak (Ta'lim Muta'allim).</p>
+              {/* Two-Column Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-slate-100">
+                <div className="space-y-1.5 bg-emerald-50/40 p-4 rounded-xl border border-emerald-100/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
+                    Tata Bahasa & Nahwu Shorof
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Penguatan kaidah tata bahasa Arab melalui kitab Al-Ajurumiyyah, Nadhom Imrithi, hingga Alfiyah Ibnu Malik sebagai kunci memahami teks gundul.
+                  </p>
+                </div>
+                <div className="space-y-1.5 bg-emerald-50/40 p-4 rounded-xl border border-emerald-100/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+                    Fikih & Tasawuf
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Kajian hukum amaliyah bermazhab Syafi'i (Safinatun Najah, Fathul Qorib) berpadu dengan kemurnian tauhid dan adab penuntut ilmu (Ta'lim Muta'allim).
+                  </p>
+                </div>
               </div>
             </div>
+
           </div>
-        </div>
+        </article>
 
-        {/* 3. SMP & SMA Islam Terpadu */}
-        <div id="formal" className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
-          <div className="lg:col-span-7 space-y-4">
-            <span className="text-xs font-bold text-gold-600 uppercase tracking-widest flex items-center gap-2">
-              <GraduationCap className="w-4 h-4" /> Kurikulum Nasional & Terakreditasi
-            </span>
-            <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
-              SMP & SMA Islam Boarding School
-            </h2>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Menyelenggarakan pembelajaran umum berbasis Kurikulum Merdeka yang diperkaya nilai-nilai Islam. Lulusan memperoleh ijazah resmi negara, berdaya saing tinggi untuk menembus Perguruan Tinggi Negeri (PTN), sekolah kedinasan, maupun universitas terkemuka di Timur Tengah.
-            </p>
 
-            <ul className="space-y-2 pt-2 text-xs text-slate-700">
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Penguatan Literasi Sains, Matematika, dan Teknologi Komputer</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Bimbingan intensif persiapan UTBK-SNBT & seleksi beasiswa Timur Tengah</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Tenaga pengajar berdedikasi, lulusan perguruan tinggi ternama</span>
-              </li>
-            </ul>
-          </div>
+        {/* ---------------------------------------------------- */}
+        {/* PROGRAM 03: PENDIDIKAN FORMAL (Teks Kiri, Foto Kanan) */}
+        {/* ---------------------------------------------------- */}
+        <article id="formal" className="scroll-mt-24 border-b border-emerald-100/70 pb-16 lg:pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            
+            {/* Left Content Area */}
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+              {/* Category Breadcrumb */}
+              <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-emerald-600" />
+                <span>Pendidikan Formal Terakreditasi</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-700 font-semibold">SMP & SMA IT</span>
+              </div>
 
-          <div className="lg:col-span-5 rounded-2xl overflow-hidden shadow-lg border-2 border-slate-100">
-            <img
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
-              alt="Santri Belajar Formal"
-              className="w-full h-80 object-cover"
-            />
-          </div>
-        </div>
+              {/* Title & Subtitle */}
+              <div className="space-y-2">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
+                  SMP & SMA Islam Boarding School
+                </h2>
+                <p className="text-sm sm:text-base text-emerald-800 font-medium">
+                  Kurikulum nasional Kurikulum Merdeka yang diperkaya wawasan sains, komputer, dan teknologi.
+                </p>
+              </div>
 
-        {/* 4. Ekstrakurikuler & Bahasa */}
-        <div id="ekskul" className="scroll-mt-24 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-8">
-          <div className="max-w-2xl space-y-2">
-            <span className="text-xs font-bold text-gold-600 uppercase tracking-widest flex items-center gap-2">
-              <Languages className="w-4 h-4" /> Pengembangan Minat & Bakat
-            </span>
-            <h2 className=" text-2xl sm:text-3xl font-bold text-slate-900">
-              Ekstrakurikuler & Pembiasaan Bahasa
-            </h2>
-            <p className="text-sm text-slate-600">
-              Membekali santri keterampilan komunikasi internasional serta ragam kegiatan ekstrakurikuler yang menyehatkan raga dan mengasah kreativitas.
-            </p>
-          </div>
+              {/* Horizontal Inset Image with Floating Pill */}
+              <div className="relative group overflow-hidden rounded-2xl border border-emerald-100 shadow-sm bg-slate-50">
+                <img
+                  src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80"
+                  alt="Laboratorium dan Ruang Belajar Formal"
+                  className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
+                
+                {/* Floating Action Pill */}
+                <div className="absolute right-4 bottom-4">
+                  <Link
+                    to="/ppdb"
+                    className="bg-white/95 hover:bg-forest-900 hover:text-white text-forest-900 border border-emerald-200/80 shadow-md px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide inline-flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
+                  >
+                    <span>Informasi Jalur Masuk</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-emerald-600 group-hover:text-white" />
+                  </Link>
+                </div>
+              </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-2">
-              <h4 className=" font-bold text-sm text-slate-900">Bilingual Daily</h4>
-              <p className="text-xs text-slate-600">Pemberian kosakata (mufradat/vocabulary) setiap ba'da subuh dan hari wajib berbahasa Arab & Inggris.</p>
+              {/* Two-Column Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-slate-100">
+                <div className="space-y-1.5 bg-emerald-50/40 p-4 rounded-xl border border-emerald-100/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                    <GraduationCap className="w-3.5 h-3.5 text-emerald-700" />
+                    Ijazah & Jalur PTN
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Lulusan menerima ijazah resmi negara berakreditasi lengkap, siap bersaing dalam seleksi masuk PTN unggulan, sekolah kedinasan, maupun beasiswa internasional.
+                  </p>
+                </div>
+                <div className="space-y-1.5 bg-emerald-50/40 p-4 rounded-xl border border-emerald-100/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                    <Compass className="w-3.5 h-3.5 text-emerald-700" />
+                    Sains & Literasi Digital
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Didukung sarana komputer modern, penguatan sains-matematika, serta pembekalan intensif persiapan UTBK-SNBT oleh para tenaga pendidik berpengalaman.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-2">
-              <h4 className=" font-bold text-sm text-slate-900">Pramuka Pesantren</h4>
-              <p className="text-xs text-slate-600">Gugus depan kepanduan untuk menanamkan kedisiplinan, survival skill, gotong royong, dan cinta tanah air.</p>
+
+            {/* Right Tall Feature Photo with Side Label & Large Number */}
+            <div className="lg:col-span-5 relative group">
+              <div className="relative rounded-2xl overflow-hidden border border-emerald-200/80 shadow-md bg-slate-100">
+                <img
+                  src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1000&q=80"
+                  alt="Santri Berprestasi di Kelas Formal"
+                  className="w-full h-[460px] sm:h-[540px] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                />
+                
+                {/* Vertical Side Tag */}
+                <div className="absolute top-6 left-6 [writing-mode:vertical-lr] rotate-180 text-[10px] uppercase font-bold tracking-widest text-white/95 drop-shadow bg-forest-950/40 px-1 py-2 rounded backdrop-blur-xs">
+                  Kurikulum Merdeka — Terakreditasi
+                </div>
+
+                {/* Bottom Overlay Info */}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-950/90 via-forest-950/40 to-transparent p-6 flex items-end justify-between text-white pointer-events-none">
+                  <div className="space-y-0.5">
+                    <p className="text-[11px] font-bold tracking-wider uppercase text-emerald-300">Jenjang Menengah</p>
+                    <p className="text-xs font-medium text-slate-200">Ijazah Resmi Nasional</p>
+                  </div>
+                  <div className="text-5xl sm:text-6xl font-bold tracking-tight text-white/90">
+                    03
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-2">
-              <h4 className=" font-bold text-sm text-slate-900">Khat & Kaligrafi</h4>
-              <p className="text-xs text-slate-600">Seni menulis mushaf Al-Qur'an dan kaidah khat Riq'ah, Naskhi, dan Tsuluts berstandar seni islami.</p>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm space-y-2">
-              <h4 className=" font-bold text-sm text-slate-900">Khitobah & Pidato</h4>
-              <p className="text-xs text-slate-600">Latihan public speaking 3 bahasa (Indonesia, Arab, Inggris) untuk melatih keberanian berdakwah.</p>
-            </div>
+
           </div>
-        </div>
+        </article>
 
-      </section>
 
-      {/* CTA Pendaftaran */}
+        {/* ---------------------------------------------------- */}
+        {/* PROGRAM 04: BAHASA & EKSTRAKURIKULER (Foto Kiri, Teks Kanan) */}
+        {/* ---------------------------------------------------- */}
+        <article id="ekskul" className="scroll-mt-24 pb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            
+            {/* Left Tall Feature Photo */}
+            <div className="lg:col-span-5 order-2 lg:order-1 relative group">
+              <div className="relative rounded-2xl overflow-hidden border border-emerald-200/80 shadow-md bg-slate-100">
+                <img
+                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80"
+                  alt="Aktivitas Pengembangan Kepribadian dan Kepanduan"
+                  className="w-full h-[460px] sm:h-[540px] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                />
+                
+                {/* Vertical Side Tag */}
+                <div className="absolute top-6 left-6 [writing-mode:vertical-lr] rotate-180 text-[10px] uppercase font-bold tracking-widest text-white/95 drop-shadow bg-forest-950/40 px-1 py-2 rounded backdrop-blur-xs">
+                  Life Skills & Language
+                </div>
+
+                {/* Bottom Overlay Info */}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-950/90 via-forest-950/40 to-transparent p-6 flex items-end justify-between text-white pointer-events-none">
+                  <div className="space-y-0.5">
+                    <p className="text-[11px] font-bold tracking-wider uppercase text-emerald-300">Arab & Inggris</p>
+                    <p className="text-xs font-medium text-slate-200">Kemandirian & Karakter</p>
+                  </div>
+                  <div className="text-5xl sm:text-6xl font-bold tracking-tight text-white/90">
+                    04
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Content Area */}
+            <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col justify-between space-y-6">
+              {/* Category Breadcrumb */}
+              <div className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-2">
+                <Globe2 className="w-4 h-4 text-emerald-600" />
+                <span>Pengembangan Minat & Bakat</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-700 font-semibold">Bahasa & Kepemimpinan</span>
+              </div>
+
+              {/* Title & Subtitle */}
+              <div className="space-y-2">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
+                  Pembiasaan Bahasa & Ekstrakurikuler
+                </h2>
+                <p className="text-sm sm:text-base text-emerald-800 font-medium">
+                  Membangun kemandirian raga, jiwa kepemimpinan, dan kecakapan komunikasi global.
+                </p>
+              </div>
+
+              {/* Horizontal Inset Image with Floating Pill */}
+              <div className="relative group overflow-hidden rounded-2xl border border-emerald-100 shadow-sm bg-slate-50">
+                <img
+                  src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80"
+                  alt="Aktivitas Bahasa dan Komunikasi Santri"
+                  className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
+                
+                {/* Floating Action Pill */}
+                <div className="absolute right-4 bottom-4">
+                  <a
+                    href={SITE_INFO.contacts.ppdbWa}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/95 hover:bg-forest-900 hover:text-white text-forest-900 border border-emerald-200/80 shadow-md px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide inline-flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
+                  >
+                    <span>Ragam Kegiatan Santri</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-emerald-600 group-hover:text-white" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Two-Column Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-slate-100">
+                <div className="space-y-1.5 bg-emerald-50/40 p-4 rounded-xl border border-emerald-100/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                    <Globe2 className="w-3.5 h-3.5 text-emerald-700" />
+                    Bilingual Atmosphere
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Pembiasaan bahasa Arab & Inggris aktif dalam kehidupan harian asrama dengan dukungan kosa kata tematik harian dan pelatihan pidato (khitobah) 3 bahasa.
+                  </p>
+                </div>
+                <div className="space-y-1.5 bg-emerald-50/40 p-4 rounded-xl border border-emerald-100/60">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                    <Award className="w-3.5 h-3.5 text-emerald-700" />
+                    Khat & Kepramukaan
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Ekstrakurikuler seni kaligrafi Islam (khat mushaf), pramuka pesantren, bela diri praktis, olahraga sunnah, dan pembentukan karakter kepemimpinan.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+      </main>
+
+      {/* CTA Pendaftaran Selaras dengan Bagian Lain Web */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="bg-aurora-banner text-white rounded-2xl p-8 sm:p-12 border border-emerald-500/20 shadow-lg space-y-4">
-          <h2 className=" text-2xl sm:text-3xl font-bold text-white">Siap Menjadi Bagian dari Keluarga Besar Al-Mursyid?</h2>
-          <p className="text-xs sm:text-sm text-emerald-100/90 max-w-xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Siap Menjadi Bagian dari Keluarga Besar Al-Mursyid?
+          </h2>
+          <p className="text-xs sm:text-sm text-emerald-100/90 max-w-xl mx-auto leading-relaxed">
             Pendaftaran dibuka setiap tahun ajaran baru dengan kuota selektif. Konsultasikan jalur pendaftaran bersama tim panitia kami.
           </p>
-          <div className="pt-2">
+          <div className="pt-2 flex flex-wrap justify-center gap-4">
             <Link
               to="/ppdb"
-              className="bg-white hover:bg-emerald-50 text-forest-950 font-bold px-6 py-3 rounded-lg text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 shadow-sm transition-all hover:-translate-y-0.5 active:scale-95"
+              className="bg-white hover:bg-emerald-50 text-forest-950 font-bold px-6 py-3 rounded-full text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 shadow-sm transition-all hover:-translate-y-0.5 active:scale-95"
             >
               <span>Daftar Santri Baru Sekarang</span>
               <ArrowRight className="w-4 h-4 text-forest-900" />
             </Link>
+            <a
+              href={SITE_INFO.contacts.ppdbWa}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-forest-900/80 hover:bg-forest-900 border border-emerald-400/30 text-white font-bold px-6 py-3 rounded-full text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-all hover:-translate-y-0.5 active:scale-95"
+            >
+              <span>Hubungi Panitia PPDB</span>
+            </a>
           </div>
         </div>
       </section>

@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-forest-950: #022c22;
-  --color-forest-900: #064e3b;
-  --color-forest-850: #065f46;
-  --color-forest-800: #047857;
-  --color-forest-700: #059669;
-  --color-forest-600: #10b981;
-  --color-forest-500: #34d399;
+  --color-forest-950: #06372b;
+  --color-forest-900: #0a4637;
+  --color-forest-850: #0e5644;
+  --color-forest-800: #146954;
+  --color-forest-700: #1d7d65;
+  --color-forest-600: #28594d;
+  --color-forest-500: #3a7566;
   --color-forest-50:  #f0fdf4;
 
   --color-gold-600: #15803d;
@@ -114,61 +114,61 @@
               linear-gradient(180deg, #ffffff 0%, #f4fbf7 100%);
 }
 
-/* Onyx Black into Deep Royal Emerald with subtle emerald glow highlight */
+/* Signature Forest Gradient & Glow */
 .bg-aurora-banner {
-  background: radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.22) 0px, transparent 60%),
-              radial-gradient(at 0% 100%, rgba(5, 150, 105, 0.2) 0px, transparent 60%),
-              linear-gradient(135deg, #090e0c 0%, #061c14 45%, #04291c 80%, #063624 100%);
+  background: radial-gradient(at 100% 0%, rgba(40, 89, 77, 0.35) 0px, transparent 60%),
+              radial-gradient(at 0% 100%, rgba(10, 70, 55, 0.4) 0px, transparent 60%),
+              linear-gradient(135deg, #05261e 0%, #06372b 45%, #0a4637 80%, #146954 100%);
 }
 
 .bg-dark-hero {
-  background: radial-gradient(at 80% 20%, rgba(16, 185, 129, 0.18) 0px, transparent 55%),
-              radial-gradient(at 20% 90%, rgba(5, 150, 105, 0.14) 0px, transparent 60%),
-              linear-gradient(145deg, #070c09 0%, #091712 50%, #0a2119 100%);
+  background: radial-gradient(at 80% 20%, rgba(40, 89, 77, 0.3) 0px, transparent 55%),
+              radial-gradient(at 20% 90%, rgba(10, 70, 55, 0.25) 0px, transparent 60%),
+              linear-gradient(145deg, #05261e 0%, #06372b 50%, #0a4637 100%);
 }
 
 .bg-aurora-btn {
-  background: linear-gradient(135deg, #047857 0%, #059669 45%, #10b981 100%);
+  background: linear-gradient(135deg, #0a4637 0%, #0e5644 45%, #1d7d65 100%);
   background-size: 200% 200%;
   transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bg-aurora-btn:hover {
   background-position: right center;
-  box-shadow: 0 4px 18px -2px rgba(16, 185, 129, 0.42);
+  box-shadow: 0 4px 18px -2px rgba(29, 125, 101, 0.42);
 }
 
 .text-aurora-gradient {
-  background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #10b981 100%);
+  background: linear-gradient(135deg, #06372b 0%, #0e5644 50%, #1d7d65 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gold-gradient {
-  background: linear-gradient(135deg, #34d399 0%, #10b981 60%, #059669 100%);
+  background: linear-gradient(135deg, #3a7566 0%, #28594d 60%, #146954 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Custom Palette Tokens */
-.bg-forest-950 { background-color: #022c22; }
-.bg-forest-900 { background-color: #064e3b; }
-.bg-forest-850 { background-color: #065f46; }
-.bg-forest-800 { background-color: #047857; }
-.bg-forest-700 { background-color: #059669; }
-.bg-forest-600 { background-color: #10b981; }
-.bg-forest-500 { background-color: #34d399; }
+.bg-forest-950 { background-color: #06372b; }
+.bg-forest-900 { background-color: #0a4637; }
+.bg-forest-850 { background-color: #0e5644; }
+.bg-forest-800 { background-color: #146954; }
+.bg-forest-700 { background-color: #1d7d65; }
+.bg-forest-600 { background-color: #28594d; }
+.bg-forest-500 { background-color: #3a7566; }
 .bg-forest-50  { background-color: #f0fdf4; }
 
-.text-forest-950 { color: #022c22; }
-.text-forest-900 { color: #064e3b; }
-.text-forest-850 { color: #065f46; }
-.text-forest-800 { color: #047857; }
-.text-forest-700 { color: #059669; }
+.text-forest-950 { color: #06372b; }
+.text-forest-900 { color: #0a4637; }
+.text-forest-850 { color: #0e5644; }
+.text-forest-800 { color: #146954; }
+.text-forest-700 { color: #1d7d65; }
 
-.border-forest-900 { border-color: #064e3b; }
-.border-forest-850 { border-color: #065f46; }
-.border-forest-800 { border-color: #047857; }
-.border-forest-700 { border-color: #059669; }
+.border-forest-900 { border-color: #0a4637; }
+.border-forest-850 { border-color: #0e5644; }
+.border-forest-800 { border-color: #146954; }
+.border-forest-700 { border-color: #1d7d65; }
 
 .bg-gold-600 { background-color: #15803d; }
 .bg-gold-500 { background-color: #10b981; }

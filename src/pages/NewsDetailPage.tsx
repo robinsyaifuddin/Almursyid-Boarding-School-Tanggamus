@@ -118,7 +118,7 @@ export const NewsDetailPage: React.FC = () => {
     <div className="bg-white min-h-screen text-slate-800 pb-24">
       
       {/* Breadcrumb Bar */}
-      <div className="border-b border-slate-100 bg-[#fbfcfd]">
+      <div className="border-b border-slate-100 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
           <div className="flex items-center gap-2 text-xs text-slate-500">
             <Link to="/" className="hover:text-emerald-700 transition-colors">Beranda</Link>
@@ -214,7 +214,7 @@ export const NewsDetailPage: React.FC = () => {
             <div className="pt-8 border-t border-slate-100">
               <Link 
                 to="/berita"
-                className="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100/70 px-4 py-2.5 rounded-xl transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100/70 px-5 py-2.5 rounded-full transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Kembali ke Halaman Berita</span>
@@ -353,3 +353,4 @@ export const NewsDetailPage: React.FC = () => {
     </div>
   );
 };
+

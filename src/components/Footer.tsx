@@ -86,6 +86,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/galeri" className="hover:text-gold-400 transition-colors flex items-center gap-1.5">
+                  <ArrowRight className="w-3 h-3 text-gold-500" /> Galeri Kegiatan
+                </Link>
+              </li>
+              <li>
                 <Link to="/ppdb" className="hover:text-gold-400 transition-colors flex items-center gap-1.5">
                   <ArrowRight className="w-3 h-3 text-gold-500" /> Informasi PPDB
                 </Link>

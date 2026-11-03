@@ -28,7 +28,7 @@ export const SITE_INFO = {
     pengawas: "Budi Setiawan",
     founders: ["Agus Aftah", "Muhammad Al Ashimi", "Usman Mursyid"],
     pengurus: [
-      { name: "Pungut Sarifuddin Ash-Shajili", role: "Ketua Pengurus" },
+      { name: "Pungut Sarifuddin Ash-Shajili", role: "Ketua Pengurus", highlight: true },
       { name: "Astoya Saimulani", role: "Sekretaris" },
       { name: "Muhammad Al Ashimi", role: "Bendahara & Hubungan Umat" },
       { name: "Agus Aftah", role: "Divisi Pendidikan & Kurikulum" },
@@ -60,6 +60,7 @@ export const NAV_LINKS: NavItem[] = [
   { label: "Tentang Kami", href: "/tentang-kami" },
   { label: "Program", href: "/program" },
   { label: "Fasilitas", href: "/fasilitas" },
+  { label: "Galeri", href: "/galeri" },
   { label: "PPDB Online", href: "/ppdb" },
   { label: "Berita", href: "/berita" },
 ];
@@ -104,37 +105,37 @@ export const FACILITIES = [
     name: "Masjid Jami' Al-Mursyid",
     category: "Ibadah & Halaqah",
     desc: "Pusat spiritual santri untuk salat berjamaah 5 waktu, kajian diniyah, wirid, dan halaqah tahfidz yang sejuk dan luas.",
-    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1000&q=80"
   },
   {
     name: "Asrama Santri Putra & Putri Terpisah",
     category: "Tempat Tinggal",
     desc: "Gedung asrama bersih, nyaman, dengan sirkulasi udara pegunungan Tanggamus yang segar, dilengkapi ranjang tingkat dan lemari mandiri.",
-    image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1000&q=80"
   },
   {
-    name: "Ruang Kelas & Laboratorium",
+    name: "Ruang Kelas & Madrasah Diniyah",
     category: "Pendidikan",
-    desc: "Ruang belajar representatif berfasilitas modern untuk pembelajaran formal, sains, dan literasi teknologi.",
-    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80"
+    desc: "Ruang belajar representatif berfasilitas modern untuk pembelajaran formal, kajian kitab kuning, sains, dan literasi teknologi.",
+    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1000&q=80"
   },
   {
     name: "Dapur & Ruang Makan Higienis",
     category: "Nutrisi & Konsumsi",
     desc: "Penyediaan menu makanan santri 3 kali sehari yang terjamin gizi seimbang, halal, dan disiapkan dengan standar kebersihan tinggi.",
-    image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1000&q=80"
   },
   {
     name: "Lapangan Olahraga & Area Terbuka",
     category: "Kebugaran & Bakat",
-    desc: "Fasilitas olahraga futsal, bulu tangkis, voli, dan area apel upacara berlatar pemandangan alam Way Lalaan yang asri.",
-    image: "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=800&q=80"
+    desc: "Fasilitas olahraga futsal, bulu tangkis, voli, panahan sunnah, dan area apel upacara berlatar pemandangan alam Way Lalaan yang asri.",
+    image: "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=1000&q=80"
   },
   {
-    name: "Perpustakaan Islam & Bacaan Umum",
+    name: "Perpustakaan Islam & Maktabah Turats",
     category: "Literasi",
-    desc: "Koleksi ratusan kitab turats, terjemahan tafsir, buku penunjang kurikulum nasional, ensiklopedia, dan karya sastra santri.",
-    image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80"
+    desc: "Koleksi ratusan kitab turats, terjemahan tafsir Al-Qur'an, buku penunjang kurikulum nasional, ensiklopedia, dan karya sastra santri.",
+    image: "https://images.unsplash.com/photo-1532012164546-f432f2e3edd4?auto=format&fit=crop&w=1000&q=80"
   }
 ];
 
@@ -147,7 +148,7 @@ export const NEWS_DATA = [
     category: "Prestasi Santri",
     subCategory: "Tahfidz & Sanad",
     summary: "Sebanyak 42 santriwan dan santriwati resmi diwisuda dan menerima syahadah sanad muttashil dalam prosesi khidmat yang dihadiri ulama dan wali santri.",
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1200&q=80",
     isFeatured: true
   },
   {
@@ -157,7 +158,7 @@ export const NEWS_DATA = [
     timeAgo: "3 jam yang lalu",
     category: "Agenda Pondok",
     summary: "Mempererat sinergi antara orang tua dan dewan asatidz dalam menumbuhkan generasi berakhlak mulia serta mandiri di era digital.",
-    image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "penerimaan-santri-baru-2027",
@@ -166,7 +167,7 @@ export const NEWS_DATA = [
     timeAgo: "5 jam yang lalu",
     category: "Informasi PPDB",
     summary: "Pendaftaran santri baru jalur reguler dan beasiswa prestasi tahfidz kini dapat diakses secara online melalui portal resmi website pondok.",
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "olimpiade-sains-santri",
@@ -175,7 +176,7 @@ export const NEWS_DATA = [
     timeAgo: "Kemarin",
     category: "Prestasi Akademik",
     summary: "Kombinasi sains modern dan nilai pesantren membuktikan santri mampu bersaing unggul di kancah olimpiade bergengsi tingkat nasional.",
-    image: "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "panen-hidroponik-santri",
@@ -193,7 +194,7 @@ export const NEWS_DATA = [
     timeAgo: "3 hari lalu",
     category: "Bahasa & Literasi",
     summary: "Ajang unjuk kemampuan public speaking santri dalam tiga bahasa dengan gaya orasi meyakinkan dan wawasan global.",
-    image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "pelatihan-robotik-santri",
@@ -202,7 +203,7 @@ export const NEWS_DATA = [
     timeAgo: "4 hari lalu",
     category: "Teknologi",
     summary: "Pengenalan logika pemrograman mikrokontroler dan otomasi teknologi terapan sebagai bekal literasi digital generasi santri.",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
@@ -212,7 +213,7 @@ export const TICKER_NEWS = [
     title: "Juara 1 Musabaqah Hifdzil Qur'an Tingkat Provinsi Lampung",
     category: "Tahfidz",
     timeAgo: "1 jam lalu",
-    image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=200&q=80"
+    image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=200&q=80"
   },
   {
     title: "Santri Kirim Delegasi Debat Bahasa Arab Nasional",
@@ -224,19 +225,19 @@ export const TICKER_NEWS = [
     title: "Kunjungan Studi Banding Forum Pesantren Se-Sumbagsel",
     category: "Kelembagaan",
     timeAgo: "3 jam lalu",
-    image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=200&q=80"
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=200&q=80"
   },
   {
     title: "Peresmian Laboratorium Komputer & Studio Multimedia Baru",
     category: "Sarpras",
     timeAgo: "4 jam lalu",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=200&q=80"
+    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=200&q=80"
   },
   {
     title: "Pemberian Beasiswa Santri Berprestasi Bidang Sains & Riset",
     category: "Beasiswa",
     timeAgo: "5 jam lalu",
-    image: "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?auto=format&fit=crop&w=200&q=80"
+    image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=200&q=80"
   },
   {
     title: "Klinik Santri Resmikan Layanan Konseling & Cek Medis Berkala",
@@ -252,19 +253,19 @@ export const LATEST_POSTS = [
     title: "Kunjungan Studi Banding Forum Pengasuh Pesantren Se-Sumbagsel",
     category: "Kelembagaan",
     timeAgo: "25 mnt lalu",
-    image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=300&q=80"
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=300&q=80"
   },
   {
     title: "Peresmian Laboratorium Komputer & Studio Multimedia Baru",
     category: "Fasilitas",
     timeAgo: "1 jam lalu",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=300&q=80"
+    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=300&q=80"
   },
   {
     title: "Santri Al-Mursyid Raih Medali Emas Olimpiade Sains Nasional",
     category: "Prestasi",
     timeAgo: "3 jam lalu",
-    image: "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?auto=format&fit=crop&w=300&q=80"
+    image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=300&q=80"
   },
   {
     title: "Program Kemandirian: Panen Sayur Hidroponik Perdana",
@@ -276,7 +277,7 @@ export const LATEST_POSTS = [
     title: "Gebyar Muhadhoroh: Festival Orasi Tiga Bahasa Santriwan",
     category: "Bahasa",
     timeAgo: "6 jam lalu",
-    image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=300&q=80"
+    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=300&q=80"
   }
 ];
 
@@ -293,7 +294,7 @@ export const DONT_MISS_NEWS = {
       title: "Uji Publik Hafalan Al-Qur'an Santri Menjelang Evaluasi Tengah Semester",
       category: "Akademik",
       timeAgo: "3 jam lalu",
-      image: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=600&q=80"
+      image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=600&q=80"
     },
     {
       title: "Pelatihan Kaligrafi Kontemporer & Pameran Karya Seni Islami",
@@ -322,25 +323,25 @@ export const TOP_STORIES = [
     rank: 1,
     title: "Alumni Al-Mursyid Tembus Universitas Al-Azhar Kairo Jalur Beasiswa Penuh",
     timeAgo: "1 jam lalu",
-    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=200&q=80"
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=200&q=80"
   },
   {
     rank: 2,
     title: "Profil Ustadz Pembina: Membangun Karakter Qur'ani di Era Distraksi Digital",
     timeAgo: "2 jam lalu",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+    image: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=200&q=80"
   },
   {
     rank: 3,
-    title: "Kunjungan Silaturahmi Kapolres & Tokoh Masyarakat Tanggamus",
+    title: "Kunjungan Silaturahmi Tokoh Masyarakat & Ulama Tanggamus",
     timeAgo: "3 jam lalu",
-    image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=200&q=80"
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=200&q=80"
   },
   {
-    rank: 4,
     title: "Tips Mendampingi Anak Masuk Pondok Pesantren Bagi Orang Tua Baru",
+    rank: 4,
     timeAgo: "4 jam lalu",
-    image: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&w=200&q=80"
+    image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=200&q=80"
   },
   {
     rank: 5,
@@ -357,14 +358,14 @@ export const VIDEO_GALLERY = {
     status: "Video Utama",
     views: "1.2k tayangan",
     duration: "18:45",
-    image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=80"
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1200&q=80"
   },
   items: [
     {
       title: "Lantunan Murottal Santri Al-Mursyid Surat Ar-Rahman di Alam Terbuka",
       duration: "04:32",
       timeAgo: "2 jam lalu",
-      image: "https://images.unsplash.com/photo-1584697964190-705b89368d83?auto=format&fit=crop&w=400&q=80"
+      image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=400&q=80"
     },
     {
       title: "Tur Fasilitas Asrama & Lingkungan Belajar Al-Mursyid Boarding School",
@@ -387,4 +388,134 @@ export const PPDB_FEES = [
   { item: "Buku Paket & Modul Diniyah 1 Tahun", amount: "Rp 650.000", note: "Kitab & modul kurikulum" },
   { item: "Perlengkapan Asrama (Kasur, Sprei, Loker)", amount: "Rp 850.000", note: "Fasilitas pribadi santri" },
   { item: "Syahriah / SPP Bulanan (Makan 3x + Asrama)", amount: "Rp 950.000", note: "Per bulan (All-in)" },
+];
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: "Tahfidz & Ibadah" | "Akademik & Formal" | "Ekstrakurikuler" | "Kemandirian & Sosial" | "Peringatan Hari Besar";
+  date: string;
+  location: string;
+  image: string;
+  desc: string;
+}
+
+export const GALLERY_CATEGORIES = [
+  "Semua",
+  "Tahfidz & Ibadah",
+  "Akademik & Formal",
+  "Ekstrakurikuler",
+  "Kemandirian & Sosial",
+  "Peringatan Hari Besar",
+] as const;
+
+export const GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: "gal-1",
+    title: "Halaqah Tahfidzul Qur'an & Talaqqi Ba'da Subuh",
+    category: "Tahfidz & Ibadah",
+    date: "28 Oktober 2026",
+    location: "Masjid Jami' Al-Mursyid",
+    image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1200&q=80",
+    desc: "Suasana syahdu santri menyetorkan ziyadah hafalan Al-Qur'an dan muraja'ah bersama asatidz pengampu tahfidz."
+  },
+  {
+    id: "gal-2",
+    title: "Praktikum Sains & Eksperimen Biologi Terpadu",
+    category: "Akademik & Formal",
+    date: "24 Oktober 2026",
+    location: "Laboratorium Sains SMP-SMA Islam",
+    image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80",
+    desc: "Santri mempraktikkan pengamatan mikroskopis dan formulasi kimia ramah lingkungan dalam pembelajaran sains terpadu."
+  },
+  {
+    id: "gal-3",
+    title: "Tadabbur Alam & Survival Camp di Alam Way Lalaan",
+    category: "Ekstrakurikuler",
+    date: "19 Oktober 2026",
+    location: "Kawasan Alam Way Lalaan, Tanggamus",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    desc: "Eksplorasi alam santri pecinta alam mengasah ketahanan fisik, kerja sama regu, dan tadabbur keagungan ciptaan Allah."
+  },
+  {
+    id: "gal-4",
+    title: "Kemandirian Santri: Panen Kebun Hidroponik & Ikan Air Tawar",
+    category: "Kemandirian & Sosial",
+    date: "15 Oktober 2026",
+    location: "Kebun Edukasi Agropreneur Santri",
+    image: "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=1200&q=80",
+    desc: "Edukasi budidaya sayuran hijau dan sistem perikanan mandiri guna membekali santri jiwa wirausaha dan ketahanan pangan."
+  },
+  {
+    id: "gal-5",
+    title: "Latihan Rutin Seni Bela Diri Tapak Suci & Panahan Tradisional",
+    category: "Ekstrakurikuler",
+    date: "12 Oktober 2026",
+    location: "Lapangan Serbaguna Kampus Al-Mursyid",
+    image: "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=1200&q=80",
+    desc: "Melatih kebugaran, kedisiplinan gerak, serta sunnah berolahraga memanah bagi para santriwan dan santriwati."
+  },
+  {
+    id: "gal-6",
+    title: "Peringatan Hari Santri Nasional & Apel Akbar Keikhlasan",
+    category: "Peringatan Hari Besar",
+    date: "22 Oktober 2026",
+    location: "Plaza Utama Al-Mursyid",
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1200&q=80",
+    desc: "Semarak upacara Hari Santri Nasional bersama segenap masyaikh, dewan guru, dan wali santri dalam balutan ukhuwah."
+  },
+  {
+    id: "gal-7",
+    title: "Sorogan Kitab Kuning & Muwajjahah Diniyah Sore Hari",
+    category: "Tahfidz & Ibadah",
+    date: "08 Oktober 2026",
+    location: "Serambi Madrasah Diniyah",
+    image: "https://images.unsplash.com/photo-1532012164546-f432f2e3edd4?auto=format&fit=crop&w=1200&q=80",
+    desc: "Pendalaman kaidah nahwu, sharaf, dan fiqih klasik dengan metode sorogan talaqqi langsung kepada para asatidz."
+  },
+  {
+    id: "gal-8",
+    title: "Pelatihan Kaligrafi Kontemporer & Pameran Seni Khath",
+    category: "Ekstrakurikuler",
+    date: "03 Oktober 2026",
+    location: "Studio Seni & Kaligrafi Islam",
+    image: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80",
+    desc: "Mengasah kepekaan estetika dan kecintaan terhadap seni tulisan mushaf Al-Qur'an gaya Tsuluts, Naskhi, dan Diwani."
+  },
+  {
+    id: "gal-9",
+    title: "Muhadhoroh Tiga Bahasa (Arab, Inggris, dan Indonesia)",
+    category: "Akademik & Formal",
+    date: "29 September 2026",
+    location: "Aula Pertemuan Utama",
+    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
+    desc: "Latihan rutin orasi ilmiah santri di hadapan khalayak umum guna membentuk mental kepemimpinan dan public speaking internasional."
+  },
+  {
+    id: "gal-10",
+    title: "Literasi Digital & Coding Lab Santri Masa Depan",
+    category: "Akademik & Formal",
+    date: "22 September 2026",
+    location: "Laboratorium Komputer & Multimedia",
+    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80",
+    desc: "Pengenalan teknologi digital, dasar algoritma pemrograman, dan publikasi konten dakwah santri berbasis web."
+  },
+  {
+    id: "gal-11",
+    title: "Bakti Sosial Santri Peduli Warga Kampung Sekitar Way Lalaan",
+    category: "Kemandirian & Sosial",
+    date: "17 September 2026",
+    location: "Desa Kampung Baru, Kota Agung Timur",
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+    desc: "Penyaluran paket sembako, gotong royong kebersihan lingkungan, serta edukasi kesehatan bersama santri dan pemuda desa."
+  },
+  {
+    id: "gal-12",
+    title: "Peringatan Maulid Nabi Muhammad SAW & Gema Sholawat",
+    category: "Peringatan Hari Besar",
+    date: "12 September 2026",
+    location: "Masjid Jami' Al-Mursyid",
+    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1200&q=80",
+    desc: "Malam mahabbah melantunkan qasidah Burdah dan Simthuddurar dalam suasana khusyuk berbalut cahaya pendar lampu asrama."
+  }
 ];

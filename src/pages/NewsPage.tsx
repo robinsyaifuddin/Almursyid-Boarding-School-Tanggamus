@@ -27,7 +27,7 @@ export const NewsPage: React.FC = () => {
   const currentSlide = heroSlides[heroIndex] || heroSlides[0];
 
   return (
-    <div className="bg-[#f8fafc] text-slate-800 min-h-screen pb-20">
+    <div className="bg-white text-slate-800 min-h-screen pb-20">
       
       {/* 1. TOP TICKER STRIP (Marquee Infinite Scroll - Pause on Hover) */}
       <section className="bg-white border-b border-slate-200/80 overflow-hidden py-2.5 relative group">
@@ -106,7 +106,7 @@ export const NewsPage: React.FC = () => {
               <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
                 <Link 
                   to={`/berita/${createSlug(currentSlide.title)}`}
-                  className="inline-flex items-center gap-2 bg-white text-slate-900 hover:bg-emerald-500 hover:text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm active:scale-[0.98]"
+                  className="inline-flex items-center gap-2 bg-white text-slate-900 hover:bg-emerald-500 hover:text-white px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-sm active:scale-[0.98]"
                 >
                   <span>Baca Selengkapnya</span>
                   <ArrowRight className="w-4 h-4" />
@@ -285,3 +285,4 @@ export const NewsPage: React.FC = () => {
     </div>
   );
 };
+

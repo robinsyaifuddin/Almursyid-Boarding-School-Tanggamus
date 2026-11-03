@@ -8,14 +8,14 @@ export default {
     extend: {
       colors: {
         forest: {
-          950: '#022c22', // Deep emerald dark canvas
-          900: '#064e3b', // Deep emerald header/footer
-          850: '#065f46', // Refined deep emerald
-          800: '#047857', // Vibrant emerald hero/card
-          700: '#059669', // Bright emerald interactive
-          600: '#10b981', // Fresh emerald tone
-          500: '#34d399', // Fresh mint green
-          50: '#f0fdf4',  // Light emerald wash
+          950: '#06372b', // Deep forest canvas (sampled)
+          900: '#0a4637', // Deep forest header/footer
+          850: '#0e5644', // Refined deep forest
+          800: '#146954', // Forest card/accent
+          700: '#1d7d65', // Interactive forest
+          600: '#28594d', // Mid forest tone
+          500: '#3a7566', // Soft forest tint
+          50: '#f0fdf4',  // Light tint
         },
         gold: {
           600: '#15803d', // Deep vibrant green

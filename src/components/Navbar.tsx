@@ -68,7 +68,7 @@ export const Navbar: React.FC = () => {
           <div className="hidden lg:flex items-center">
             <Link 
               to="/kontak"
-              className="text-xs font-bold bg-aurora-btn text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg shadow-sm hover:shadow transition-all duration-200 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2"
+              className="text-xs font-bold bg-aurora-btn text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2"
             >
               <span>Hubungi Kami</span>
               <ArrowRight className="w-3.5 h-3.5 text-white/90" />
@@ -76,13 +76,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile menu trigger */}
-          <div className="flex lg:hidden items-center gap-1.5">
-            <Link
-              to="/kontak"
-              className="text-[11px] font-bold bg-aurora-btn text-white px-2.5 py-1.5 rounded-md active:scale-95 transition-all"
-            >
-              Hubungi Kami
-            </Link>
+          <div className="flex lg:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-1.5 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-forest-950/20"
@@ -122,7 +116,7 @@ export const Navbar: React.FC = () => {
             <Link
               to="/kontak"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center bg-aurora-btn text-white font-bold py-2.5 rounded-lg text-xs flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all"
+              className="w-full text-center bg-aurora-btn text-white font-bold py-2.5 rounded-full text-xs flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all"
             >
               <span>Hubungi Kami</span>
               <ArrowRight className="w-3.5 h-3.5 text-white/90" />

@@ -36,5 +36,5 @@ jobs:
           security: loose
           timeout: 120000
           local-dir: ./dist/
-          server-dir: /
+          server-dir: public_html/
           dangerous-clean-slate: false

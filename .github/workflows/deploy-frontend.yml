@@ -32,15 +32,7 @@ jobs:
           cp -f index.html dist/index.html
           cp -rf backend dist/backend
 
-      - name: 🚀 Deploy dist/ to Hostinger public_html
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          timeout: 300000
-          local-dir: ./dist/
-          server-dir: public_html/
-          dangerous-clean-slate: false
+      - name: 🚀 Deploy via LFTP with Auto-Retry
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          lftp -e "set ftp:ssl-allow yes; set ftp:ssl-force false; set ftp:passive-mode true; set net:timeout 60; set net:max-retries 5; mirror -R --verbose ./dist/ public_html/; quit" -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}"

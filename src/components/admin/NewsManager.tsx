@@ -99,23 +99,9 @@ export const NewsManager: React.FC = () => {
     }
 
     if (editingId) {
-      const updated = typedNews.map((item: NewsItem) => {
-        if (item.id === editingId) {
-          return {
-            ...item,
-            ...formData
-          };
-        }
-        return item;
-      });
-      AppStore.saveNews(updated);
+      AppStore.updateNewsRemote(editingId, formData);
     } else {
-      const slugId = formData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') || `berita-${Date.now()}`;
-      const newItem: NewsItem = {
-        id: slugId,
-        ...formData
-      };
-      AppStore.saveNews([newItem, ...typedNews]);
+      AppStore.createNewsRemote(formData);
     }
 
     setViewMode('list');
@@ -123,8 +109,7 @@ export const NewsManager: React.FC = () => {
 
   const handleDelete = (id: string, title: string) => {
     if (window.confirm(`Hapus berita "${title}"?`)) {
-      const updated = typedNews.filter((item: NewsItem) => item.id !== id);
-      AppStore.saveNews(updated);
+      AppStore.deleteNewsRemote(id);
     }
   };
 

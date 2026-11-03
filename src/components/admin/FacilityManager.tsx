@@ -70,21 +70,13 @@ export const FacilityManager: React.FC = () => {
       return;
     }
 
-    let updated = [...typedFacilities];
-    if (editingIndex !== null) {
-      updated[editingIndex] = { ...formData };
-    } else {
-      updated.push({ ...formData });
-    }
-
-    AppStore.saveFacilities(updated);
+    AppStore.saveFacilityRemote(formData, editingIndex);
     setViewMode('list');
   };
 
   const handleDelete = (index: number, name: string) => {
     if (window.confirm(`Hapus fasilitas "${name}"?`)) {
-      const updated = typedFacilities.filter((_: FacilityItem, idx: number) => idx !== index);
-      AppStore.saveFacilities(updated);
+      AppStore.deleteFacilityRemote(index);
     }
   };
 

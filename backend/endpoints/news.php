@@ -9,7 +9,7 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/cors.php';
 
 $pdo = Database::getConnection();
-$method = $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 // GET: Berita Publik (Super cepat dengan HTTP Caching)
 if ($method === 'GET') {
@@ -40,35 +40,43 @@ if ($method === 'GET') {
     ]);
 }
 
-// POST: Tambah Berita Baru (Admin Only)
+// POST: Tambah atau Update Berita (Admin Only)
 if ($method === 'POST') {
     require_once __DIR__ . '/../middleware/auth.php';
     requireAuth();
 
     $input = getJsonInput();
+    $id        = !empty($input['id']) ? (int)$input['id'] : null;
     $title     = trim($input['title'] ?? '');
     $category  = trim($input['category'] ?? 'Kegiatan');
-    $excerpt   = trim($input['excerpt'] ?? '');
-    $content   = trim($input['content'] ?? '');
-    $imageUrl  = trim($input['imageUrl'] ?? $input['image_url'] ?? '');
+    $excerpt   = trim($input['excerpt'] ?? $input['summary'] ?? '');
+    $content   = trim($input['content'] ?? $input['summary'] ?? '');
+    $imageUrl  = trim($input['imageUrl'] ?? $input['image_url'] ?? $input['image'] ?? '');
     $author    = trim($input['author'] ?? 'Humas Pesantren');
     $date      = trim($input['date'] ?? date('d M Y'));
 
     if (empty($title) || empty($content)) {
-        jsonResponse(false, null, 'Judul dan konten berita wajib diisi.', 400);
+        jsonResponse(false, null, 'Judul dan ringkasan berita wajib diisi.', 400);
     }
 
     // Generate slug otomatis
     $slugBase = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title), '-'));
-    $slug = $slugBase . '-' . substr(bin2hex(random_bytes(3)), 0, 5);
 
-    $stmt = $pdo->prepare("INSERT INTO news (title, slug, category, excerpt, content, image_url, author, published_at, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'published')");
-    $stmt->execute([$title, $slug, $category, $excerpt, $content, $imageUrl, $author, $date]);
+    if ($id) {
+        $stmt = $pdo->prepare("UPDATE news SET title = ?, category = ?, excerpt = ?, content = ?, image_url = ?, author = ?, published_at = ? WHERE id = ?");
+        $stmt->execute([$title, $category, $excerpt, $content, $imageUrl, $author, $date, $id]);
+        recordRealtimeEvent($pdo, 'NEWS_UPDATED', 'news', (string)$id, ['title' => $title]);
+        jsonResponse(true, ['id' => $id], 'Berita berhasil diperbarui.', 200);
+    } else {
+        $slug = $slugBase . '-' . substr(bin2hex(random_bytes(3)), 0, 5);
+        $stmt = $pdo->prepare("INSERT INTO news (title, slug, category, excerpt, content, image_url, author, published_at, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'published')");
+        $stmt->execute([$title, $slug, $category, $excerpt, $content, $imageUrl, $author, $date]);
 
-    $newId = $pdo->lastInsertId();
-    recordRealtimeEvent($pdo, 'NEWS_CREATED', 'news', (string)$newId, ['title' => $title, 'slug' => $slug]);
+        $newId = $pdo->lastInsertId();
+        recordRealtimeEvent($pdo, 'NEWS_CREATED', 'news', (string)$newId, ['title' => $title, 'slug' => $slug]);
 
-    jsonResponse(true, ['id' => $newId, 'slug' => $slug], 'Berita berhasil diterbitkan.', 201);
+        jsonResponse(true, ['id' => (int)$newId, 'slug' => $slug], 'Berita berhasil diterbitkan.', 201);
+    }
 }
 
 // DELETE: Hapus Berita (Admin Only)

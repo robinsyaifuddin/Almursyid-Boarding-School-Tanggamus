@@ -95,7 +95,7 @@ const dispatchStoreUpdate = (key: string) => {
 };
 
 export const AppStore = {
-  // SITE INFO
+  // SITE INFO & PENGURUS
   getSiteInfo: () => {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.SITE_INFO);
@@ -104,9 +104,27 @@ export const AppStore = {
       return DEFAULT_SITE_INFO;
     }
   },
-  saveSiteInfo: (info: typeof DEFAULT_SITE_INFO) => {
+  syncSiteInfoFromApi: async (): Promise<typeof DEFAULT_SITE_INFO> => {
+    try {
+      const remoteInfo = await api.getSetting('site_info');
+      if (remoteInfo && typeof remoteInfo === 'object') {
+        localStorage.setItem(STORAGE_KEYS.SITE_INFO, JSON.stringify(remoteInfo));
+        dispatchStoreUpdate(STORAGE_KEYS.SITE_INFO);
+        return remoteInfo;
+      }
+    } catch (e) {
+      console.warn('Fallback local siteInfo:', e);
+    }
+    return AppStore.getSiteInfo();
+  },
+  saveSiteInfo: async (info: typeof DEFAULT_SITE_INFO) => {
     localStorage.setItem(STORAGE_KEYS.SITE_INFO, JSON.stringify(info));
     dispatchStoreUpdate(STORAGE_KEYS.SITE_INFO);
+    try {
+      await api.saveSetting('site_info', info);
+    } catch (err) {
+      console.error('Remote save site_info failed:', err);
+    }
   },
 
   // BERITA (Sync ke Backend Database Hostinger)
@@ -122,9 +140,23 @@ export const AppStore = {
     try {
       const remoteNews = await api.getNews();
       if (Array.isArray(remoteNews) && remoteNews.length > 0) {
-        localStorage.setItem(STORAGE_KEYS.NEWS, JSON.stringify(remoteNews));
+        // Normalisasi struktur agar sesuai dengan yang diharapkan komponen frontend
+        const normalized = remoteNews.map(item => ({
+          id: String(item.id),
+          title: item.title,
+          slug: item.slug,
+          category: item.category,
+          subCategory: item.subCategory || 'Umum',
+          summary: item.excerpt || item.summary || item.content || '',
+          content: item.content || item.summary || item.excerpt || '',
+          image: item.imageUrl || item.image_url || item.image || '',
+          date: item.date || item.published_at || 'Baru saja',
+          timeAgo: item.timeAgo || 'Baru saja',
+          isFeatured: Boolean(item.isFeatured)
+        }));
+        localStorage.setItem(STORAGE_KEYS.NEWS, JSON.stringify(normalized));
         dispatchStoreUpdate(STORAGE_KEYS.NEWS);
-        return remoteNews;
+        return normalized;
       }
     } catch (e) {
       console.warn('Fallback local news:', e);
@@ -135,27 +167,65 @@ export const AppStore = {
     localStorage.setItem(STORAGE_KEYS.NEWS, JSON.stringify(newsList));
     dispatchStoreUpdate(STORAGE_KEYS.NEWS);
   },
-  addNewsRemote: async (item: any) => {
-    try {
-      await api.createNews(item);
-    } catch (err) {
-      console.error('Remote save error:', err);
-    }
+  createNewsRemote: async (item: any) => {
+    const tempId = `berita-${Date.now()}`;
+    const newItem = { ...item, id: tempId };
     const current = AppStore.getNews();
-    const updated = [item, ...current];
+    const optimistic = [newItem, ...current];
+    localStorage.setItem(STORAGE_KEYS.NEWS, JSON.stringify(optimistic));
+    dispatchStoreUpdate(STORAGE_KEYS.NEWS);
+
+    try {
+      const res = await api.createNews({
+        title: item.title,
+        category: item.category,
+        excerpt: item.summary || item.excerpt || '',
+        content: item.content || item.summary || '',
+        imageUrl: item.image || item.imageUrl || '',
+        author: item.author || 'Humas Pesantren',
+        date: item.date || 'Baru saja'
+      });
+      if (res && res.id) {
+        await AppStore.syncNewsFromApi();
+      }
+    } catch (err) {
+      console.error('Remote create news failed:', err);
+    }
+  },
+  updateNewsRemote: async (id: string | number, item: any) => {
+    const current = AppStore.getNews();
+    const updated = current.map(n => String(n.id) === String(id) ? { ...n, ...item } : n);
     localStorage.setItem(STORAGE_KEYS.NEWS, JSON.stringify(updated));
     dispatchStoreUpdate(STORAGE_KEYS.NEWS);
+
+    try {
+      await api.createNews({
+        id: isNaN(Number(id)) ? undefined : Number(id),
+        title: item.title,
+        category: item.category,
+        excerpt: item.summary || item.excerpt || '',
+        content: item.content || item.summary || '',
+        imageUrl: item.image || item.imageUrl || '',
+        author: item.author || 'Humas Pesantren',
+        date: item.date || 'Baru saja'
+      });
+      await AppStore.syncNewsFromApi();
+    } catch (err) {
+      console.error('Remote update news failed:', err);
+    }
   },
   deleteNewsRemote: async (id: string | number) => {
-    try {
-      await api.deleteNews(id);
-    } catch (err) {
-      console.error('Remote delete error:', err);
-    }
     const current = AppStore.getNews();
     const updated = current.filter(item => String(item.id) !== String(id));
     localStorage.setItem(STORAGE_KEYS.NEWS, JSON.stringify(updated));
     dispatchStoreUpdate(STORAGE_KEYS.NEWS);
+
+    try {
+      await api.deleteNews(id);
+      await AppStore.syncNewsFromApi();
+    } catch (err) {
+      console.error('Remote delete news error:', err);
+    }
   },
 
   // GALERI (Sync ke Backend Database Hostinger)
@@ -171,9 +241,18 @@ export const AppStore = {
     try {
       const remoteGallery = await api.getGallery();
       if (Array.isArray(remoteGallery) && remoteGallery.length > 0) {
-        localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(remoteGallery));
+        const normalized: GalleryItem[] = remoteGallery.map(item => ({
+          id: String(item.id),
+          title: item.title,
+          category: item.category || 'Tahfidz & Ibadah',
+          image: item.imageUrl || item.image_url || item.image || '',
+          date: item.date || 'Terbaru',
+          location: 'Pondok Pesantren Al-Mursyid',
+          desc: item.desc || ''
+        }));
+        localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(normalized));
         dispatchStoreUpdate(STORAGE_KEYS.GALLERY);
-        return remoteGallery;
+        return normalized;
       }
     } catch (e) {
       console.warn('Fallback local gallery:', e);
@@ -184,30 +263,65 @@ export const AppStore = {
     localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(items));
     dispatchStoreUpdate(STORAGE_KEYS.GALLERY);
   },
-  addGalleryRemote: async (item: { title: string; category: string; imageUrl: string }) => {
+  createGalleryRemote: async (item: { title: string; category?: string; image: string }) => {
+    const tempId = `gal-${Date.now()}`;
+    const newItem: GalleryItem = {
+      id: tempId,
+      title: item.title,
+      category: (item.category as any) || 'Tahfidz & Ibadah',
+      image: item.image,
+      date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+      location: 'Pondok Pesantren Al-Mursyid',
+      desc: ''
+    };
+    const current = AppStore.getGallery();
+    localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify([newItem, ...current]));
+    dispatchStoreUpdate(STORAGE_KEYS.GALLERY);
+
     try {
-      await api.createGalleryItem(item);
+      await api.createGalleryItem({
+        title: item.title,
+        category: item.category || 'Kegiatan',
+        imageUrl: item.image
+      });
+      await AppStore.syncGalleryFromApi();
     } catch (err) {
       console.error('Remote gallery add error:', err);
     }
+  },
+  updateGalleryRemote: async (id: string | number, item: { title: string; category?: string; image: string }) => {
     const current = AppStore.getGallery();
-    const updated = [item, ...current];
+    const updated = current.map(g => String(g.id) === String(id) ? { ...g, ...item } : g);
     localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(updated));
     dispatchStoreUpdate(STORAGE_KEYS.GALLERY);
+
+    try {
+      await api.createGalleryItem({
+        id: isNaN(Number(id)) ? undefined : Number(id),
+        title: item.title,
+        category: item.category || 'Kegiatan',
+        imageUrl: item.image
+      } as any);
+      await AppStore.syncGalleryFromApi();
+    } catch (err) {
+      console.error('Remote gallery update error:', err);
+    }
   },
   deleteGalleryRemote: async (id: string | number) => {
-    try {
-      await api.deleteGalleryItem(id);
-    } catch (err) {
-      console.error('Remote gallery delete error:', err);
-    }
     const current = AppStore.getGallery();
     const updated = current.filter(item => String(item.id) !== String(id));
     localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(updated));
     dispatchStoreUpdate(STORAGE_KEYS.GALLERY);
+
+    try {
+      await api.deleteGalleryItem(id);
+      await AppStore.syncGalleryFromApi();
+    } catch (err) {
+      console.error('Remote gallery delete error:', err);
+    }
   },
 
-  // PROGRAM
+  // PROGRAM (Sync ke Backend Database Hostinger)
   getPrograms: (): any[] => {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.PROGRAMS);
@@ -216,12 +330,68 @@ export const AppStore = {
       return DEFAULT_PROGRAMS;
     }
   },
+  syncProgramsFromApi: async (): Promise<any[]> => {
+    try {
+      const remotePrograms = await api.getPrograms();
+      if (Array.isArray(remotePrograms) && remotePrograms.length > 0) {
+        const normalized = remotePrograms.map(p => ({
+          id: p.id,
+          title: p.title,
+          tagline: p.tagline || '',
+          desc: p.description || p.desc || '',
+          icon: p.icon || 'BookOpen',
+          highlights: Array.isArray(p.highlights) ? p.highlights : [],
+          image: p.image || ''
+        }));
+        localStorage.setItem(STORAGE_KEYS.PROGRAMS, JSON.stringify(normalized));
+        dispatchStoreUpdate(STORAGE_KEYS.PROGRAMS);
+        return normalized;
+      }
+    } catch (e) {
+      console.warn('Fallback local programs:', e);
+    }
+    return AppStore.getPrograms();
+  },
   savePrograms: (programs: any[]) => {
     localStorage.setItem(STORAGE_KEYS.PROGRAMS, JSON.stringify(programs));
     dispatchStoreUpdate(STORAGE_KEYS.PROGRAMS);
   },
+  saveProgramRemote: async (prog: any) => {
+    const current = AppStore.getPrograms();
+    const exists = current.some(p => p.id === prog.id);
+    const updated = exists ? current.map(p => p.id === prog.id ? { ...p, ...prog } : p) : [...current, prog];
+    localStorage.setItem(STORAGE_KEYS.PROGRAMS, JSON.stringify(updated));
+    dispatchStoreUpdate(STORAGE_KEYS.PROGRAMS);
 
-  // FASILITAS
+    try {
+      await api.saveProgram({
+        id: prog.id,
+        title: prog.title,
+        tagline: prog.tagline,
+        description: prog.desc || prog.description,
+        icon: prog.icon || 'BookOpen',
+        highlights: prog.highlights || []
+      });
+      await AppStore.syncProgramsFromApi();
+    } catch (err) {
+      console.error('Remote save program error:', err);
+    }
+  },
+  deleteProgramRemote: async (id: string) => {
+    const current = AppStore.getPrograms();
+    const updated = current.filter(p => p.id !== id);
+    localStorage.setItem(STORAGE_KEYS.PROGRAMS, JSON.stringify(updated));
+    dispatchStoreUpdate(STORAGE_KEYS.PROGRAMS);
+
+    try {
+      await api.deleteProgram(id);
+      await AppStore.syncProgramsFromApi();
+    } catch (err) {
+      console.error('Remote delete program error:', err);
+    }
+  },
+
+  // FASILITAS (Sync ke Backend Database Hostinger)
   getFacilities: (): any[] => {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.FACILITIES);
@@ -230,9 +400,75 @@ export const AppStore = {
       return DEFAULT_FACILITIES;
     }
   },
+  syncFacilitiesFromApi: async (): Promise<any[]> => {
+    try {
+      const remoteFacilities = await api.getFacilities();
+      if (Array.isArray(remoteFacilities) && remoteFacilities.length > 0) {
+        const normalized = remoteFacilities.map(f => ({
+          id: f.id,
+          name: f.name,
+          category: f.category || 'Umum',
+          desc: f.description || f.desc || '',
+          image: f.imageUrl || f.image_url || f.image || ''
+        }));
+        localStorage.setItem(STORAGE_KEYS.FACILITIES, JSON.stringify(normalized));
+        dispatchStoreUpdate(STORAGE_KEYS.FACILITIES);
+        return normalized;
+      }
+    } catch (e) {
+      console.warn('Fallback local facilities:', e);
+    }
+    return AppStore.getFacilities();
+  },
   saveFacilities: (facilities: any[]) => {
     localStorage.setItem(STORAGE_KEYS.FACILITIES, JSON.stringify(facilities));
     dispatchStoreUpdate(STORAGE_KEYS.FACILITIES);
+  },
+  saveFacilityRemote: async (fac: any, index?: number | null) => {
+    const current = AppStore.getFacilities();
+    let updated = [...current];
+    if (index !== null && index !== undefined && index >= 0 && index < current.length) {
+      updated[index] = { ...current[index], ...fac };
+    } else {
+      updated = [fac, ...current];
+    }
+    localStorage.setItem(STORAGE_KEYS.FACILITIES, JSON.stringify(updated));
+    dispatchStoreUpdate(STORAGE_KEYS.FACILITIES);
+
+    try {
+      await api.saveFacility({
+        id: fac.id,
+        name: fac.name,
+        category: fac.category,
+        description: fac.desc || fac.description,
+        imageUrl: fac.image || fac.imageUrl
+      });
+      await AppStore.syncFacilitiesFromApi();
+    } catch (err) {
+      console.error('Remote save facility error:', err);
+    }
+  },
+  deleteFacilityRemote: async (indexOrId: number | string) => {
+    const current = AppStore.getFacilities();
+    let targetId: any = indexOrId;
+    let updated = [...current];
+    if (typeof indexOrId === 'number' && current[indexOrId]) {
+      targetId = current[indexOrId].id || indexOrId;
+      updated = current.filter((_, idx) => idx !== indexOrId);
+    } else {
+      updated = current.filter(f => String(f.id) !== String(indexOrId));
+    }
+    localStorage.setItem(STORAGE_KEYS.FACILITIES, JSON.stringify(updated));
+    dispatchStoreUpdate(STORAGE_KEYS.FACILITIES);
+
+    try {
+      if (targetId) {
+        await api.deleteFacility(targetId);
+      }
+      await AppStore.syncFacilitiesFromApi();
+    } catch (err) {
+      console.error('Remote delete facility error:', err);
+    }
   },
 
   // PPDB (Sync ke Database Hostinger)
@@ -300,7 +536,7 @@ export const AppStore = {
     dispatchStoreUpdate(STORAGE_KEYS.PPDB);
   },
 
-  // PPDB SETTINGS
+  // PPDB SETTINGS (Sync ke Database Hostinger)
   getPPDBSettings: (): PPDBSettings => {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.PPDB_SETTINGS);
@@ -309,9 +545,28 @@ export const AppStore = {
       return DEFAULT_PPDB_SETTINGS;
     }
   },
-  savePPDBSettings: (settings: PPDBSettings) => {
+  syncPPDBSettingsFromApi: async (): Promise<PPDBSettings> => {
+    try {
+      const remoteSettings = await api.getSetting('ppdb_settings');
+      if (remoteSettings && typeof remoteSettings === 'object' && remoteSettings.steps) {
+        localStorage.setItem(STORAGE_KEYS.PPDB_SETTINGS, JSON.stringify(remoteSettings));
+        dispatchStoreUpdate(STORAGE_KEYS.PPDB_SETTINGS);
+        return remoteSettings;
+      }
+    } catch (e) {
+      console.warn('Fallback local PPDB settings:', e);
+    }
+    return AppStore.getPPDBSettings();
+  },
+  savePPDBSettings: async (settings: PPDBSettings) => {
     localStorage.setItem(STORAGE_KEYS.PPDB_SETTINGS, JSON.stringify(settings));
     dispatchStoreUpdate(STORAGE_KEYS.PPDB_SETTINGS);
+
+    try {
+      await api.saveSetting('ppdb_settings', settings);
+    } catch (err) {
+      console.error('Remote save ppdb_settings error:', err);
+    }
   },
 
   // Reset to default data

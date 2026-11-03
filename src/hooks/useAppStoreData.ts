@@ -25,7 +25,11 @@ export function useAppStoreData() {
     // 1. Initial background sync dari database Hostinger (Stale-While-Revalidate)
     AppStore.syncNewsFromApi();
     AppStore.syncGalleryFromApi();
+    AppStore.syncProgramsFromApi();
+    AppStore.syncFacilitiesFromApi();
     AppStore.syncPPDBFromApi();
+    AppStore.syncPPDBSettingsFromApi();
+    AppStore.syncSiteInfoFromApi();
 
     // 2. Event listener sinkronisasi antar tab/komponen
     const handleUpdate = () => {
@@ -39,7 +43,11 @@ export function useAppStoreData() {
     const interval = setInterval(() => {
       AppStore.syncNewsFromApi();
       AppStore.syncGalleryFromApi();
+      AppStore.syncProgramsFromApi();
+      AppStore.syncFacilitiesFromApi();
       AppStore.syncPPDBFromApi();
+      AppStore.syncPPDBSettingsFromApi();
+      AppStore.syncSiteInfoFromApi();
     }, 12000);
 
     return () => {

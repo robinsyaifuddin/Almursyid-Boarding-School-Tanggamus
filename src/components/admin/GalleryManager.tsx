@@ -58,28 +58,15 @@ export const GalleryManager: React.FC = () => {
     }
 
     if (editingId) {
-      const updated = gallery.map(item => {
-        if (item.id === editingId) {
-          return {
-            ...item,
-            title: formData.title,
-            image: formData.image,
-          };
-        }
-        return item;
-      });
-      AppStore.saveGallery(updated);
-    } else {
-      const newItem: GalleryItem = {
-        id: `gal-${Date.now()}`,
+      AppStore.updateGalleryRemote(editingId, {
         title: formData.title,
         image: formData.image,
-        category: 'Tahfidz & Ibadah',
-        date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
-        location: 'Pondok Pesantren Al-Mursyid',
-        desc: ''
-      };
-      AppStore.saveGallery([newItem, ...gallery]);
+      });
+    } else {
+      AppStore.createGalleryRemote({
+        title: formData.title,
+        image: formData.image,
+      });
     }
 
     setViewMode('list');
@@ -87,8 +74,7 @@ export const GalleryManager: React.FC = () => {
 
   const handleDelete = (id: string, title: string) => {
     if (window.confirm(`Hapus foto "${title}" dari galeri?`)) {
-      const updated = gallery.filter(item => item.id !== id);
-      AppStore.saveGallery(updated);
+      AppStore.deleteGalleryRemote(id);
     }
   };
 

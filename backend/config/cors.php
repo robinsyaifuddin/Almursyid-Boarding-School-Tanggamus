@@ -19,7 +19,8 @@ header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json; charset=UTF-8');
 
 // Handle Preflight Request
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+$requestMethod = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+if ($requestMethod === 'OPTIONS') {
     http_response_code(204);
     exit;
 }

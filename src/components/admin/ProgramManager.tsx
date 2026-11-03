@@ -89,34 +89,19 @@ export const ProgramManager: React.FC = () => {
 
     const cleanHighlights = formData.highlights.map(h => h.trim()).filter(Boolean);
 
-    if (editingId) {
-      const updated = typedPrograms.map((p: ProgramItem) => {
-        if (p.id === editingId) {
-          return {
-            ...p,
-            ...formData,
-            highlights: cleanHighlights
-          };
-        }
-        return p;
-      });
-      AppStore.savePrograms(updated);
-    } else {
-      const newProgram: ProgramItem = {
-        ...formData,
-        id: formData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') || `prog-${Date.now()}`,
-        highlights: cleanHighlights
-      };
-      AppStore.savePrograms([...typedPrograms, newProgram]);
-    }
+    const progToSave: ProgramItem = {
+      ...formData,
+      id: editingId || formData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') || `prog-${Date.now()}`,
+      highlights: cleanHighlights
+    };
 
+    AppStore.saveProgramRemote(progToSave);
     setViewMode('list');
   };
 
   const handleDelete = (id: string, title: string) => {
     if (window.confirm(`Hapus program "${title}"?`)) {
-      const updated = typedPrograms.filter((p: ProgramItem) => p.id !== id);
-      AppStore.savePrograms(updated);
+      AppStore.deleteProgramRemote(id);
     }
   };
 

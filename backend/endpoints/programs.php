@@ -9,7 +9,7 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/cors.php';
 
 $pdo = Database::getConnection();
-$method = $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 // GET: Ambil semua program unggulan (Publik & Cepat)
 if ($method === 'GET') {
@@ -36,7 +36,7 @@ if ($method === 'POST') {
     $id = trim($input['id'] ?? '');
     $title = trim($input['title'] ?? '');
     $tagline = trim($input['tagline'] ?? '');
-    $description = trim($input['description'] ?? '');
+    $description = trim($input['description'] ?? $input['desc'] ?? '');
     $icon = trim($input['icon'] ?? 'BookOpen');
     $highlights = isset($input['highlights']) ? json_encode($input['highlights'], JSON_UNESCAPED_UNICODE) : json_encode([]);
     $sortOrder = (int)($input['sort_order'] ?? 0);

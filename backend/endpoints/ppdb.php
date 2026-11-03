@@ -9,7 +9,7 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/cors.php';
 
 $pdo = Database::getConnection();
-$method = $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 // GET: Ambil daftar pendaftar (Admin Dashboard)
 if ($method === 'GET') {

@@ -9,10 +9,17 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/cors.php';
 
 function requireAuth(): array {
-    $headers = getallheaders();
-    $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+    $authHeader = '';
+    if (function_exists('getallheaders')) {
+        $headers = getallheaders();
+        $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+    }
+    
+    if (empty($authHeader)) {
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+    }
 
-    if (!preg_match('/Bearer\s+(\S+)/', $authHeader, $matches)) {
+    if (!preg_match('/Bearer\s+(\S+)/i', $authHeader, $matches)) {
         jsonResponse(false, null, 'Akses ditolak: Token autentikasi tidak ditemukan.', 401);
     }
 

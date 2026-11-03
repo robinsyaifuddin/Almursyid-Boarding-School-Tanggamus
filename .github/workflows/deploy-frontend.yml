@@ -25,7 +25,6 @@ jobs:
       - name: 🔨 Build Production (Vite)
         run: npm run build
 
-      # Timpa bundle output dengan file aset yang sudah sinkron
       - name: 🔄 Sync Assets & Include Backend
         run: |
           cp -f assets/index-YZJ0pbKD.js dist/assets/
@@ -39,10 +38,9 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftp
           port: 21
-          security: loose
-          timeout: 120000
+          timeout: 300000
           local-dir: ./dist/
           server-dir: public_html/
           dangerous-clean-slate: false

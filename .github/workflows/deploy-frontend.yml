@@ -28,7 +28,7 @@ jobs:
       - name: 📂 Include Backend in dist
         run: cp -rf backend dist/backend
 
-      - name: 🚀 Deploy dist/ to Hostinger Root
+      - name: 🚀 Deploy dist/ to Hostinger public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -39,5 +39,5 @@ jobs:
           security: loose
           timeout: 120000
           local-dir: ./dist/
-          server-dir: /
-          dangerous-clean-slate: true
+          server-dir: public_html/
+          dangerous-clean-slate: false

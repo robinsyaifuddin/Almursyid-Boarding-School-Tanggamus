@@ -13,27 +13,7 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: 📦 Install Dependencies
-        run: npm ci
-
-      - name: 🔨 Build Production (Vite)
-        run: npm run build
-
-      # Sinkronkan hasil build ke root repo sebelum upload
-      - name: 🔄 Sync dist to root
-        run: |
-          cp -f dist/index.html ./index.html
-          cp -rf dist/assets/* ./assets/
-          cp -rf backend ./dist/backend
-          cp -f .htaccess ./dist/.htaccess
-
-      # Deploy seluruh isi repo ke root FTP Hostinger
+      # Deploy dist/ langsung ke Hostinger
       - name: 🚀 Deploy dist/ to Hostinger Root
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

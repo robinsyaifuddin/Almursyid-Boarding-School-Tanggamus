@@ -14,11 +14,13 @@ import {
   Search,
   Menu,
   X,
-  RotateCcw
+  RotateCcw,
+  LogOut
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppStore } from '../../services/appStore';
 import { useAppStoreData } from '../../hooks/useAppStoreData';
+import { clearAuthToken } from '../../services/apiClient';
 
 interface AdminLayoutProps {
   currentTab: string;
@@ -33,6 +35,14 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
 }) => {
   const { ppdbApplicants } = useAppStoreData();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    if (window.confirm('Apakah Anda yakin ingin keluar dari sesi Admin?')) {
+      clearAuthToken();
+      window.location.reload();
+    }
+  };
 
   const navItems = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard, badge: null },
@@ -112,6 +122,15 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                 <p className="font-semibold text-slate-800 leading-tight">Admin Mursyid</p>
                 <p className="text-[10px] text-slate-400">Pengelola Web</p>
               </div>
+
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="p-1.5 ml-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                title="Keluar / Logout"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>

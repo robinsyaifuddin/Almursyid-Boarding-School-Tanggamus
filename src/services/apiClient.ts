@@ -1,9 +1,9 @@
 /**
  * API Client & Network Service
- * Terhubung ke backend Hostinger /api/
+ * Terhubung ke backend Hostinger /api/ / backend/endpoints
  */
 
-const API_BASE = import.meta.env.VITE_API_URL || '/api/endpoints';
+const API_BASE = import.meta.env.VITE_API_URL || '/backend/endpoints';
 
 interface ApiResponse<T = any> {
   success: boolean;
@@ -23,6 +23,11 @@ export const setAuthToken = (token: string): void => {
 
 export const clearAuthToken = (): void => {
   localStorage.removeItem('almursyid_auth_token');
+  localStorage.removeItem('almursyid_admin_user');
+};
+
+export const isAuthenticated = (): boolean => {
+  return Boolean(getAuthToken());
 };
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
@@ -36,7 +41,11 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_BASE}${endpoint}`, {
+  // Handle URL yang fleksibel jika endpoint sudah menyertakan backend atau belum
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${API_BASE}${cleanEndpoint}`;
+
+  const response = await fetch(url, {
     ...options,
     headers,
   });
@@ -86,6 +95,40 @@ export const api = {
 
   deleteGalleryItem: (id: string | number) =>
     request(`/gallery.php?id=${id}`, { method: 'DELETE' }),
+
+  // Programs
+  getPrograms: () => request<any[]>('/programs.php'),
+
+  saveProgram: (programData: any) =>
+    request<{ id: string }>('/programs.php', {
+      method: 'POST',
+      body: JSON.stringify(programData),
+    }),
+
+  deleteProgram: (id: string) =>
+    request(`/programs.php?id=${encodeURIComponent(id)}`, { method: 'DELETE' }),
+
+  // Facilities
+  getFacilities: () => request<any[]>('/facilities.php'),
+
+  saveFacility: (facilityData: any) =>
+    request<{ id: number }>('/facilities.php', {
+      method: 'POST',
+      body: JSON.stringify(facilityData),
+    }),
+
+  deleteFacility: (id: string | number) =>
+    request(`/facilities.php?id=${id}`, { method: 'DELETE' }),
+
+  // Settings
+  getSetting: (key: string) =>
+    request<any>(`/settings.php?key=${encodeURIComponent(key)}`),
+
+  saveSetting: (key: string, value: any) =>
+    request<{ key: string }>('/settings.php', {
+      method: 'POST',
+      body: JSON.stringify({ key, value }),
+    }),
 
   // PPDB
   submitPPDB: (applicantData: any) =>

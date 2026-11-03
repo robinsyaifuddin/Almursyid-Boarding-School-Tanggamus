@@ -4,37 +4,25 @@ import {
   CheckCircle2, ChevronRight, ChevronDown,
   Sparkles, FileText, Download, GraduationCap
 } from 'lucide-react';
-import { SITE_INFO, PPDB_FEES } from '../data/siteData';
+import { SITE_INFO as FALLBACK_SITE_INFO } from '../data/siteData';
+import { useAppStoreData } from '../hooks/useAppStoreData';
 
 export const PPDBPage: React.FC = () => {
+  const { ppdbSettings, siteInfo } = useAppStoreData();
   const [openStepIndex, setOpenStepIndex] = useState<number | null>(0);
 
   const toggleStep = (index: number) => {
     setOpenStepIndex(prev => prev === index ? null : index);
   };
 
-  const steps = [
-    {
-      num: '01',
-      title: 'Pendaftaran Online',
-      desc: 'Mengisi Google Form pendaftaran online resmi atau langsung datang ke sekretariat pondok di Way Lalaan Tanggamus.'
-    },
-    {
-      num: '02',
-      title: "Tes Baca Qur'an & Wawancara",
-      desc: "Uji kemampuan membaca Al-Qur'an dasar, tes potensi akademik, serta wawancara kesiapan santri dan wali santri."
-    },
-    {
-      num: '03',
-      title: 'Pengumuman Kelulusan',
-      desc: 'Hasil kelulusan disampaikan melalui WhatsApp resmi panitia dan surat keputusan penerimaan santri baru.'
-    },
-    {
-      num: '04',
-      title: 'Daftar Ulang & Masuk Asrama',
-      desc: 'Penyelesaian administrasi daftar ulang, pengambilan seragam, dan penyerahan santri ke asrama pondok.'
-    }
-  ];
+  const steps = ppdbSettings?.steps || [];
+  const fees = ppdbSettings?.fees || [];
+  const heroImage = ppdbSettings?.heroImage || "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1000&q=80";
+  const whatsappNumber = ppdbSettings?.whatsappNumber || siteInfo?.contacts?.phone || "0838-4847-8150";
+  const formUrl = ppdbSettings?.formUrl || siteInfo?.contacts?.ppdbFormUrl || "https://forms.gle/almursyid-ppdb";
+  const brochurePdfUrl = ppdbSettings?.brochurePdfUrl || formUrl;
+
+  const waLink = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=Halo%20Panitia%20PPDB%20Al-Mursyid,%20saya%20ingin%20konsultasi%20pendaftaran%20santri%20baru.`;
 
   return (
     <div className="min-h-screen bg-white text-slate-800 antialiased selection:bg-emerald-500 selection:text-white pb-24">
@@ -65,7 +53,7 @@ export const PPDBPage: React.FC = () => {
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-0.5">
               <a
-                href={SITE_INFO.contacts.ppdbFormUrl}
+                href={formUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2.5 bg-forest-900 hover:bg-forest-950 text-white font-semibold text-xs uppercase tracking-wider px-5 py-3 rounded-full shadow-sm hover:shadow transition-all duration-200 active:scale-[0.98]"
@@ -77,7 +65,7 @@ export const PPDBPage: React.FC = () => {
               </a>
 
               <a
-                href={SITE_INFO.contacts.ppdbWa}
+                href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-3 rounded-full text-xs font-semibold text-slate-700 hover:text-emerald-900 bg-white border border-slate-200/90 hover:border-emerald-200 hover:bg-emerald-50/40 shadow-xs transition-all active:scale-[0.98]"
@@ -107,7 +95,7 @@ export const PPDBPage: React.FC = () => {
               </div>
 
               <a
-                href={SITE_INFO.contacts.ppdbFormUrl}
+                href={brochurePdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-xs font-semibold uppercase tracking-wider bg-forest-900 hover:bg-forest-950 text-white shadow-sm hover:shadow transition-all shrink-0 active:scale-[0.98]"
@@ -123,7 +111,7 @@ export const PPDBPage: React.FC = () => {
           <div className="lg:col-span-5 flex items-center justify-center lg:justify-end">
             <div className="relative w-full max-w-[340px] xl:max-w-[360px] aspect-[3/4] max-h-[calc(100vh-170px)] rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-slate-200/90 bg-slate-100 group">
               <img
-                src="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1000&q=80"
+                src={heroImage}
                 alt="Pondok Pesantren Al-Mursyid"
                 className="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-105"
               />
@@ -223,7 +211,7 @@ export const PPDBPage: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 text-slate-700">
-                    {PPDB_FEES.map((fee, idx) => (
+                    {fees.map((fee, idx) => (
                       <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
                         <td className="p-3.5 font-bold text-slate-900">{fee.item}</td>
                         <td className="p-3.5 font-bold text-emerald-900 text-sm whitespace-nowrap">{fee.amount}</td>

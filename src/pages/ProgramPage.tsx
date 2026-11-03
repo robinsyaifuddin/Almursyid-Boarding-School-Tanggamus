@@ -4,9 +4,18 @@ import {
   ArrowRight, CheckCircle2, BookOpen, 
   GraduationCap, Globe2, Compass, ShieldCheck, Award
 } from 'lucide-react';
-import { SITE_INFO } from '../data/siteData';
+import { SITE_INFO as FALLBACK_SITE_INFO } from '../data/siteData';
+import { useAppStoreData } from '../hooks/useAppStoreData';
 
 export const ProgramPage: React.FC = () => {
+  const { siteInfo: STORE_SITE_INFO, programs } = useAppStoreData();
+  const SITE_INFO = STORE_SITE_INFO || FALLBACK_SITE_INFO;
+
+  // Temukan program dari store berdasarkan ID
+  const tahfidzProg = programs.find((p: any) => p.id === 'tahfidz');
+  const diniyahProg = programs.find((p: any) => p.id === 'diniyah');
+  const formalProg = programs.find((p: any) => p.id === 'formal');
+  const ekskulProg = programs.find((p: any) => p.id === 'ekskul');
   return (
     <div className="space-y-16 pt-8 pb-20">
       {/* Program Showcase List */}
@@ -41,7 +50,7 @@ export const ProgramPage: React.FC = () => {
               {/* Horizontal Inset Image with Floating Pill */}
               <div className="relative group overflow-hidden rounded-2xl border border-emerald-100 shadow-sm bg-slate-50">
                 <img
-                  src="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1200&q=80"
+                  src={tahfidzProg?.image || "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1200&q=80"}
                   alt="Suasana Halaqah Tahfidz Al-Mursyid"
                   className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
@@ -171,7 +180,7 @@ export const ProgramPage: React.FC = () => {
               {/* Horizontal Inset Image with Floating Pill */}
               <div className="relative group overflow-hidden rounded-2xl border border-emerald-100 shadow-sm bg-slate-50">
                 <img
-                  src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80"
+                  src={diniyahProg?.image || "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80"}
                   alt="Kitab Turats dan Kajian Pesantren"
                   className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
@@ -247,7 +256,7 @@ export const ProgramPage: React.FC = () => {
               {/* Horizontal Inset Image with Floating Pill */}
               <div className="relative group overflow-hidden rounded-2xl border border-emerald-100 shadow-sm bg-slate-50">
                 <img
-                  src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80"
+                  src={formalProg?.image || "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80"}
                   alt="Laboratorium dan Ruang Belajar Formal"
                   className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
@@ -375,7 +384,7 @@ export const ProgramPage: React.FC = () => {
               {/* Horizontal Inset Image with Floating Pill */}
               <div className="relative group overflow-hidden rounded-2xl border border-emerald-100 shadow-sm bg-slate-50">
                 <img
-                  src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80"
+                  src={ekskulProg?.image || "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80"}
                   alt="Aktivitas Bahasa dan Komunikasi Santri"
                   className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />

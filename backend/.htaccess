@@ -1,0 +1,20 @@
+# Matikan direct directory listing
+Options -Indexes
+
+# Aktifkan Rewrite Engine
+RewriteEngine On
+
+# Izinkan akses langsung ke file/folder yang ada
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Sembunyikan file sensitif (.env, .sql)
+<FilesMatch "\.(env|sql|log|ini)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Kompresi Gzip / Brotli untuk respons JSON agar lebih cepat
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/json text/plain
+</IfModule>

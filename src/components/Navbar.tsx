@@ -64,8 +64,15 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Action Button: Hubungi Kami */}
-          <div className="hidden lg:flex items-center">
+          {/* Action Button: Hubungi Kami & CMS Admin Link */}
+          <div className="hidden lg:flex items-center gap-2">
+            <Link 
+              to="/admin"
+              className="text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+              title="Dashboard Pengelola CMS & PPDB"
+            >
+              CMS Admin
+            </Link>
             <Link 
               to="/kontak"
               className="text-xs font-bold bg-aurora-btn text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2"
@@ -112,7 +119,14 @@ export const Navbar: React.FC = () => {
             );
           })}
 
-          <div className="pt-3 mt-2 border-t border-slate-100">
+          <div className="pt-3 mt-2 border-t border-slate-100 space-y-2">
+            <Link
+              to="/admin"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center border border-slate-200 text-slate-800 font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-2 active:scale-[0.98] transition-all bg-slate-50"
+            >
+              <span>Dashboard Admin CMS</span>
+            </Link>
             <Link
               to="/kontak"
               onClick={() => setMobileMenuOpen(false)}

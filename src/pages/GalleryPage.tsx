@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { X, ZoomIn, ChevronRight } from 'lucide-react';
-import { GALLERY_ITEMS, GalleryItem } from '../data/siteData';
+import { GALLERY_ITEMS as FALLBACK_GALLERY, GalleryItem } from '../data/siteData';
+import { useAppStoreData } from '../hooks/useAppStoreData';
 
 export const GalleryPage: React.FC = () => {
+  const { gallery } = useAppStoreData();
+  const GALLERY_ITEMS = gallery && gallery.length > 0 ? gallery : FALLBACK_GALLERY;
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   // Touch gesture state for swipe

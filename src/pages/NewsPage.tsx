@@ -6,23 +6,21 @@ import {
   Clock
 } from 'lucide-react';
 import { 
-  NEWS_DATA, 
+  NEWS_DATA as FALLBACK_NEWS, 
   TICKER_NEWS, 
   LATEST_POSTS, 
   DONT_MISS_NEWS
 } from '../data/siteData';
 import { createSlug } from '../utils/slug';
+import { useAppStoreData } from '../hooks/useAppStoreData';
 
 export const NewsPage: React.FC = () => {
+  const { news } = useAppStoreData();
+  const NEWS_DATA = news && news.length > 0 ? news : FALLBACK_NEWS;
   const [heroIndex, setHeroIndex] = useState(0);
 
   // List headline pilihan untuk slide / carousel hero
-  const heroSlides = [
-    NEWS_DATA[0], // Wisuda Akbar
-    NEWS_DATA[1], // Kajian Akbar
-    NEWS_DATA[2], // PPDB Online
-    NEWS_DATA[3]  // Olimpiade Sains
-  ];
+  const heroSlides = NEWS_DATA.slice(0, 4);
 
   const currentSlide = heroSlides[heroIndex] || heroSlides[0];
 
@@ -114,7 +112,7 @@ export const NewsPage: React.FC = () => {
 
                 {/* Dot Pagination indicators */}
                 <div className="flex items-center gap-1.5">
-                  {heroSlides.map((_, dotIdx) => (
+                  {heroSlides.map((_: any, dotIdx: number) => (
                     <button
                       key={dotIdx}
                       onClick={() => setHeroIndex(dotIdx)}

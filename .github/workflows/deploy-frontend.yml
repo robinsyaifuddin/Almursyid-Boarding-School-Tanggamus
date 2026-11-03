@@ -1,4 +1,4 @@
-name: Deploy Frontend to Hostinger public_html
+name: Deploy Frontend & Backend to Hostinger
 
 on:
   push:
@@ -25,6 +25,22 @@ jobs:
       - name: 🔨 Build Production (Vite)
         run: npm run build
 
+      # STEP 1: Deploy Backend ke folder /backend (Sejajar dengan public_html)
+      - name: 🛡️ Deploy Backend to ../backend/
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          security: loose
+          timeout: 120000
+          local-dir: ./backend/
+          server-dir: backend/
+          dangerous-clean-slate: false
+
+      # STEP 2: Deploy Frontend dist/ ke public_html
       - name: 🚀 Deploy dist/ to Hostinger public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

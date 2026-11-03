@@ -9,7 +9,7 @@ import {
   Eye, 
   ArrowLeft,
   Save,
-  Sparkles,
+  Pin,
   ChevronDown,
   ExternalLink
 } from 'lucide-react';
@@ -372,8 +372,8 @@ export const NewsManager: React.FC = () => {
                     </td>
                     <td className="py-3 px-4 text-center">
                       {item.isFeatured ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
-                          <Sparkles className="w-3 h-3 text-amber-500" />
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                          <Pin className="w-3 h-3 text-emerald-700" />
                           <span>Utama</span>
                         </span>
                       ) : (

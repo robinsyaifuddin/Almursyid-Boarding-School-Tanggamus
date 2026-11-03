@@ -9,9 +9,7 @@ import {
   Building2, 
   ExternalLink,
   ChevronRight,
-  Sparkles,
-  Bell,
-  Search,
+  RefreshCw,
   Menu,
   X,
   RotateCcw,
@@ -63,7 +61,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   return (
     <div className="min-h-screen bg-[#F4F6F9] text-slate-800 font-sans antialiased flex flex-col justify-start">
       {/* Top Bar Floating / Rounded App Header */}
-      <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 py-3">
+      <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 py-3">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <button 
@@ -75,15 +73,17 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
 
-            <Link to="/" className="flex items-center gap-2 group">
-              <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-bold text-base shadow-sm group-hover:scale-105 transition-transform">
-                M
-              </div>
+            <Link to="/" className="flex items-center gap-3 group">
+              <img 
+                src="/logo.png" 
+                alt="Logo Al-Mursyid" 
+                className="w-9 h-9 object-contain group-hover:scale-105 transition-transform" 
+              />
               <div>
                 <span className="font-extrabold text-base tracking-tight text-slate-900 block leading-tight">
                   Al-Mursyid
                 </span>
-                <span className="text-[10px] font-semibold tracking-wider uppercase text-emerald-700 block">
+                <span className="text-[10px] font-bold tracking-wider uppercase text-emerald-800 block">
                   Admin CMS & PPDB
                 </span>
               </div>
@@ -115,7 +115,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
             <div className="h-4 w-px bg-slate-200 mx-1 hidden sm:block"></div>
 
             <div className="flex items-center gap-2 pl-1">
-              <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-bold ring-2 ring-emerald-500/20">
+              <div className="w-8 h-8 rounded-full bg-forest-950 text-white flex items-center justify-center text-xs font-bold ring-2 ring-forest-900/10">
                 AD
               </div>
               <div className="hidden sm:block text-left text-xs">
@@ -165,7 +165,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                     className={`
                       w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-sm font-semibold transition-all duration-150
                       ${isActive 
-                        ? 'bg-slate-900 text-white shadow-sm shadow-slate-900/10' 
+                        ? 'bg-forest-950 text-white shadow-sm shadow-forest-950/20' 
                         : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                       }
                     `}
@@ -176,11 +176,11 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                     </div>
 
                     {item.badge ? (
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${isActive ? 'bg-emerald-500 text-white' : 'bg-emerald-100 text-emerald-800'}`}>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${isActive ? 'bg-forest-800 text-white' : 'bg-emerald-100 text-emerald-800'}`}>
                         {item.badge}
                       </span>
                     ) : (
-                      isActive && <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                      isActive && <ChevronRight className="w-3.5 h-3.5 text-emerald-400/70" />
                     )}
                   </button>
                 );
@@ -188,16 +188,14 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
             </nav>
 
             <div className="mt-6 pt-5 border-t border-slate-100">
-              <div className="bg-gradient-to-br from-emerald-600 to-teal-700 text-white p-4 rounded-2xl relative overflow-hidden">
-                <div className="relative z-10">
-                  <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-100 mb-1">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                    <span>Sinkron Otomatis</span>
-                  </div>
-                  <p className="text-[11px] text-emerald-50 leading-relaxed">
-                    Setiap perubahan berita, pengurus, atau program langsung terlihat di website publik santri.
-                  </p>
+              <div className="bg-forest-950 text-white p-4 rounded-2xl border border-forest-900/50">
+                <div className="flex items-center gap-2 text-xs font-semibold text-emerald-300 mb-1">
+                  <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Sinkronisasi Otomatis</span>
                 </div>
+                <p className="text-[11px] text-white/70 leading-relaxed font-normal">
+                  Setiap perubahan berita, pengurus, atau program langsung tayang di website publik santri.
+                </p>
               </div>
             </div>
           </div>

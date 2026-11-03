@@ -7,7 +7,7 @@ import {
   ShieldCheck, 
   ArrowLeft,
   Save,
-  Sparkles
+  CheckCircle2
 } from 'lucide-react';
 import { useAppStoreData } from '../../hooks/useAppStoreData';
 import { AppStore } from '../../services/appStore';
@@ -346,7 +346,7 @@ export const PengurusManager: React.FC = () => {
                 <div className="truncate">
                   <p className="text-sm font-bold text-slate-900 truncate flex items-center gap-1.5">
                     <span>{item.name}</span>
-                    {item.highlight && <Sparkles className="w-3 h-3 text-amber-500 shrink-0" />}
+                    {item.highlight && <span className="inline-block px-1.5 py-0.2 text-[9px] font-bold rounded bg-emerald-100 text-emerald-800 uppercase tracking-wider">Inti</span>}
                   </p>
                   <p className="text-xs text-slate-500 truncate">{item.role}</p>
                 </div>

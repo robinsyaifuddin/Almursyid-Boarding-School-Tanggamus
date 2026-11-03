@@ -13,7 +13,26 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      # Deploy dist/ langsung ke Hostinger
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🔨 Build Production (Vite)
+        run: npm run build
+
+      # Pastikan bundle yang sudah stabil (index-YZJ0pbKD.js) dan backend ada di dist
+      - name: 🧩 Prepare Production Files
+        run: |
+          cp -f assets/index-YZJ0pbKD.js dist/assets/
+          cp -f assets/index-D7PgMjKI.css dist/assets/
+          cp -f index.html dist/index.html
+          cp -rf backend dist/backend
+
       - name: 🚀 Deploy dist/ to Hostinger Root
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

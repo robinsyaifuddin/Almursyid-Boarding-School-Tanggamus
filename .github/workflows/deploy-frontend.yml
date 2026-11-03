@@ -30,7 +30,7 @@ jobs:
         run: |
           cp -rf backend dist/backend
 
-      - name: 🚀 Clean Remote public_html & Mirror Fresh Build
+      - name: 🚀 Clean Remote Root & Mirror Fresh Build
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
-          lftp -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; set ftp:passive-mode true; set net:timeout 60; set net:max-retries 5; mirror -R --delete --verbose ./dist/ public_html/; quit" -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}"
+          lftp -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; set ftp:passive-mode true; set net:timeout 60; set net:max-retries 5; mirror -R --delete --verbose ./dist/ ./; quit" -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}"

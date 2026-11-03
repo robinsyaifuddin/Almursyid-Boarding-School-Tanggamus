@@ -25,11 +25,8 @@ jobs:
       - name: 🔨 Build Production (Vite)
         run: npm run build
 
-      - name: 🔄 Sync Assets & Include Backend
+      - name: 🔄 Include Backend in Dist
         run: |
-          cp -f assets/index-YZJ0pbKD.js dist/assets/
-          cp -f assets/index-D7PgMjKI.css dist/assets/
-          cp -f index.html dist/index.html
           cp -rf backend dist/backend
 
       - name: 🚀 Deploy via LFTP with Auto-Retry

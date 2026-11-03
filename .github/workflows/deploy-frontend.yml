@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -29,7 +30,7 @@ jobs:
         run: |
           cp -rf backend dist/backend
 
-      - name: 🚀 Deploy via LFTP with Auto-Retry
+      - name: 🚀 Clean Remote public_html & Mirror Fresh Build
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
-          lftp -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; set ftp:passive-mode true; set net:timeout 60; set net:max-retries 5; mirror -R --verbose ./dist/ public_html/; quit" -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}"
+          lftp -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; set ftp:passive-mode true; set net:timeout 60; set net:max-retries 5; mirror -R --delete --verbose ./dist/ public_html/; quit" -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}"

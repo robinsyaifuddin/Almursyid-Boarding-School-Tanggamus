@@ -25,11 +25,15 @@ jobs:
       - name: 🔨 Build Production (Vite)
         run: npm run build
 
-      # Copy folder backend ke dalam dist/backend agar ter-upload langsung ke root server
-      - name: 📂 Bundle Backend into dist
-        run: cp -r backend dist/backend
+      # Sinkronkan hasil build ke root repo sebelum upload
+      - name: 🔄 Sync dist to root
+        run: |
+          cp -f dist/index.html ./index.html
+          cp -rf dist/assets/* ./assets/
+          cp -rf backend ./dist/backend
+          cp -f .htaccess ./dist/.htaccess
 
-      # Deploy seluruh isi dist/ langsung ke root akun FTP Hostinger
+      # Deploy seluruh isi repo ke root FTP Hostinger
       - name: 🚀 Deploy dist/ to Hostinger Root
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

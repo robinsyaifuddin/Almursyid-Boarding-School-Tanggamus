@@ -2,15 +2,15 @@
   RewriteEngine On
   RewriteBase /
 
-  # 1. Routing khusus API: arahkan /api/* ke handler jembatan
-  RewriteRule ^api/(.*)$ api/index.php [QSA,L]
+  # 1. Routing API ke backend
+  RewriteRule ^api/(.*)$ backend/endpoints/$1 [QSA,L]
 
-  # 2. Jangan rewrite jika file statis (JS, CSS, gambar) memang ada di public_html
+  # 2. Jangan rewrite jika file statis memang ada
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # 3. Fallback seluruh rute Frontend SPA React ke index.html
+  # 3. Fallback SPA React ke index.html
   RewriteRule ^ index.html [L]
 </IfModule>
 

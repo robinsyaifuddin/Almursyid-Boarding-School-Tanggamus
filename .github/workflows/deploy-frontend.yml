@@ -25,23 +25,12 @@ jobs:
       - name: 🔨 Build Production (Vite)
         run: npm run build
 
-      # STEP 1: Deploy Backend ke folder /backend (Sejajar dengan public_html)
-      - name: 🛡️ Deploy Backend to ../backend/
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          security: loose
-          timeout: 120000
-          local-dir: ./backend/
-          server-dir: backend/
-          dangerous-clean-slate: false
+      # Copy folder backend ke dalam dist/backend agar ter-upload langsung ke root server
+      - name: 📂 Bundle Backend into dist
+        run: cp -r backend dist/backend
 
-      # STEP 2: Deploy Frontend dist/ ke public_html
-      - name: 🚀 Deploy dist/ to Hostinger public_html
+      # Deploy seluruh isi dist/ langsung ke root akun FTP Hostinger
+      - name: 🚀 Deploy dist/ to Hostinger Root
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -52,5 +41,5 @@ jobs:
           security: loose
           timeout: 120000
           local-dir: ./dist/
-          server-dir: public_html/
+          server-dir: /
           dangerous-clean-slate: false

@@ -247,14 +247,13 @@ export const FacilityManager: React.FC = () => {
                 <th className="py-3.5 px-4 w-24">Foto</th>
                 <th className="py-3.5 px-4">Nama Sarana & Deskripsi</th>
                 <th className="py-3.5 px-4">Kategori</th>
-                <th className="py-3.5 px-4">Pratinjau Asli</th>
                 <th className="py-3.5 px-4 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
               {typedFacilities.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-12 text-center text-slate-400">
+                  <td colSpan={4} className="py-12 text-center text-slate-400">
                     Belum ada fasilitas yang ditambahkan.
                   </td>
                 </tr>
@@ -274,17 +273,6 @@ export const FacilityManager: React.FC = () => {
                       <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
                         {item.category}
                       </span>
-                    </td>
-                    <td className="py-3 px-4">
-                      <a
-                        href={item.image}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:underline"
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                        <span>Buka Foto</span>
-                      </a>
                     </td>
                     <td className="py-3 px-4 text-right">
                       <div className="flex items-center justify-end gap-1">

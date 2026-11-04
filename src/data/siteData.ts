@@ -24,8 +24,18 @@ export const SITE_INFO = {
     full: "Way Lalaan Kampung Baru, Desa Kampung Baru, Kec. Kota Agung Timur, Kab. Tanggamus, Lampung 35384"
   },
   leadership: {
-    pembina: "Usman Mursyid",
-    pengawas: "Budi Setiawan",
+    pembina: {
+      name: "Usman Mursyid",
+      role: "Pembina Yayasan",
+      image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80",
+      desc: "Pondok Pesantren Al-Mursyid Tanggamus, pembina arah kebijakan strategis & kepesantrenan."
+    },
+    pengawas: {
+      name: "Budi Setiawan",
+      role: "Pengawas Yayasan",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80",
+      desc: "Memastikan kepatuhan tata kelola, keterbukaan manajerial, dan operasional yayasan."
+    },
     founders: ["Agus Aftah", "Muhammad Al Ashimi", "Usman Mursyid"],
     pengurus: [
       { 

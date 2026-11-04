@@ -220,14 +220,13 @@ export const GalleryManager: React.FC = () => {
               <tr>
                 <th className="py-3.5 px-4 w-24">Foto</th>
                 <th className="py-3.5 px-4">Judul Dokumentasi Kegiatan</th>
-                <th className="py-3.5 px-4">Pratinjau Asli</th>
                 <th className="py-3.5 px-4 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
               {filteredItems.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="py-12 text-center text-slate-400">
+                  <td colSpan={3} className="py-12 text-center text-slate-400">
                     Tidak ada foto kegiatan yang cocok dengan pencarian.
                   </td>
                 </tr>
@@ -241,17 +240,6 @@ export const GalleryManager: React.FC = () => {
                     </td>
                     <td className="py-3 px-4">
                       <p className="font-bold text-slate-900 text-sm leading-snug">{item.title}</p>
-                    </td>
-                    <td className="py-3 px-4">
-                      <a
-                        href={item.image}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:underline"
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                        <span>Buka Ukuran Asli</span>
-                      </a>
                     </td>
                     <td className="py-3 px-4 text-right">
                       <div className="flex items-center justify-end gap-1">

@@ -9,6 +9,7 @@ interface ImageUploaderProps {
   aspectRatio?: 'landscape' | 'portrait' | 'square';
   required?: boolean;
   description?: string;
+  compact?: boolean;
 }
 
 export const ImageUploader: React.FC<ImageUploaderProps> = ({
@@ -17,7 +18,8 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   onChange,
   aspectRatio = 'landscape',
   required = false,
-  description = 'Klik atau seret file gambar ke sini (JPG, PNG, WebP maks 5MB)'
+  description = 'Klik atau seret file gambar ke sini (JPG, PNG, WebP maks 5MB)',
+  compact = false
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragOver, setDragOver] = useState(false);
@@ -132,42 +134,44 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
         `}
       >
         {isUploading ? (
-          <div className="py-8 px-4 flex flex-col items-center">
-            <Loader2 className="w-8 h-8 text-emerald-600 animate-spin mb-2" />
+          <div className="py-6 px-4 flex flex-col items-center">
+            <Loader2 className="w-7 h-7 text-emerald-600 animate-spin mb-2" />
             <p className="text-xs font-bold text-slate-700">Mengunggah ke Storage Hostinger...</p>
           </div>
         ) : value ? (
           <div className="w-full flex flex-col items-center">
-            <div className={`w-full max-w-xs ${aspectClass} rounded-xl overflow-hidden border border-slate-200 bg-white shadow-sm relative group`}>
+            <div className={`w-full ${compact ? 'max-w-[120px] sm:max-w-[130px]' : 'max-w-xs'} ${aspectClass} rounded-xl overflow-hidden border border-slate-200 bg-white shadow-2xs relative group`}>
               <img
                 src={value}
                 alt="Preview Upload"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">
-                Klik untuk Ganti Foto
+              <div className="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] font-bold">
+                Ganti Foto
               </div>
             </div>
-            <span className="text-[11px] font-semibold text-emerald-700 mt-2">
-              ✓ Gambar terpilih & siap disimpan
+            <span className="text-[10px] sm:text-[11px] font-semibold text-emerald-700 mt-1.5">
+              ✓ Siap disimpan
             </span>
           </div>
         ) : (
-          <div className="py-6 px-4 flex flex-col items-center">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2 shadow-2xs">
-              <UploadCloud className="w-6 h-6 stroke-[1.75]" />
+          <div className={`${compact ? 'py-3 px-2' : 'py-6 px-4'} flex flex-col items-center`}>
+            <div className={`${compact ? 'w-8 h-8 rounded-xl mb-1' : 'w-12 h-12 rounded-2xl mb-2'} bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-2xs`}>
+              <UploadCloud className={`${compact ? 'w-4 h-4' : 'w-6 h-6'} stroke-[1.75]`} />
             </div>
-            <p className="text-xs font-bold text-slate-800">
-              Pilih foto dari komputer / HP
+            <p className={`${compact ? 'text-[11px]' : 'text-xs'} font-bold text-slate-800`}>
+              {compact ? 'Pilih Foto' : 'Pilih foto dari komputer / HP'}
             </p>
-            <p className="text-[11px] text-slate-400 mt-1 max-w-xs">
-              {description}
-            </p>
+            {!compact && (
+              <p className="text-[11px] text-slate-400 mt-1 max-w-xs">
+                {description}
+              </p>
+            )}
             <button
               type="button"
-              className="mt-3 px-3.5 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 shadow-2xs hover:bg-slate-100"
+              className={`mt-2 ${compact ? 'px-2.5 py-1 text-[10px]' : 'px-3.5 py-1.5 text-xs'} rounded-xl bg-white border border-slate-200 font-bold text-slate-700 shadow-2xs hover:bg-slate-100`}
             >
-              Jelajahi File
+              {compact ? 'Browse' : 'Jelajahi File'}
             </button>
           </div>
         )}

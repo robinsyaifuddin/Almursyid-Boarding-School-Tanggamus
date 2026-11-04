@@ -119,13 +119,21 @@ export const AboutPage: React.FC = () => {
             {/* Foto Tokoh Full Frame */}
             <div className="w-full rounded-3xl overflow-hidden bg-stone-900 border border-emerald-900/50 shadow-md group relative min-h-[350px] lg:min-h-full">
               <img 
-                src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" 
-                alt={SITE_INFO.leadership.pembina} 
+                src={
+                  (typeof SITE_INFO?.leadership?.pembina === 'object' && SITE_INFO?.leadership?.pembina?.image)
+                    ? SITE_INFO.leadership.pembina.image
+                    : "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
+                } 
+                alt={typeof SITE_INFO?.leadership?.pembina === 'object' ? SITE_INFO?.leadership?.pembina?.name : SITE_INFO?.leadership?.pembina || 'Pembina Yayasan'} 
                 className="w-full h-full object-cover object-top filter brightness-95 contrast-105 group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/40 to-transparent flex flex-col justify-end p-6 text-center">
-                <p className="text-lg font-bold tracking-tight text-white drop-shadow-sm">{SITE_INFO.leadership.pembina}</p>
-                <p className="text-xs text-emerald-300 font-sans tracking-wide">Pembina & Pendiri Yayasan</p>
+                <p className="text-lg font-bold tracking-tight text-white drop-shadow-sm">
+                  {typeof SITE_INFO?.leadership?.pembina === 'object' ? SITE_INFO?.leadership?.pembina?.name : SITE_INFO?.leadership?.pembina}
+                </p>
+                <p className="text-xs text-emerald-300 font-sans tracking-wide">
+                  {(typeof SITE_INFO?.leadership?.pembina === 'object' && SITE_INFO?.leadership?.pembina?.role) ? SITE_INFO.leadership.pembina.role : 'Pembina & Pendiri Yayasan'}
+                </p>
               </div>
             </div>
           </div>
@@ -446,8 +454,12 @@ export const AboutPage: React.FC = () => {
                   {/* Frame Foto Portrait Profil */}
                   <div className="relative w-28 h-36 sm:w-32 sm:h-40 rounded-2xl overflow-hidden shrink-0 bg-stone-100 border border-stone-200/80 shadow-2xs">
                     <img
-                      src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80"
-                      alt={SITE_INFO.leadership.pembina}
+                      src={
+                        (typeof SITE_INFO.leadership.pembina === 'object' && SITE_INFO.leadership.pembina?.image)
+                          ? SITE_INFO.leadership.pembina.image
+                          : "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80"
+                      }
+                      alt={typeof SITE_INFO.leadership.pembina === 'object' ? SITE_INFO.leadership.pembina?.name : SITE_INFO.leadership.pembina}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl"></div>
@@ -460,14 +472,16 @@ export const AboutPage: React.FC = () => {
                     </div>
                     <div>
                       <span className="text-[11px] uppercase tracking-wider text-stone-800 font-bold block">
-                        PEMBINA YAYASAN
+                        {(typeof SITE_INFO.leadership.pembina === 'object' && SITE_INFO.leadership.pembina?.role) ? SITE_INFO.leadership.pembina.role : 'PEMBINA YAYASAN'}
                       </span>
                       <h4 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-snug">
-                        {SITE_INFO.leadership.pembina}
+                        {typeof SITE_INFO.leadership.pembina === 'object' ? SITE_INFO.leadership.pembina?.name : SITE_INFO.leadership.pembina}
                       </h4>
                     </div>
                     <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                      Pondok Pesantren Al-Mursyid Tanggamus, pembina arah kebijakan strategis &amp; kepesantrenan.
+                      {(typeof SITE_INFO.leadership.pembina === 'object' && SITE_INFO.leadership.pembina?.desc)
+                        ? SITE_INFO.leadership.pembina.desc
+                        : 'Pondok Pesantren Al-Mursyid Tanggamus, pembina arah kebijakan strategis & kepesantrenan.'}
                     </p>
                   </div>
                 </div>
@@ -487,8 +501,12 @@ export const AboutPage: React.FC = () => {
                   {/* Frame Foto Portrait Profil */}
                   <div className="relative w-28 h-36 sm:w-32 sm:h-40 rounded-2xl overflow-hidden shrink-0 bg-stone-100 border border-stone-200/80 shadow-2xs">
                     <img
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80"
-                      alt={SITE_INFO.leadership.pengawas}
+                      src={
+                        (typeof SITE_INFO.leadership.pengawas === 'object' && SITE_INFO.leadership.pengawas?.image)
+                          ? SITE_INFO.leadership.pengawas.image
+                          : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80"
+                      }
+                      alt={typeof SITE_INFO.leadership.pengawas === 'object' ? SITE_INFO.leadership.pengawas?.name : SITE_INFO.leadership.pengawas}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl"></div>
@@ -501,14 +519,16 @@ export const AboutPage: React.FC = () => {
                     </div>
                     <div>
                       <span className="text-[11px] uppercase tracking-wider text-stone-800 font-bold block">
-                        PENGAWAS YAYASAN
+                        {(typeof SITE_INFO.leadership.pengawas === 'object' && SITE_INFO.leadership.pengawas?.role) ? SITE_INFO.leadership.pengawas.role : 'PENGAWAS YAYASAN'}
                       </span>
                       <h4 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-snug">
-                        {SITE_INFO.leadership.pengawas}
+                        {typeof SITE_INFO.leadership.pengawas === 'object' ? SITE_INFO.leadership.pengawas?.name : SITE_INFO.leadership.pengawas}
                       </h4>
                     </div>
                     <p className="text-xs text-stone-600 leading-relaxed font-normal">
-                      Memastikan kepatuhan tata kelola, keterbukaan manajerial, dan operasional yayasan.
+                      {(typeof SITE_INFO.leadership.pengawas === 'object' && SITE_INFO.leadership.pengawas?.desc)
+                        ? SITE_INFO.leadership.pengawas.desc
+                        : 'Memastikan kepatuhan tata kelola, keterbukaan manajerial, dan operasional yayasan.'}
                     </p>
                   </div>
                 </div>

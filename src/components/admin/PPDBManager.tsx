@@ -15,13 +15,14 @@ import {
 import { useAppStoreData } from '../../hooks/useAppStoreData';
 import { AppStore, PPDBSettings, PPDBStep, PPDBFeeItem } from '../../services/appStore';
 import { ImageUploader } from './ImageUploader';
+import { useToast } from './ToastContext';
 
 export const PPDBManager: React.FC = () => {
   const { ppdbSettings } = useAppStoreData();
+  const { toast, startLoading, stopLoading } = useToast();
   
   // State untuk Pengaturan Halaman PPDB (Foto 3:4, Kontak WA, Link Form, Alur, Biaya)
   const [settingsData, setSettingsData] = useState<PPDBSettings>(ppdbSettings);
-  const [saveSuccessMsg, setSaveSuccessMsg] = useState(false);
 
   // Synchronize when ppdbSettings updates
   React.useEffect(() => {
@@ -31,11 +32,17 @@ export const PPDBManager: React.FC = () => {
   }, [ppdbSettings]);
 
   // Handlers for PPDB Page Settings
-  const handleSaveAllSettings = (e: React.FormEvent) => {
+  const handleSaveAllSettings = async (e: React.FormEvent) => {
     e.preventDefault();
-    AppStore.savePPDBSettings(settingsData);
-    setSaveSuccessMsg(true);
-    setTimeout(() => setSaveSuccessMsg(false), 3000);
+    startLoading('Menyimpan pengaturan PPDB...');
+    try {
+      await AppStore.savePPDBSettings(settingsData);
+      toast.success('Pengaturan Disimpan', 'Konfigurasi PPDB, brosur, kontak, dan alur pendaftaran berhasil diperbarui.');
+    } catch (err: any) {
+      toast.error('Gagal Menyimpan', err?.message || 'Terjadi kesalahan saat menyimpan pengaturan PPDB.');
+    } finally {
+      stopLoading();
+    }
   };
 
   // Step Helpers
@@ -111,18 +118,6 @@ export const PPDBManager: React.FC = () => {
 
       <form onSubmit={handleSaveAllSettings} className="space-y-6">
         
-        {saveSuccessMsg && (
-          <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-2xl flex items-center justify-between text-xs font-bold animate-in fade-in duration-200">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span>Perubahan konten halaman PPDB berhasil disimpan dan langsung terbit di halaman /ppdb!</span>
-            </div>
-            <button type="button" onClick={() => setSaveSuccessMsg(false)} className="text-emerald-600 hover:underline">
-              Tutup
-            </button>
-          </div>
-        )}
-
         {/* Section 1: Foto 3:4 & Link Kontak */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           

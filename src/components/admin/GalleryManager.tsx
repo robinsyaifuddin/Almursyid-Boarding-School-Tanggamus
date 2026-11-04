@@ -13,9 +13,11 @@ import { useAppStoreData } from '../../hooks/useAppStoreData';
 import { AppStore } from '../../services/appStore';
 import { GalleryItem } from '../../data/siteData';
 import { ImageUploader } from './ImageUploader';
+import { useToast } from './ToastContext';
 
 export const GalleryManager: React.FC = () => {
   const { gallery } = useAppStoreData();
+  const { toast, startLoading, stopLoading } = useToast();
   const [search, setSearch] = useState('');
   
   // Tampilan halaman: 'list' atau 'form' (in-place full page, sidebar tetap ada)
@@ -50,31 +52,47 @@ export const GalleryManager: React.FC = () => {
     setViewMode('form');
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.title.trim() || !formData.image.trim()) {
-      alert('Judul foto dan upload gambar wajib diisi.');
+      toast.warning('Form Belum Lengkap', 'Judul foto dan upload gambar wajib diisi.');
       return;
     }
 
-    if (editingId) {
-      AppStore.updateGalleryRemote(editingId, {
-        title: formData.title,
-        image: formData.image,
-      });
-    } else {
-      AppStore.createGalleryRemote({
-        title: formData.title,
-        image: formData.image,
-      });
+    startLoading(editingId ? 'Menyimpan perubahan foto...' : 'Mengunggah dokumentasi baru...');
+    try {
+      if (editingId) {
+        await AppStore.updateGalleryRemote(editingId, {
+          title: formData.title,
+          image: formData.image,
+        });
+        toast.success('Pembaruan Galeri', `Dokumentasi "${formData.title}" berhasil diperbarui.`);
+      } else {
+        await AppStore.createGalleryRemote({
+          title: formData.title,
+          image: formData.image,
+        });
+        toast.success('Dokumentasi Ditambahkan', `Foto "${formData.title}" berhasil ditambahkan.`);
+      }
+      setViewMode('list');
+    } catch (err: any) {
+      toast.error('Gagal Menyimpan', err?.message || 'Terjadi kesalahan saat menyimpan foto.');
+    } finally {
+      stopLoading();
     }
-
-    setViewMode('list');
   };
 
-  const handleDelete = (id: string, title: string) => {
+  const handleDelete = async (id: string, title: string) => {
     if (window.confirm(`Hapus foto "${title}" dari galeri?`)) {
-      AppStore.deleteGalleryRemote(id);
+      startLoading('Menghapus foto galeri...');
+      try {
+        await AppStore.deleteGalleryRemote(id);
+        toast.success('Foto Terhapus', `Foto "${title}" telah dihapus.`);
+      } catch (err: any) {
+        toast.error('Gagal Menghapus', err?.message || 'Terjadi kesalahan saat menghapus.');
+      } finally {
+        stopLoading();
+      }
     }
   };
 

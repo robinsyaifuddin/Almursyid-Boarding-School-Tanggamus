@@ -12,6 +12,7 @@ import {
 import { useAppStoreData } from '../../hooks/useAppStoreData';
 import { AppStore } from '../../services/appStore';
 import { ImageUploader } from './ImageUploader';
+import { useToast } from './ToastContext';
 
 interface FacilityItem {
   name: string;
@@ -23,6 +24,7 @@ interface FacilityItem {
 export const FacilityManager: React.FC = () => {
   const { facilities } = useAppStoreData();
   const typedFacilities: FacilityItem[] = facilities as FacilityItem[];
+  const { toast, startLoading, stopLoading } = useToast();
   
   // Tampilan halaman: 'list' atau 'form' (in-place full page, sidebar tetap ada)
   const [viewMode, setViewMode] = useState<'list' | 'form'>('list');
@@ -63,20 +65,39 @@ export const FacilityManager: React.FC = () => {
     setViewMode('form');
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.desc.trim() || !formData.image.trim()) {
-      alert('Nama fasilitas, deskripsi, dan foto wajib diisi.');
+      toast.warning('Form Belum Lengkap', 'Nama fasilitas, deskripsi, dan foto wajib diisi.');
       return;
     }
 
-    AppStore.saveFacilityRemote(formData, editingIndex);
-    setViewMode('list');
+    startLoading(editingIndex !== null ? 'Memperbarui data sarana fasilitas...' : 'Menambahkan sarana baru...');
+    try {
+      await AppStore.saveFacilityRemote(formData, editingIndex);
+      toast.success(
+        editingIndex !== null ? 'Fasilitas Diperbarui' : 'Fasilitas Ditambahkan',
+        `Sarana "${formData.name}" berhasil disimpan.`
+      );
+      setViewMode('list');
+    } catch (err: any) {
+      toast.error('Gagal Menyimpan', err?.message || 'Terjadi kesalahan sistem.');
+    } finally {
+      stopLoading();
+    }
   };
 
-  const handleDelete = (index: number, name: string) => {
+  const handleDelete = async (index: number, name: string) => {
     if (window.confirm(`Hapus fasilitas "${name}"?`)) {
-      AppStore.deleteFacilityRemote(index);
+      startLoading('Menghapus fasilitas...');
+      try {
+        await AppStore.deleteFacilityRemote(index);
+        toast.success('Fasilitas Dihapus', `Sarana "${name}" telah dihapus.`);
+      } catch (err: any) {
+        toast.error('Gagal Menghapus', err?.message || 'Terjadi kesalahan sistem.');
+      } finally {
+        stopLoading();
+      }
     }
   };
 

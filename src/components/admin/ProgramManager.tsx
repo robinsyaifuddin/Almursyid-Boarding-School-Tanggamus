@@ -12,6 +12,7 @@ import {
 import { useAppStoreData } from '../../hooks/useAppStoreData';
 import { AppStore } from '../../services/appStore';
 import { ImageUploader } from './ImageUploader';
+import { useToast } from './ToastContext';
 
 interface ProgramItem {
   id: string;
@@ -26,6 +27,7 @@ interface ProgramItem {
 export const ProgramManager: React.FC = () => {
   const { programs } = useAppStoreData();
   const typedPrograms: ProgramItem[] = programs as ProgramItem[];
+  const { toast, startLoading, stopLoading } = useToast();
   
   // Tampilan halaman: 'list' atau 'form' (in-place full page, sidebar tetap ada)
   const [viewMode, setViewMode] = useState<'list' | 'form'>('list');
@@ -80,28 +82,47 @@ export const ProgramManager: React.FC = () => {
     setFormData({ ...formData, highlights: list.length ? list : [''] });
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.title.trim() || !formData.desc.trim()) {
-      alert('Judul program dan deskripsi wajib diisi.');
+      toast.warning('Form Belum Lengkap', 'Judul program dan deskripsi wajib diisi.');
       return;
     }
 
-    const cleanHighlights = formData.highlights.map(h => h.trim()).filter(Boolean);
+    startLoading(editingId ? 'Menyimpan program pendidikan...' : 'Menambahkan program pendidikan...');
+    try {
+      const cleanHighlights = formData.highlights.map(h => h.trim()).filter(Boolean);
 
-    const progToSave: ProgramItem = {
-      ...formData,
-      id: editingId || formData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') || `prog-${Date.now()}`,
-      highlights: cleanHighlights
-    };
+      const progToSave: ProgramItem = {
+        ...formData,
+        id: editingId || formData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') || `prog-${Date.now()}`,
+        highlights: cleanHighlights
+      };
 
-    AppStore.saveProgramRemote(progToSave);
-    setViewMode('list');
+      await AppStore.saveProgramRemote(progToSave);
+      toast.success(
+        editingId ? 'Pembaruan Program' : 'Program Berhasil Dibuat',
+        `Program "${formData.title}" telah tersimpan.`
+      );
+      setViewMode('list');
+    } catch (err: any) {
+      toast.error('Gagal Menyimpan', err?.message || 'Terjadi masalah saat menyimpan program.');
+    } finally {
+      stopLoading();
+    }
   };
 
-  const handleDelete = (id: string, title: string) => {
+  const handleDelete = async (id: string, title: string) => {
     if (window.confirm(`Hapus program "${title}"?`)) {
-      AppStore.deleteProgramRemote(id);
+      startLoading('Menghapus program...');
+      try {
+        await AppStore.deleteProgramRemote(id);
+        toast.success('Program Dihapus', `Program "${title}" berhasil dihapus.`);
+      } catch (err: any) {
+        toast.error('Gagal Menghapus', err?.message || 'Terjadi kesalahan sistem.');
+      } finally {
+        stopLoading();
+      }
     }
   };
 

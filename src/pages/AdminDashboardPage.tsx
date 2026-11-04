@@ -10,6 +10,7 @@ import { ProgramManager } from '../components/admin/ProgramManager';
 import { FacilityManager } from '../components/admin/FacilityManager';
 import { AdminLogin } from '../components/admin/AdminLogin';
 import { isAuthenticated } from '../services/apiClient';
+import { ToastProvider } from '../components/admin/ToastContext';
 
 export const AdminDashboardPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,20 +38,22 @@ export const AdminDashboardPage: React.FC = () => {
   }
 
   return (
-    <AdminLayout currentTab={currentTab} onTabChange={handleTabChange}>
-      {currentTab === 'overview' && (
-        <BentoOverview 
-          onNavigate={handleTabChange} 
-          onOpenNewModal={handleQuickModal} 
-        />
-      )}
-      {currentTab === 'ppdb' && <PPDBManager />}
-      {currentTab === 'news' && <NewsManager />}
-      {currentTab === 'gallery' && <GalleryManager />}
-      {currentTab === 'pengurus' && <PengurusManager />}
-      {currentTab === 'program' && <ProgramManager />}
-      {currentTab === 'facilities' && <FacilityManager />}
-    </AdminLayout>
+    <ToastProvider>
+      <AdminLayout currentTab={currentTab} onTabChange={handleTabChange}>
+        {currentTab === 'overview' && (
+          <BentoOverview 
+            onNavigate={handleTabChange} 
+            onOpenNewModal={handleQuickModal} 
+          />
+        )}
+        {currentTab === 'ppdb' && <PPDBManager />}
+        {currentTab === 'news' && <NewsManager />}
+        {currentTab === 'gallery' && <GalleryManager />}
+        {currentTab === 'pengurus' && <PengurusManager />}
+        {currentTab === 'program' && <ProgramManager />}
+        {currentTab === 'facilities' && <FacilityManager />}
+      </AdminLayout>
+    </ToastProvider>
   );
 };
 

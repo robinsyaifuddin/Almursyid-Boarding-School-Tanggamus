@@ -19,6 +19,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppStore } from '../../services/appStore';
 import { useAppStoreData } from '../../hooks/useAppStoreData';
 import { clearAuthToken } from '../../services/apiClient';
+import { useToast } from './ToastContext';
 
 interface AdminLayoutProps {
   currentTab: string;
@@ -34,11 +35,15 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   const { ppdbApplicants } = useAppStoreData();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleLogout = () => {
     if (window.confirm('Apakah Anda yakin ingin keluar dari sesi Admin?')) {
       clearAuthToken();
-      window.location.reload();
+      toast.info('Sesi Ditutup', 'Anda telah keluar dari dashboard admin.');
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     }
   };
 
@@ -55,6 +60,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   const handleResetData = () => {
     if (window.confirm('Kembalikan semua data ke setelan awal bawaan pesantren? Perubahan yang belum dicatat akan direset.')) {
       AppStore.resetAll();
+      toast.success('Reset Berhasil', 'Data demo telah dipulihkan ke pengaturan awal pesantren.');
     }
   };
 

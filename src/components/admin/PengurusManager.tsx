@@ -12,6 +12,7 @@ import {
 import { useAppStoreData } from '../../hooks/useAppStoreData';
 import { AppStore } from '../../services/appStore';
 import { ImageUploader } from './ImageUploader';
+import { useToast } from './ToastContext';
 
 interface PengurusItem {
   name: string;
@@ -22,6 +23,7 @@ interface PengurusItem {
 
 export const PengurusManager: React.FC = () => {
   const { siteInfo } = useAppStoreData();
+  const { toast, startLoading, stopLoading } = useToast();
   
   // Tampilan halaman: 'list' atau 'form' (in-place full page, sidebar tetap ada)
   const [viewMode, setViewMode] = useState<'list' | 'form'>('list');
@@ -38,8 +40,6 @@ export const PengurusManager: React.FC = () => {
   // Top Leaders State
   const [pembina, setPembina] = useState(siteInfo.leadership.pembina);
   const [pengawas, setPengawas] = useState(siteInfo.leadership.pengawas);
-  const [isSavingLeaders, setIsSavingLeaders] = useState(false);
-  const [leaderSavedNotice, setLeaderSavedNotice] = useState(false);
 
   const pengurusList: PengurusItem[] = (siteInfo.leadership.pengurus || []) as PengurusItem[];
 
@@ -63,35 +63,22 @@ export const PengurusManager: React.FC = () => {
     setViewMode('form');
   };
 
-  const handleSavePengurus = (e: React.FormEvent) => {
+  const handleSavePengurus = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.role.trim()) {
-      alert('Nama dan jabatan wajib diisi.');
+      toast.warning('Form Belum Lengkap', 'Nama dan jabatan pengurus wajib diisi.');
       return;
     }
 
-    let updatedPengurus = [...pengurusList];
-    if (editingIndex !== null) {
-      updatedPengurus[editingIndex] = { ...formData };
-    } else {
-      updatedPengurus.push({ ...formData });
-    }
-
-    const updatedSiteInfo = {
-      ...siteInfo,
-      leadership: {
-        ...siteInfo.leadership,
-        pengurus: updatedPengurus
+    startLoading(editingIndex !== null ? 'Menyimpan profil pengurus...' : 'Menambahkan pengurus...');
+    try {
+      let updatedPengurus = [...pengurusList];
+      if (editingIndex !== null) {
+        updatedPengurus[editingIndex] = { ...formData };
+      } else {
+        updatedPengurus.push({ ...formData });
       }
-    };
 
-    AppStore.saveSiteInfo(updatedSiteInfo);
-    setViewMode('list');
-  };
-
-  const handleDeletePengurus = (index: number, name: string) => {
-    if (window.confirm(`Hapus pengurus "${name}"?`)) {
-      const updatedPengurus = pengurusList.filter((_: PengurusItem, idx: number) => idx !== index);
       const updatedSiteInfo = {
         ...siteInfo,
         leadership: {
@@ -99,27 +86,61 @@ export const PengurusManager: React.FC = () => {
           pengurus: updatedPengurus
         }
       };
-      AppStore.saveSiteInfo(updatedSiteInfo);
+
+      await AppStore.saveSiteInfo(updatedSiteInfo);
+      toast.success(
+        editingIndex !== null ? 'Pembaruan Berhasil' : 'Pengurus Ditambahkan',
+        `Data profil "${formData.name}" berhasil disimpan.`
+      );
+      setViewMode('list');
+    } catch (err: any) {
+      toast.error('Gagal Menyimpan', err?.message || 'Terjadi kesalahan saat menyimpan data pengurus.');
+    } finally {
+      stopLoading();
     }
   };
 
-  const handleSaveTopLeaders = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSavingLeaders(true);
-    const updatedSiteInfo = {
-      ...siteInfo,
-      leadership: {
-        ...siteInfo.leadership,
-        pembina,
-        pengawas
+  const handleDeletePengurus = async (index: number, name: string) => {
+    if (window.confirm(`Hapus pengurus "${name}"?`)) {
+      startLoading('Menghapus data pengurus...');
+      try {
+        const updatedPengurus = pengurusList.filter((_: PengurusItem, idx: number) => idx !== index);
+        const updatedSiteInfo = {
+          ...siteInfo,
+          leadership: {
+            ...siteInfo.leadership,
+            pengurus: updatedPengurus
+          }
+        };
+        await AppStore.saveSiteInfo(updatedSiteInfo);
+        toast.success('Pengurus Dihapus', `Data "${name}" berhasil dihapus dari struktur kepengurusan.`);
+      } catch (err: any) {
+        toast.error('Gagal Menghapus', err?.message || 'Terjadi kesalahan saat menghapus data.');
+      } finally {
+        stopLoading();
       }
-    };
-    AppStore.saveSiteInfo(updatedSiteInfo);
-    setTimeout(() => {
-      setIsSavingLeaders(false);
-      setLeaderSavedNotice(true);
-      setTimeout(() => setLeaderSavedNotice(false), 2500);
-    }, 200);
+    }
+  };
+
+  const handleSaveTopLeaders = async (e: React.FormEvent) => {
+    e.preventDefault();
+    startLoading('Menyimpan Dewan Pembina & Pengawas...');
+    try {
+      const updatedSiteInfo = {
+        ...siteInfo,
+        leadership: {
+          ...siteInfo.leadership,
+          pembina,
+          pengawas
+        }
+      };
+      await AppStore.saveSiteInfo(updatedSiteInfo);
+      toast.success('Dewan Utama Disimpan', 'Data Dewan Pembina dan Pengawas Pesantren berhasil diperbarui.');
+    } catch (err: any) {
+      toast.error('Gagal Menyimpan', err?.message || 'Terjadi kesalahan sistem.');
+    } finally {
+      stopLoading();
+    }
   };
 
   // FULL IN-PLACE FORM VIEW
@@ -272,11 +293,6 @@ export const PengurusManager: React.FC = () => {
               <p className="text-[11px] text-slate-400">Tampil di posisi kehormatan halaman Tentang Kami</p>
             </div>
           </div>
-          {leaderSavedNotice && (
-            <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-              ✓ Berhasil diperbarui
-            </span>
-          )}
         </div>
 
         <form onSubmit={handleSaveTopLeaders} className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -306,7 +322,7 @@ export const PengurusManager: React.FC = () => {
               className="inline-flex items-center gap-2 px-5 py-2 text-xs font-bold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-transform active:scale-95"
             >
               <Save className="w-3.5 h-3.5" />
-              <span>{isSavingLeaders ? 'Menyimpan...' : 'Perbarui Pimpinan'}</span>
+              <span>Perbarui Pimpinan</span>
             </button>
           </div>
         </form>

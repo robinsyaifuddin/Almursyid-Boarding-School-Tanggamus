@@ -17,6 +17,7 @@ import { useAppStoreData } from '../../hooks/useAppStoreData';
 import { AppStore } from '../../services/appStore';
 import { Link } from 'react-router-dom';
 import { ImageUploader } from './ImageUploader';
+import { useToast } from './ToastContext';
 
 interface NewsItem {
   id: string;
@@ -33,6 +34,7 @@ interface NewsItem {
 export const NewsManager: React.FC = () => {
   const { news } = useAppStoreData();
   const typedNews: NewsItem[] = news as NewsItem[];
+  const { toast, startLoading, stopLoading } = useToast();
   
   const [search, setSearch] = useState('');
   const [filterCategory, setFilterCategory] = useState<string>('Semua');
@@ -91,25 +93,41 @@ export const NewsManager: React.FC = () => {
     setViewMode('form');
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.title.trim() || !formData.summary.trim()) {
-      alert('Judul dan ringkasan berita wajib diisi.');
+      toast.warning('Validasi Form', 'Judul dan ringkasan berita wajib diisi.');
       return;
     }
 
-    if (editingId) {
-      AppStore.updateNewsRemote(editingId, formData);
-    } else {
-      AppStore.createNewsRemote(formData);
+    startLoading(editingId ? 'Menyimpan pembaruan artikel...' : 'Menerbitkan artikel baru...');
+    try {
+      if (editingId) {
+        await AppStore.updateNewsRemote(editingId, formData);
+        toast.success('Pembaruan Berhasil', `Artikel "${formData.title}" telah berhasil diperbarui.`);
+      } else {
+        await AppStore.createNewsRemote(formData);
+        toast.success('Publikasi Berhasil', `Artikel "${formData.title}" telah diterbitkan.`);
+      }
+      setViewMode('list');
+    } catch (err: any) {
+      toast.error('Gagal Menyimpan', err?.message || 'Terjadi kesalahan sistem saat menyimpan.');
+    } finally {
+      stopLoading();
     }
-
-    setViewMode('list');
   };
 
-  const handleDelete = (id: string, title: string) => {
+  const handleDelete = async (id: string, title: string) => {
     if (window.confirm(`Hapus berita "${title}"?`)) {
-      AppStore.deleteNewsRemote(id);
+      startLoading('Menghapus artikel...');
+      try {
+        await AppStore.deleteNewsRemote(id);
+        toast.success('Penghapusan Berhasil', `Artikel "${title}" telah dihapus.`);
+      } catch (err: any) {
+        toast.error('Gagal Menghapus', err?.message || 'Terjadi kesalahan saat menghapus data.');
+      } finally {
+        stopLoading();
+      }
     }
   };
 
@@ -314,9 +332,74 @@ export const NewsManager: React.FC = () => {
         </div>
       </div>
 
-      {/* DAFTAR BERITA BERUPA TABEL */}
+      {/* DAFTAR BERITA BERUPA TABEL / KARTU RESPONSIVE */}
       <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
+        {/* Mobile View: Clean Card List */}
+        <div className="block md:hidden divide-y divide-slate-100">
+          {filteredNews.length === 0 ? (
+            <div className="py-12 text-center text-slate-400 text-xs">
+              Tidak ada artikel berita yang ditemukan.
+            </div>
+          ) : (
+            filteredNews.map((item: NewsItem) => (
+              <div key={item.id} className="p-4 space-y-3">
+                <div className="flex gap-3">
+                  <div className="w-20 h-16 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
+                    <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                        {item.category}
+                      </span>
+                      {item.isFeatured && (
+                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                          <Pin className="w-2.5 h-2.5 text-emerald-700" />
+                          <span>Utama</span>
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-bold text-slate-900 text-sm line-clamp-1">{item.title}</h3>
+                    <p className="text-[11px] text-slate-500 mt-0.5">{item.date}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-slate-100/80">
+                  <Link
+                    to={`/berita/${item.id}`}
+                    target="_blank"
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 hover:text-emerald-800"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>Lihat di Web</span>
+                  </Link>
+
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={() => handleOpenEdit(item)}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200"
+                    >
+                      <Edit className="w-3.5 h-3.5" />
+                      <span>Edit</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(item.id, item.title)}
+                      className="p-1 text-rose-500 hover:bg-rose-50 rounded-lg"
+                      title="Hapus Artikel"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Desktop View: Table */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-50/80 border-b border-slate-100 text-slate-400 uppercase text-[10px] font-bold tracking-wider">
               <tr>

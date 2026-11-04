@@ -28,12 +28,37 @@ export const SITE_INFO = {
     pengawas: "Budi Setiawan",
     founders: ["Agus Aftah", "Muhammad Al Ashimi", "Usman Mursyid"],
     pengurus: [
-      { name: "Pungut Sarifuddin Ash-Shajili", role: "Ketua Pengurus", highlight: true },
-      { name: "Astoya Saimulani", role: "Sekretaris" },
-      { name: "Muhammad Al Ashimi", role: "Bendahara & Hubungan Umat" },
-      { name: "Agus Aftah", role: "Divisi Pendidikan & Kurikulum" },
-      { name: "Fia Aulia", role: "Kepengurusan Putri & Asrama" },
-      { name: "Novi Yani", role: "Administrasi & Keuangan" },
+      { 
+        name: "Pungut Sarifuddin Ash-Shajili", 
+        role: "Ketua Pengurus", 
+        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80",
+        highlight: true 
+      },
+      { 
+        name: "Astoya Saimulani", 
+        role: "Sekretaris",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80"
+      },
+      { 
+        name: "Muhammad Al Ashimi", 
+        role: "Bendahara & Hubungan Umat",
+        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80"
+      },
+      { 
+        name: "Agus Aftah", 
+        role: "Divisi Pendidikan & Kurikulum",
+        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=500&q=80"
+      },
+      { 
+        name: "Fia Aulia", 
+        role: "Kepengurusan Putri & Asrama",
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80"
+      },
+      { 
+        name: "Novi Yani", 
+        role: "Administrasi & Keuangan",
+        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=500&q=80"
+      },
     ]
   },
   contacts: {

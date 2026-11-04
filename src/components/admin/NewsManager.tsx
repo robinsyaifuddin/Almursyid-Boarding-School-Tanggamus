@@ -50,7 +50,7 @@ export const NewsManager: React.FC = () => {
     category: 'Prestasi Santri',
     subCategory: 'Umum',
     summary: '',
-    image: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1200&q=80',
+    image: '',
     isFeatured: false,
   });
 
@@ -72,7 +72,7 @@ export const NewsManager: React.FC = () => {
       category: 'Prestasi Santri',
       subCategory: 'Umum',
       summary: '',
-      image: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1200&q=80',
+      image: '',
       isFeatured: false,
     });
     setViewMode('form');

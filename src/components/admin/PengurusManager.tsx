@@ -338,56 +338,64 @@ export const PengurusManager: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {pengurusList.map((item: PengurusItem, index: number) => (
-            <div 
-              key={index}
-              className={`p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
-                item.highlight 
-                  ? 'bg-emerald-50/50 border-emerald-200/80' 
-                  : 'bg-slate-50/70 border-slate-200/70'
-              }`}
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                {item.image ? (
-                  <div className="w-11 h-11 rounded-xl overflow-hidden border border-slate-200 shrink-0 bg-slate-100">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+          {pengurusList.map((item: PengurusItem, index: number) => {
+            const hasCustomImage = Boolean(item.image && item.image.trim() !== '');
+            const displayPhoto = hasCustomImage ? item.image : "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80";
+
+            return (
+              <div 
+                key={index}
+                className={`p-3 sm:p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
+                  item.highlight 
+                    ? 'bg-emerald-50/50 border-emerald-200/80' 
+                    : 'bg-white border-slate-200/80 shadow-2xs hover:shadow-sm'
+                }`}
+              >
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div className="w-13 h-16 sm:w-14 sm:h-18 rounded-xl overflow-hidden border border-slate-200 shrink-0 bg-slate-100 shadow-2xs">
+                    <img 
+                      src={displayPhoto} 
+                      alt={item.name} 
+                      className="w-full h-full object-cover object-top" 
+                    />
                   </div>
-                ) : (
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 ${
-                    item.highlight ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-white'
-                  }`}>
-                    {item.name.substring(0, 2).toUpperCase()}
+                  <div className="truncate">
+                    <p className="text-sm font-bold text-slate-900 truncate flex items-center gap-1.5">
+                      <span className="truncate">{item.name}</span>
+                      {item.highlight && (
+                        <span className="inline-block px-1.5 py-0.5 text-[9px] font-bold rounded bg-emerald-100 text-emerald-800 uppercase tracking-wider shrink-0">
+                          Inti
+                        </span>
+                      )}
+                    </p>
+                    <p className="text-xs text-emerald-800 font-semibold truncate mt-0.5">{item.role}</p>
+                    <span className="text-[10px] text-slate-400 block mt-1">
+                      {hasCustomImage ? 'Foto khusus terpasang' : 'Foto bawaan'}
+                    </span>
                   </div>
-                )}
-                <div className="truncate">
-                  <p className="text-sm font-bold text-slate-900 truncate flex items-center gap-1.5">
-                    <span>{item.name}</span>
-                    {item.highlight && <span className="inline-block px-1.5 py-0.2 text-[9px] font-bold rounded bg-emerald-100 text-emerald-800 uppercase tracking-wider">Inti</span>}
-                  </p>
-                  <p className="text-xs text-slate-500 truncate">{item.role}</p>
+                </div>
+
+                <div className="flex items-center gap-1 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => handleOpenEdit(index)}
+                    className="p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
+                    title="Edit Profil & Foto"
+                  >
+                    <Edit className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDeletePengurus(index, item.name)}
+                    className="p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors"
+                    title="Hapus"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
-
-              <div className="flex items-center gap-1 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => handleOpenEdit(index)}
-                  className="p-1.5 text-slate-500 hover:text-slate-800 hover:bg-white rounded-lg transition-colors"
-                  title="Edit"
-                >
-                  <Edit className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDeletePengurus(index, item.name)}
-                  className="p-1.5 text-rose-500 hover:bg-rose-100/50 rounded-lg transition-colors"
-                  title="Hapus"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

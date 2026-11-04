@@ -541,16 +541,7 @@ export const AboutPage: React.FC = () => {
             {/* Grid 6 Kartu Profil Sejajar Kesamping dengan Rasio Gambar 3:4 */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
               {SITE_INFO.leadership.pengurus.map((item: any, idx: number) => {
-                // Foto profil: gunakan foto upload jika ada, jika tidak fallback ke template bawaan
-                const profilePhotos = [
-                  "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80", // Pungut Sarifuddin (Ketua)
-                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80", // Astoya Saimulani (Sekretaris)
-                  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80", // Muhammad Al Ashimi (Bendahara)
-                  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=500&q=80", // Agus Aftah (Div. Pendidikan)
-                  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80", // Fia Aulia (Kepengurusan Putri & Asrama)
-                  "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=500&q=80", // Novi Yani (Administrasi & Keuangan)
-                ];
-                const photoSrc = item.image || profilePhotos[idx % profilePhotos.length];
+                const photoSrc = item.image || "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80";
                 const isLeader = idx === 0;
 
                 return (
